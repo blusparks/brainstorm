@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainstorm </title>
+    <link rel="icon" type="image" href="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg">
+    
+    <style>
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to bottom right, #0c032e, #001a66);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  animation: gradientAnimation 20s ease infinite alternate;
+}
+
+@keyframes gradientAnimation {
+  0% { background: linear-gradient(to bottom right, #160039, #021348); }
+  25% { background: linear-gradient(to bottom right, #3b3c36, #00173a); }
+  50% { background: linear-gradient(to bottom right, #242124, #003366 ); }
+   60% { background:  linear-gradient(to bottom right, #24044b, #0e1768 ); }
+   70% { background: linear-gradient(to bottom right,#01134a, #0c0039 ); }
+  80% { background: linear-gradient(to bottom right, #032b04,#130F40); }
+  90% { background: linear-gradient(to bottom right, #2C3E50,#000000); }
+  100% { background: linear-gradient(to bottom right, #00173a, #300066); }
+}
+
+.pre-splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 1000;
+  animation: fadein 3s forwards 3s;
+}
+
+.pre-splash img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 25px 0;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.6);
+  animation: fadeIn 6s;
+}
+
+.pre-splash h1 {
+  font-size: 40px;
+  color: white;
+  margin-top: 10px;
+  font-family: 'Monotype Corsiva', cursive;
+}
+
+@keyframes fadein {
+  from { opacity: 1; }
+  to { opacity: 0; visibility: hidden; }
+}
+
+.main-title {
+    font-size: 70px;
+    font-weight: bold;
+    font-family: 'Monotype Corsiva', cursive;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typewriter 1.5s steps(30) 4.5s forwards, glow 1.5s infinite alternate;
+    text-shadow: 0 0 10px rgba(160, 32, 240, 0.7), 0 0 30px rgba(120, 20, 200, 0.6), 0 0 40px rgba(90, 10, 160, 0.5);
+}
+
+.sub-title {
+    font-size: 24px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    animation: typewriter 2.5s steps(30) 6s forwards, glow 1.5s infinite alternate;
+    text-shadow: 0 0 10px rgba(50, 200, 255, 0.7), 0 0 30px rgba(40, 170, 230, 0.6), 0 0 40px rgba(30, 140, 200, 0.5);
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes glow {
+  0%, 100% { text-shadow: 0 0 10px rgba(160, 32, 240, 0.7), 0 0 30px rgba(120, 20, 200, 0.7); }
+  50% { text-shadow: 0 0 20px rgba(160, 32, 240, 1), 0 0 40px rgba(120, 20, 200, 0.9); }
+}
+
+h1, h2, h3, p {
+  text-align: center;
+}
+
+h1 {
+  font-size: 350%;
+  transition: color 0.3s ease-in-out;
+}
+
+h1:hover {
+  color: #03eaff;
+}
+
+p {
+  font-size: 18px;
+}
+
+button {
+  padding: 15px 25px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  background: linear-gradient(to bottom right, #002580, #580000);
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out;
+}
+
+button:hover {
+  background: #005ea5;
+  transform: scale(1.05);
+  box-shadow: 0px 6px 20px rgba(0, 94, 165, 0.8);
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+
+.container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 8s;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.splash-screen img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 20px 0;
+  border: 3px solid #fff;
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.6);
+  animation: fadeIn 8s;
+}
+
+.splash-screen p {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.category-container {
+  position: relative;
+  width: 100%;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.category-header {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.category-image {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: -20px;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.quiz-container {
+  text-align: center;
+}
+
+.results {
+  display: none;
+}
+
+.timer {
+  font-size: 30px;
+  margin: 40px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7);
+}
+
+/* Navigation Bar */
+#navbar {
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.58);
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  left: 0;
+  z-index: 100;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.nav-link {
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.nav-link.active {
+  border-bottom: 3px solid cyan;
+}
+
+/* Sections */
+section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out; /* Smooth transition */
+}
+
+section.active {
+  display: block;
+  opacity: 1;
+}
+
+.category-content {
+  display: none;
+}
+
+section.active .category-content {
+  display: block;
+}
+
+/* Contact Links */
+.contact-links {
+  text-align: center;
+  width: 20000px;
+  border-radius: 20px;
+  background-color: #00173a;
+}
+
+/* BANK SECTION - Supercharged Styles */
+#bank {
+  text-align: center;
+  padding: 50px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* Main Flexbox Layout */
+.bank-info {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+/* 🔥 Streak Card */
+.streak, .currency {
+  background: #0f3460;
+  padding: 20px;
+  border-radius: 15px;
+  width: 45%;
+  min-width: 300px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 100, 100, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+/* 🔥 Hover Effects */
+.streak:hover, .currency:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(255, 100, 100, 0.8);
+}
+
+/* 💥 Title Styling */
+h2 {
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 🖼️ ICONS */
+.streak img, .currency img {
+  width: 80px;
+  height: auto;
+  margin: 10px 0;
+  filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.5));
+}
+
+/* 💰 Sparkbux Counter */
+#sparkbux-count {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+#streak-count {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+}
+
+/* 💥 Animation for Streak Loss */
+@keyframes streakLost {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.streak.lost {
+  animation: streakLost 1s infinite;
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 768px) {
+  .bank-info {
+    flex-direction: column;
+  }
+  .streak, .currency {
+    width: 80%;
+  }
+}
+
+/* SHOP SECTION - Ultimate Style */
+/* 🏆 STATUS BAR */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #222;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-bottom: 3px solid #ffcc00;
+}
+
+/* 🛍️ SHOP STYLES */
+#shop {
+  text-align: center;
+  padding: 80px;
+  padding-bottom: 30%;
+  background: linear-gradient(135deg, #1b1b2f, #16213e);
+  color: white;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+/* 💰 SHOP ITEM */
+.shop-item {
+  background: #103665;
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+}
+
+.shop-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+}
+
+/* 💎 BUTTON */
+.shop-item button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  font-size: 18px;
+  color: white;
+  background: #ff4c29;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.shop-item button:hover {
+  background: #ff2200;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+.status-bar {
+  margin: 20px 0;
+}
+.gold-button {
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #8b7700, #ffcc00);
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 1s ease-in-out;
+}
+
+.gold-button:hover {
+    background: #ffcc00;
+    transform: scale(1.05);
+    box-shadow: 0px 6px 20px rgba(255, 204, 0, 0.8);
+}
+
+#quiz-notification {
+    position: fixed;
+    bottom: 530px;
+    right: 450px;
+    background-color: #333;
+    color: #fff;
+    padding: 18px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    font-size: 20px;
+    
+}
+
+#buy-answer-button.success {
+    background-color: #28a745; /* Green */
+}
+
+#buy-answer-button.error {
+    background-color: #dc3545; /* Red */
+}
+
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Pre-Splash Screen -->
+  <div id="pre-splash" class="pre-splash">
+      <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Brainstorm Logo">
+      
+      <h1>By Sparks</h1>
+  </div>
+  <!-- Splash Screen -->
+  <div id="splash" class="splash-screen">
+      <div class="main-title">Welcome to Brainstorm</div>
+      <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Trivia Game Icon">
+      <div class="sub-title">Test your knowledge across various topics and claim your IQ ranking! Wish You the best of LUCK!!😂😈</div>
+      <button onclick="startQuiz()">Get Started</button>
+  </div>
+
+  <!-- Category Selection -->
+  <div id="categories" class="container">
+      <nav id="navbar">
+          <a href="#" class="nav-link" data-section="home">Home</a>
+          <a href="#" class="nav-link" data-section="high-scores">High Scores</a>
+          <a href="#" class="nav-link" data-section="about">About</a>
+          <a href="#" class="nav-link" data-section="news">News</a>
+          <a href="#" class="nav-link" data-section="bank">Bank</a>
+          <a href="#" class="nav-link" data-section="shop">Shop</a>
+          <a href="#" class="nav-link" data-section="contact">Contact</a>
+      </nav>
+
+      <section id="home" class="section active">
+          <div class="category-content">
+              <h2 class="category-header" style="font-size: 250%;">Select a Category</h2>
+              <p class="category-header">It is Not as easy as you think. But still believe in yourself. Try Beat This and Get a Legendary IQ Award.</p>
+              <div class="category-buttons">
+                  <button onclick="loadQuiz('math')">Math</button>
+                  <button onclick="loadQuiz('science')">Science</button>
+                  <button onclick="loadQuiz('geography')">Geography</button>
+                  <button onclick="loadQuiz('history')">History</button>
+                  <button onclick="loadQuiz('literature')">Literature</button>
+                  <button onclick="loadQuiz('sports')">Sports</button>
+                  <button onclick="loadQuiz('celebrities')">Celebrities</button>
+                  <button onclick="loadQuiz('lifestyle')">Lifestyle</button>
+                  <button onclick="loadQuiz('technology')">Technology</button>
+                  <button onclick="loadQuiz('movies')">Movies and Series</button>
+                  <button onclick="loadQuiz('cartoons')">Cartoons</button>
+                  <button onclick="loadQuiz('games')">Games</button>
+                  <button onclick="loadQuiz('survival')">Survival</button>
+                  <button onclick="loadQuiz('random')">Random</button>
+                  <button onclick="loadQuiz('languages')">Languages</button>
+                  <button onclick="loadQuiz('travelAndWorldWonders')">Travel and World Wonders</button>
+                  <button onclick="loadQuiz('foodsAndBeverages')">Foods And Beverages</button>
+                  <button onclick="loadQuiz('space')">Space</button>
+                  <button onclick="loadQuiz('minecraft')">Minecraft</button>
+                  <button onclick="loadQuiz('roblox')">Roblox</button>
+              </div>
+          </div>
+      </section>
+
+      <!-- High Scores Section -->
+      <section id="high-scores" class="section">
+        <div id="high-scores-section">
+            <h1>🏆 High Scores 🏆</h1>
+            <p style="font-style: italic; color: #ccc;">High Scores will be displayed once accomplished.</p>
+            <!-- High scores will be dynamically inserted here -->
+        </div>
+    </section>
+    
+
+      <section id="news" class="section">
+          <h1>🚀 Latest News & Updates 📰</h1>
+          <p>Welcome to our Updates and News Hub! Stay informed with the latest posts, features, and improvements. Be sure to check in from time to time! 🔥</p>
+          <p>We bring fresh updates **every year** to make your experience even better! 🌟</p>
+
+          <div class="news-content">
+              <p>📅 **Next Update Release:** <strong>5th January 2026</strong> ⏳</p>
+              <h2>**New Feature Alert!**</h2>
+              <p> We're introducing **polls** to let YOU decide exciting aspects of the game! 🗳️🔥</p>
+
+              <h2>🔹 What You’ll Be Voting For:</h2>
+              <ul>
+                  
+                  <li>🕹️ **New Game Categories** – Help us pick fresh and exciting categories to be added next!</li>
+                  <li>Any other thing you might feel is needed.</li>
+              </ul>
+<p> In the <b>Future </b>we hope to even introduce <strong>Accounts</strong> and <strong>Leaderboards</strong> so that you may get your scores saved across different search engines.<br>We also hope to have purchase plans to purchase our Sparksbux and Streaks.</p>
+              <p>🔥 **Polls are organized by** <strong>Sparks </strong> – Stay tuned and make your voice count! Your choices shape the future of Sparks! 🚀</p>
+          </div>
+      </section>
+
+      <section id="about" class="section">
+        <h1>🚀 Welcome to Brainstorm! ⚡</h1>
+        <p>Think fast, answer smart, and race against the clock! ⏳ Brainstorm is a **high-energy, adrenaline-pumping quiz challenge** that puts your knowledge to the ultimate test. From science to pop culture, history to tech, **every second counts!** 🧠💥</p>
+        
+        <h2>🔥 How to Play</h2>
+        <p>You’ve got **260 seconds** to answer as many questions as possible—**no pauses, no do-overs!** Every correct answer pushes you forward, but can you keep up? 💨</p>
+        
+        <h2>💰 Sparksbux & Streaks</h2>
+        <p>🔥 Keep answering correctly to build **Streaks**—just for the thrill of it! But the real power? **Sparksbux!** Earn them as you play and **spend them in the shop** to grab game-changing power-ups that give you an edge. 💡💰</p>
+        
+        <h2>🏆 Can You Handle the Heat?</h2>
+        <p>With the **clock ticking** and your brain firing on all cylinders, it’s all about **speed, strategy, and pure skill**! **Will you rise to the challenge or crack under pressure?** 🚀⚡</p>
+    </section>
+    
+
+      
+<!-- Bank Section -->
+<section id="bank" class="section active">
+  <h1>🏦 The Brainstorm Vault 💥</h1>
+  <p>Welcome to the **ultimate** power hub of Brainstorm! This is where your 🔥 streaks and 💰 Sparkbux are **locked, loaded, and ready for action!**</p>
+
+  <div class="bank-info">
+      <div class="streak">
+          <h2>🔥 DAILY STREAKS – STAY ON FIRE! 🔥</h2>
+          <p>You're on a <span id="streak-count">0</span>-day streak! <strong>Keep playing daily to maintain the fire! 🔥</strong></p>
+          <p>⚠️ Miss a day and **POOF!** Your streak disappears like magic! 🫥.</p>
+      </div>
+
+      <div class="currency">
+          <h2>💰 SPARKBUX – GET THAT BAG! 💰</h2>
+          <p>You’ve stacked up <span id="sparksbux-count" style="font-size: 28px; font-weight: bold; color: #ffd700;text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);">0</span> Sparkbux! 💵💎</p>
+          <p>Earn **100 Sparkbux** for every 10 questions you crush! 🔥 Are you a **high-roller** or just getting started? 🚀</p>
+      </div>
+  </div>
+</section>
+
+<!-- Shop Section -->
+<section id="shop" class="section">
+  <div class="status-bar">
+      <span>🔥 Streaks: <span id="streak-count">0</span></span>
+      <span>💰 Sparksbux: <span id="sparksbux-count" style="font-size: 28px; font-weight: bold; color: #ffd700;text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);">0</span></span>
+  </div>
+  <h1>🛍️ Welcome to the Brainstorm Shop!</h1>
+  <h3>Spend your Sparksbux wisely!</h3>
+  <div class="shop-items">
+      <div class="shop-item">
+          <img src="assets/extra-time.png" alt="Extra Time">
+          <h2>⏳ Extra Time</h2>
+          <p>Adds +40 seconds to your timer, giving you more room to breathe and think. Perfect for those brain-busting questions!</p>
+          <h2 class="price">400 Sparksbux</h2>
+          <button onclick="purchaseItem('extraTime', 400)">Buy</button>
+      </div>
+      <div class="shop-item">
+        <img src="assets/multiplier.png" alt="Sparksbux Multiplier">
+        <h2>⚡ Sparksbux Multiplier</h2>
+        <p>Doubles the Sparksbux you earn during this quiz. Get paid twice as much for your brilliance!</p>
+        <h2 class="price">3000 Sparksbux</h2>
+        <button onclick="purchaseItem('multiplier', 3000)">Buy</button>
+    </div>
+    <div class="shop-item">
+      <img src="assets/answers.png" alt="Buy 25 Answers">
+      <h2>📚 Buy 25 Correct Answers</h2>
+      <p>Instantly marks 25 questions as correct. Whether you're stuck or just stacking points, this is a serious power move.</p>
+      <h2 class="price">5000 Sparksbux</h2>
+      <button onclick="purchaseItem('answers', 5000)">Buy</button>
+  </div>
+ 
+  <div class="shop-item">
+      <img src="assets/streak-saver.png" alt="Streak Saver">
+      <h2>🔥 Streak Saver</h2>
+      <p>Automatically saves your streaks from vanishing if you miss a day.</p>
+      <h2 class="price">3500 Sparksbux</h2>
+      <button onclick="purchaseItem('streakSaver', 3500)">Buy</button>
+  </div>
+  </div>
+</section>
+
+<!-- Sparksbux Notification -->
+<div id="notification" class="notification" style="font-weight: bold; color: gold;"></div>
+      <section id="contact" class="section">
+          <h1>🚀 Get in Touch with Us! 🔥</h1>
+          <p>Got questions, ideas, or just want to say hi? Don't be shy—drop us a message! We're always ready to connect. ⚡</p>
+          <div class="contact-links">
+              <p>📬 Find us on:</p>
+              <a href="mailto:Dec.Mshindi@gmail.com" class="email">
+                  
+                  <span>Gmail – Let’s Talk! 📩</span>
+
+<p><strong style="color:maroon">NOTE:</strong>In case of any problem or lag in any functionality, click <a href="mailto:Dec.Mshindi@gmail.com" class="email">Here</a> to report the issue. We will gladly appreciate.</p>
+          </div>
+      </section>
+  </div>
+
+<!-- Quiz Section -->
+<div id="quiz" class="container quiz-container">
+    <h2 id="quiz-category"></h2>
+    <div id="question-container"></div>
+    <div class="timer" id="timer">Time Left: 260s</div>
+    <button class="back-button" onclick="goBack()">Back</button>
+    <button class="gold-button" id="skip-question-button" onclick="skipQuestion()">Skip Question (80 Sparksbux)</button>
+  </div>
+  <!-- Sparksbux Notification -->
+  <div id="quiz-notification" class="notification" style="font-weight: bold; color: gold;"></div>
+</div>
+
+
+
+  <!-- Results Section -->
+  <div id="results" class="container results">
+      <h2>Your Results</h2>
+      <p id="score"></p>
+      <p id="rank"></p>
+      <button onclick="restartQuiz()">Restart</button>
+  </div>
+
+  <audio id="bg-music" src="assets/audio/brainstorm-theme.mp3" autoplay loop></audio>
+</body>
+    <script>
+
+        const questions = {
+    math: [
+// Easy Questions
+{ question: "What is 2 + 2?", answers: ["5", "1", "4", "3"], correct: 2 },
+{ question: "What is 10 ÷ 2?", answers: ["10", "5", "2", "20"], correct: 1 },
+{ question: "What is 14 ÷ 7?", answers: ["4", "3", "2", "1"], correct: 2 },
+{ question: "What is 3 × 3?", answers: ["9", "8", "6", "12"], correct: 0 },
+{ question: "What is the perimeter of a square with side length 5?", answers: ["15", "20", "10", "25"], correct: 1 },
+
+// Medium Questions
+{ question: "What is 15 × 6?", answers: ["100", "90", "85", "110"], correct: 1 },
+{ question: "What is the square root of 81?", answers: ["8", "9", "10", "7"], correct: 1 },
+{ question: "What is 8 + 7 × 2?", answers: ["22", "25", "18", "24"], correct: 0 },
+{ question: "What is 6 + 5 × 3?", answers: ["21", "19", "15", "20"], correct: 0 },
+{ question: "What is the area of a rectangle with sides 6 and 4?", answers: ["30", "24", "22", "28"], correct: 1 },
+{ question: "What is 7 × 12?", answers: ["84", "90", "75", "70"], correct: 0 },
+{ question: "What is 100 ÷ 4?", answers: ["30", "25", "50", "45"], correct: 2 },
+{ question: "What is 9²?", answers: ["75", "90", "81", "72"], correct: 2 },
+{ question: "What is the next prime number after 17?", answers: ["19", "20", "21", "18"], correct: 0 },
+{ question: "What is 23 × 4?", answers: ["95", "84", "76", "92"], correct: 3 },
+{ question: "What is 6 + 8 × 3?", answers: ["30", "25", "24", "20"], correct: 0 },
+{ question: "What is 12 ÷ 3?", answers: ["3", "4", "6", "5"], correct: 2 },
+{ question: "What is the next number in the sequence: 2, 4, 8, 16?", answers: ["18", "20", "32", "24"], correct: 2 },
+
+// Hard Questions
+{ question: "What is the value of 9³?", answers: ["750", "729", "800", "625"], correct: 1 },
+{ question: "What is 18 ÷ 2?", answers: ["10", "9", "8", "6"], correct: 3 },
+{ question: "What is 3³?", answers: ["29", "24", "27", "30"], correct: 2 },
+{ question: "What is 7 × 8 × 2?", answers: ["112", "128", "130", "115"], correct: 0 },
+{ question: "What is the square root of 49?", answers: ["6", "7", "8", "9"], correct: 1 },
+{ question: "What is 50 - 17?", answers: ["34", "30", "33", "29"], correct: 0 },
+{ question: "What is the result of 35 ÷ 7?", answers: ["6", "5", "7", "4"], correct: 1 },
+{ question: "What is 18 × 12?", answers: ["220", "210", "200", "216"], correct: 3 },
+{ question: "What is 13 × 8?", answers: ["100", "112", "104", "90"], correct: 1 },
+{ question: "What is the result of 45 ÷ 9?", answers: ["4", "5", "6", "7"], correct: 2 },
+{ question: "What is 12 × 12?", answers: ["144", "150", "130", "120"], correct: 0 },
+{ question: "What is the perimeter of a rectangle with sides 8 and 5?", answers: ["30", "26", "24", "20"], correct: 1 }
+],
+science: [
+// Easy Questions (10)
+{ question: "What is the chemical symbol for water?", answers: ["O2", "H2O", "CO2", "HO"], correct: 1 },
+{ question: "What planet is known as the Red Planet?", answers: ["Venus", "Earth", "Mars", "Jupiter"], correct: 2 },
+{ question: "What is the boiling point of water?", answers: ["50°C", "0°C", "200°C", "100°C"], correct: 3 },
+{ question: "Which gas do plants absorb from the atmosphere for photosynthesis?", answers: ["Oxygen", "Hydrogen", "Carbon dioxide", "Nitrogen"], correct: 2 },
+{ question: "Which part of the plant conducts photosynthesis?", answers: ["Roots", "Leaves", "Stem", "Flowers"], correct: 1 },
+{ question: "What is the largest organ in the human body?", answers: ["Heart", "Liver", "Skin", "Lung"], correct: 2 },
+{ question: "Which planet is closest to the Sun?", answers: ["Earth", "Venus", "Mercury", "Mars"], correct: 2 },
+{ question: "What is the chemical formula of methane?", answers: ["CO2", "CH4", "C2H6", "C6H12O6"], correct: 1 },
+{ question: "What is the unit of electric current?", answers: ["Joule", "Volt", "Ohm", "Ampere"], correct: 3 },
+{ question: "Which element has the atomic number 1?", answers: ["Helium", "Hydrogen", "Oxygen", "Carbon"], correct: 1 },
+
+// Medium Questions (15)
+{ question: "What is the most abundant gas in Earth's atmosphere?", answers: ["Oxygen", "Hydrogen", "Carbon dioxide", "Nitrogen"], correct: 3 },
+{ question: "What is the smallest bone in the human body?", answers: ["Femur", "Stapes", "Radius", "Tibia"], correct: 1 },
+{ question: "What is the process by which cells divide to form two identical daughter cells?", answers: ["Meiosis", "Fission", "Mitosis", "Binary division"], correct: 2 },
+{ question: "What is the chemical symbol for gold?", answers: ["Ag", "Fe", "Au", "Pb"], correct: 2 },
+{ question: "Which vitamin is produced by the body when exposed to sunlight?", answers: ["Vitamin C", "Vitamin E", "Vitamin D", "Vitamin A"], correct: 2 },
+{ question: "What is the largest planet in our solar system?", answers: ["Neptune", "Saturn", "Earth", "Jupiter"], correct: 3 },
+{ question: "Which blood group is known as the universal donor?", answers: ["AB+", "O-", "A+", "B-"], correct: 1 },
+{ question: "What is the distance between Earth and the Sun?", answers: ["200 million miles", "93 million miles", "100 million miles", "400 million miles"], correct: 1 },
+{ question: "Which chemical element has the highest melting point?", answers: ["Gold", "Copper", "Tungsten", "Iron"], correct: 2 },
+{ question: "What element is used in the construction of nuclear reactors?", answers: ["Uranium", "Thorium", "Plutonium", "Radium"], correct: 0 },
+{ question: "What is the second most abundant gas in Earth's atmosphere?", answers: ["Carbon dioxide", "Argon", "Oxygen", "Nitrogen"], correct: 1 },
+{ question: "What is the study of fungi called?", answers: ["Botany", "Zoology", "Mycology", "Entomology"], correct: 2 },
+{ question: "What is the hottest planet in our solar system?", answers: ["Earth", "Mars", "Venus", "Mercury"], correct: 2 },
+{ question: "What is the main gas found in the Earth's atmosphere?", answers: ["Nitrogen", "Oxygen", "Carbon Dioxide", "Helium"], correct: 0 },
+{ question: "What is the chemical formula for sulfuric acid?", answers: ["HCl", "HNO3", "NaOH", "H2SO4"], correct: 3 },
+
+// Hard Questions (25)
+{ question: "What is the most abundant element in the Earth’s crust?", answers: ["Silicon", "Iron", "Oxygen", "Calcium"], correct: 2 },
+{ question: "Which scientist developed the theory of general relativity?", answers: ["Isaac Newton", "Nikola Tesla", "Albert Einstein", "Galileo Galilei"], correct: 2 },
+{ question: "Which chemical element has the atomic number 86?", answers: ["Xenon", "Krypton", "Radon", "Neon"], correct: 2 },
+{ question: "Which species is known for its ability to regenerate lost body parts?", answers: ["Axolotl", "Lionfish", "Crocodile", "Turtle"], correct: 0 },
+{ question: "What element has the highest atomic number naturally occurring?", answers: ["Uranium", "Thorium", "Plutonium", "Radium"], correct: 0 },
+{ question: "Which planet has the most moons?", answers: ["Neptune", "Saturn", "Jupiter", "Uranus"], correct: 2 },
+{ question: "Which of these is the lightest element?", answers: ["Hydrogen", "Helium", "Lithium", "Beryllium"], correct: 0 },
+{ question: "What is the chemical symbol for sodium?", answers: ["Na", "N", "S", "So"], correct: 0 },
+{ question: "What is the second most abundant element in the Earth's crust?", answers: ["Silicon", "Aluminum", "Calcium", "Iron"], correct: 1 },
+{ question: "What is the most common type of cancer in men?", answers: ["Skin cancer", "Leukemia", "Prostate cancer", "Lung cancer"], correct: 2 },
+{ question: "Which planet has the longest day?", answers: ["Earth", "Mars", "Venus", "Mercury"], correct: 2 },
+{ question: "What is the chemical formula for ozone?", answers: ["O", "O3", "O2", "O4"], correct: 1 },
+{ question: "What is the chemical formula for ammonia?", answers: ["NH3", "N2H4", "N2O", "NH4"], correct: 0 },
+{ question: "What is the strongest acid?", answers: ["Hydrochloric acid", "Sulfuric acid", "Fluoroantimonic acid", "Acetic acid"], correct: 2 },
+{ question: "Which element is used in the construction of nuclear reactors?", answers: ["Uranium", "Plutonium", "Thorium", "Radium"], correct: 0 },
+{ question: "What is the unit of force?", answers: ["Joule", "Newton", "Pascal", "Watt"], correct: 1 },
+{ question: "What process do plants use to convert light energy into chemical energy?", answers: ["Transpiration", "Respiration", "Photosynthesis", "Osmosis"], correct: 2 },
+{ question: "What element is used in the construction of solar panels?", answers: ["Copper", "Silicon", "Iron", "Gold"], correct: 1 },
+{ question: "What gas is primarily responsible for global warming?", answers: ["Oxygen", "Carbon dioxide", "Nitrogen", "Methane"], correct: 1 },
+{ question: "What is the atomic number of carbon?", answers: ["4", "6", "8", "12"], correct: 1 },
+{ question: "Which scientist discovered the laws of motion?", answers: ["Isaac Newton", "Albert Einstein", "Galileo Galilei", "Niels Bohr"], correct: 0 },
+{ question: "What is the chemical symbol for potassium?", answers: ["K", "P", "Na", "Ca"], correct: 0 },
+{ question: "What is the most common isotope of carbon?", answers: ["C12", "C13", "C14", "C15"], correct: 0 },
+{ question: "What is the study of the universe and celestial bodies called?", answers: ["Astronomy", "Astrology", "Cosmology", "Geology"], correct: 0 },
+{ question: "What is the lightest metal?", answers: ["Iron", "Aluminum", "Lithium", "Sodium"], correct: 2 },
+
+],
+geography: [
+// Easy Questions (10)
+{ question: "Which country is the largest by area?", answers: ["Russia", "Canada", "China", "United States"], correct: 0 },
+{ question: "What is the longest river in the world?", answers: ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"], correct: 1 },
+{ question: "Which continent is known as the 'Dark Continent'?", answers: ["Asia", "Africa", "Europe", "Australia"], correct: 1 },
+{ question: "Which country is the smallest in the world?", answers: ["Monaco", "Vatican City", "San Marino", "Liechtenstein"], correct: 1 },
+{ question: "What is the capital city of Japan?", answers: ["Beijing", "Seoul", "Tokyo", "Osaka"], correct: 2 },
+{ question: "Which country is famous for its pyramids?", answers: ["Egypt", "Mexico", "India", "China"], correct: 0 },
+{ question: "Which ocean is the largest?", answers: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], correct: 3 },
+{ question: "What is the capital city of France?", answers: ["Rome", "Berlin", "Paris", "Madrid"], correct: 2 },
+{ question: "What is the largest continent by population?", answers: ["Africa", "Asia", "Europe", "North America"], correct: 1 },
+{ question: "What is the capital city of Australia?", answers: ["Sydney", "Melbourne", "Canberra", "Perth"], correct: 2 },
+
+// Normal Questions (25)
+{ question: "Which country has the most number of time zones?", answers: ["Russia", "United States", "China", "Brazil"], correct: 0 },
+{ question: "Which river flows through Cairo?", answers: ["Amazon", "Yangtze", "Nile", "Mississippi"], correct: 2 },
+{ question: "Which desert is the largest in the world?", answers: ["Sahara", "Gobi", "Kalahari", "Atacama"], correct: 0 },
+{ question: "Which country is the largest producer of coffee?", answers: ["Vietnam", "Brazil", "Colombia", "Indonesia"], correct: 1 },
+{ question: "What is the capital city of Canada?", answers: ["Toronto", "Vancouver", "Ottawa", "Montreal"], correct: 2 },
+{ question: "Which country has the longest coastline?", answers: ["Canada", "Australia", "Russia", "United States"], correct: 0 },
+{ question: "What is the capital city of Brazil?", answers: ["Rio de Janeiro", "Brasília", "São Paulo", "Salvador"], correct: 1 },
+{ question: "Which country is known as the Land of the Rising Sun?", answers: ["China", "Japan", "India", "South Korea"], correct: 1 },
+{ question: "What is the highest mountain in the world?", answers: ["K2", "Mount Everest", "Kangchenjunga", "Makalu"], correct: 1 },
+{ question: "Which country is both in Europe and Asia?", answers: ["Turkey", "Russia", "Kazakhstan", "Georgia"], correct: 0 },
+{ question: "What is the capital city of Egypt?", answers: ["Cairo", "Alexandria", "Luxor", "Giza"], correct: 0 },
+{ question: "Which continent is known for its kangaroos?", answers: ["North America", "South America", "Europe", "Australia"], correct: 3 },
+{ question: "Which country has the most islands?", answers: ["Sweden", "Canada", "Finland", "Norway"], correct: 2 },
+{ question: "Which country is famous for its Great Wall?", answers: ["China", "India", "Japan", "Mexico"], correct: 0 },
+{ question: "Which is the largest country in Africa?", answers: ["Nigeria", "South Africa", "Algeria", "Sudan"], correct: 2 },
+{ question: "Which continent is the Amazon Rainforest located in?", answers: ["Asia", "Africa", "South America", "North America"], correct: 2 },
+{ question: "Which country is known for having a maple leaf on its flag?", answers: ["Canada", "United States", "Australia", "New Zealand"], correct: 0 },
+{ question: "What is the largest island in the world?", answers: ["Greenland", "New Guinea", "Borneo", "Madagascar"], correct: 0 },
+{ question: "Which country is home to the city of Machu Picchu?", answers: ["Bolivia", "Peru", "Chile", "Colombia"], correct: 1 },
+{ question: "What is the capital city of India?", answers: ["New Delhi", "Mumbai", "Kolkata", "Chennai"], correct: 0 },
+{ question: "Which country has the most volcanoes?", answers: ["Japan", "Indonesia", "United States", "Chile"], correct: 1 },
+{ question: "What is the longest river in Asia?", answers: ["Yangtze River", "Yellow River", "Ganges River", "Mekong River"], correct: 0 },
+{ question: "Which mountain range separates Europe and Asia?", answers: ["Ural Mountains", "Himalayas", "Andes", "Rocky Mountains"], correct: 0 },
+{ question: "Which desert is the largest hot desert in the world?", answers: ["Sahara Desert", "Gobi Desert", "Kalahari Desert", "Arabian Desert"], correct: 0 },
+
+// Hard Questions (15)
+{ question: "What is the highest waterfall in the world?", answers: ["Niagara Falls", "Victoria Falls", "Angel Falls", "Iguazu Falls"], correct: 2 },
+{ question: "Which country has the most number of UNESCO World Heritage Sites?", answers: ["Italy", "China", "France", "Germany"], correct: 0 },
+{ question: "Which country has the largest population in Africa?", answers: ["Nigeria", "Ethiopia", "South Africa", "Kenya"], correct: 0 },
+{ question: "Which is the only country to have a flag that is not quadrilateral in shape?", answers: ["Nepal", "Switzerland", "Vatican City", "Denmark"], correct: 0 },
+{ question: "Which country has the most neighboring countries?", answers: ["Russia", "China", "Brazil", "India"], correct: 0 },
+{ question: "Which continent has the most number of countries?", answers: ["Africa", "Asia", "Europe", "North America"], correct: 0 },
+{ question: "What is the capital city of Kazakhstan?", answers: ["Almaty", "Astana", "Bishkek", "Tashkent"], correct: 1 },
+{ question: "Which mountain is the second-highest in the world?", answers: ["K2", "Mount Everest", "Kangchenjunga", "Makalu"], correct: 0 },
+{ question: "Which African lake is the largest by volume?", answers: ["Lake Victoria", "Lake Tanganyika", "Lake Malawi", "Lake Chad"], correct: 1 },
+{ question: "Which is the smallest country in Africa?", answers: ["Gabon", "Seychelles", "Gambia", "Lesotho"], correct: 2 },
+{ question: "What is the capital city of Myanmar?", answers: ["Yangon", "Naypyidaw", "Mandalay", "Inle"], correct: 1 },
+{ question: "Which ocean is the deepest?", answers: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], correct: 3 },
+{ question: "Which is the longest mountain range in the world?", answers: ["Himalayas", "Andes", "Rockies", "Mid-Atlantic Ridge"], correct: 3 },
+{ question: "Which city is known as the 'City of Canals'?", answers: ["Amsterdam", "Venice", "Bruges", "Saint Petersburg"], correct: 1 },
+{ question: "Which country is the largest producer of diamonds?", answers: ["South Africa", "Russia", "Australia", "Botswana"], correct: 1 }
+],
+history: [
+// Easy Questions (10)
+{ question: "Who was the first President of the United States?", answers: ["George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"], correct: 0 },
+{ question: "What year did World War II end?", answers: ["1942", "1945", "1939", "1941"], correct: 1 },
+{ question: "What ancient civilization built the pyramids?", answers: ["Romans", "Greeks", "Egyptians", "Babylonians"], correct: 2 },
+{ question: "Who is known as the 'Father of Modern India'?", answers: ["Mahatma Gandhi", "Jawaharlal Nehru", "Raja Ram Mohan Roy", "B. R. Ambedkar"], correct: 2 },
+{ question: "What was the name of the ship on which the Pilgrims traveled to America in 1620?", answers: ["Santa Maria", "Mayflower", "Endeavour", "Discovery"], correct: 1 },
+{ question: "Which empire was ruled by Genghis Khan?", answers: ["Mongol Empire", "Ottoman Empire", "Roman Empire", "Persian Empire"], correct: 0 },
+{ question: "Who discovered America in 1492?", answers: ["Christopher Columbus", "Ferdinand Magellan", "Marco Polo", "Amerigo Vespucci"], correct: 0 },
+{ question: "Which country gifted the Statue of Liberty to the United States?", answers: ["France", "Italy", "Germany", "United Kingdom"], correct: 0 },
+{ question: "What was the name of the first manned moon landing mission?", answers: ["Apollo 11", "Challenger", "Voyager 1", "Sputnik"], correct: 0 },
+{ question: "Who was the British monarch during World War I?", answers: ["Queen Victoria", "King George V", "King Edward VII", "King Edward VIII"], correct: 1 },
+
+// Normal Questions (25)
+{ question: "Which ancient city is known as the 'Cradle of Civilization'?", answers: ["Athens", "Babylon", "Rome", "Mesopotamia"], correct: 3 },
+{ question: "Which war was fought between the North and South regions of the United States?", answers: ["American Revolution", "Civil War", "War of 1812", "Vietnam War"], correct: 1 },
+{ question: "Who was the first Emperor of Rome?", answers: ["Julius Caesar", "Augustus", "Nero", "Caligula"], correct: 1 },
+{ question: "In what year did the Berlin Wall fall?", answers: ["1987", "1989", "1991", "1985"], correct: 1 },
+{ question: "Who was the first female Prime Minister of the United Kingdom?", answers: ["Margaret Thatcher", "Queen Elizabeth II", "Theresa May", "Angela Merkel"], correct: 0 },
+{ question: "Which dynasty built the Great Wall of China?", answers: ["Han", "Ming", "Qing", "Tang"], correct: 1 },
+{ question: "What year did the Titanic sink?", answers: ["1910", "1912", "1914", "1920"], correct: 1 },
+{ question: "Who was the Soviet leader during the Cuban Missile Crisis?", answers: ["Joseph Stalin", "Nikita Khrushchev", "Leonid Brezhnev", "Mikhail Gorbachev"], correct: 1 },
+{ question: "What event started World War I?", answers: ["The bombing of Pearl Harbor", "The assassination of Archduke Franz Ferdinand", "The invasion of Poland", "The sinking of the Lusitania"], correct: 1 },
+{ question: "What treaty ended World War I?", answers: ["Treaty of Versailles", "Treaty of Paris", "Treaty of Ghent", "Treaty of Tordesillas"], correct: 0 },
+{ question: "What was the ancient capital of the Aztec Empire?", answers: ["Cuzco", "Tenochtitlán", "Teotihuacán", "Chichen Itza"], correct: 1 },
+{ question: "Who led the Indian independence movement?", answers: ["Subhas Chandra Bose", "Mahatma Gandhi", "Bhagat Singh", "Sardar Patel"], correct: 1 },
+{ question: "What year did the United States declare independence?", answers: ["1774", "1776", "1783", "1787"], correct: 1 },
+{ question: "Which war is known as 'The Great War'?", answers: ["World War II", "World War I", "Vietnam War", "Napoleonic Wars"], correct: 1 },
+{ question: "What was the main religion of the Byzantine Empire?", answers: ["Islam", "Judaism", "Orthodox Christianity", "Roman Catholicism"], correct: 2 },
+{ question: "Which European country was the first to establish a colony in Africa?", answers: ["Portugal", "Spain", "France", "England"], correct: 0 },
+{ question: "Who was the first President of independent Kenya?", answers: ["Jomo Kenyatta", "Daniel arap Moi", "Mwai Kibaki", "Uhuru Kenyatta"], correct: 0 },
+{ question: "Which U.S. President issued the Emancipation Proclamation?", answers: ["George Washington", "Abraham Lincoln", "Theodore Roosevelt", "Andrew Jackson"], correct: 1 },
+{ question: "What is the name of the ancient Greek city known for its Oracle?", answers: ["Athens", "Sparta", "Delphi", "Thebes"], correct: 2 },
+{ question: "What year did Nelson Mandela become President of South Africa?", answers: ["1990", "1994", "1996", "1998"], correct: 1 },
+{ question: "In which year did the American Civil War begin?", answers: ["1861", "1776", "1865", "1812"], correct: 0 },
+{ question: "Which ancient city was buried by the eruption of Mount Vesuvius in 79 AD?", answers: ["Pompeii", "Rome", "Athens", "Carthage"], correct: 0 },
+{ question: "Which empire was ruled by Genghis Khan?", answers: ["Mongol Empire", "Ottoman Empire", "Roman Empire", "British Empire"], correct: 0 },
+{ question: "Which historical event is associated with the year 1066?", answers: ["Battle of Hastings", "Signing of the Magna Carta", "Fall of Constantinople", "American Revolution"], correct: 0 },
+{ question: "Who was the British Prime Minister during most of World War II?", answers: ["Winston Churchill", "Neville Chamberlain", "Clement Attlee", "Margaret Thatcher"], correct: 0 },
+// Hard Questions (15)
+{ question: "Who led the Haitian Revolution?", answers: ["Toussaint Louverture", "Jean-Jacques Dessalines", "François Mackandal", "Dutty Boukman"], correct: 0 },
+{ question: "What was the capital of the Inca Empire?", answers: ["Machu Picchu", "Cuzco", "Lima", "Tenochtitlán"], correct: 1 },
+{ question: "Who was the first ruler of the Holy Roman Empire?", answers: ["Charlemagne", "Otto I", "Frederick I", "Henry V"], correct: 0 },
+{ question: "Which African kingdom defeated the Italians at the Battle of Adwa?", answers: ["Zulu Kingdom", "Mali Empire", "Ethiopia", "Ashanti Kingdom"], correct: 2 },
+{ question: "Who was the last Emperor of China?", answers: ["Puyi", "Sun Yat-sen", "Mao Zedong", "Chiang Kai-shek"], correct: 0 },
+{ question: "What year did the French Revolution begin?", answers: ["1787", "1789", "1793", "1799"], correct: 1 },
+{ question: "Who led the conquest of the Aztec Empire?", answers: ["Francisco Pizarro", "Hernán Cortés", "Diego de Almagro", "Pedro de Alvarado"], correct: 1 },
+{ question: "Which treaty divided the New World between Spain and Portugal?", answers: ["Treaty of Tordesillas", "Treaty of Zaragoza", "Treaty of Paris", "Treaty of Utrecht"], correct: 0 },
+{ question: "What year did the Soviet Union dissolve?", answers: ["1989", "1990", "1991", "1992"], correct: 2 },
+{ question: "Which African leader was overthrown in a coup in Ghana in 1966?", answers: ["Kwame Nkrumah", "Jerry Rawlings", "John Atta Mills", "Kofi Busia"], correct: 0 },
+{ question: "What treaty ended the Thirty Years' War in 1648?", answers: ["Peace of Westphalia", "Treaty of Versailles", "Treaty of Paris", "Treaty of Ghent"], correct: 0 },
+{ question: "Which ancient civilization built the city of Machu Picchu?", answers: ["Inca", "Maya", "Aztec", "Olmec"], correct: 0 },
+{ question: "Who was the leader of the Soviet Union during the Cuban Missile Crisis?", answers: ["Nikita Khrushchev", "Joseph Stalin", "Leonid Brezhnev", "Mikhail Gorbachev"], correct: 0 },
+{ question: "What was the main goal of the Marshall Plan after World War II?", answers: ["To rebuild Europe", "To establish NATO", "To partition Germany", "To end communism"], correct: 0 },
+{ question: "What was the codename for the Allied invasion of Normandy during World War II?", answers: ["Operation Overlord", "Operation Torch", "Operation Barbarossa", "Operation Market Garden"], correct: 0 },
+],
+literature: [
+// Easy Questions (10)
+{ question: "How do you spell the plural of 'baby'?", answers: ["Babys", "Babies", "Baby's", "Babyes"], correct: 1 },
+{ question: "Which is correct: 'Their', 'There', or 'They're' in this sentence? '____ dog is very playful.'", answers: ["Their", "There", "They're", "Theyre"], correct: 0 },
+{ question: "What is the past tense of 'run'?", answers: ["Running", "Ran", "Runned", "Runs"], correct: 1 },
+{ question: "Which word means 'to receive something willingly'?", answers: ["Accept", "Except", "Adapt", "Expect"], correct: 0 },
+{ question: "What punctuation is missing in this sentence? 'Its raining outside.'", answers: ["Comma", "Apostrophe", "Semicolon", "Period"], correct: 1 },
+{ question: "Which of these words is spelled correctly?", answers: ["Accomodation", "Accommodation", "Acommodation", "Accomadation"], correct: 1 },
+{ question: "What does the word 'noun' mean?", answers: ["An action word", "A describing word", "A person, place, or thing", "A joining word"], correct: 2 },
+{ question: "What is the synonym for 'happy'?", answers: ["Joyful", "Sad", "Angry", "Anxious"], correct: 0 },
+{ question: "Choose the antonym of 'big':", answers: ["Small", "Tall", "Wide", "Large"], correct: 0 },
+{ question: "Which sentence is correct?", answers: ["She don't like pizza.", "She doesn’t like pizza.", "She didn't liked pizza.", "She didn’t likes pizza."], correct: 1 },
+
+// Normal Questions (25)
+{ question: "Which sentence uses the correct form of 'your'?", answers: ["Your going to love this.", "You're going to love this.", "Yore going to love this.", "Your's going to love this."], correct: 1 },
+{ question: "Choose the sentence with the correct subject-verb agreement:", answers: ["The team are winning.", "The team is winning.", "The teams is winning.", "The teams are winning."], correct: 1 },
+{ question: "Identify the adverb in this sentence: 'She sings beautifully.'", answers: ["She", "Sings", "Beautifully", "None"], correct: 2 },
+{ question: "Which word is a conjunction?", answers: ["And", "Quickly", "House", "Red"], correct: 0 },
+{ question: "Which sentence uses a comma correctly?", answers: ["Let's eat, Grandma.", "Let's eat Grandma.", "Lets eat Grandma.", "Lets, eat Grandma."], correct: 0 },
+{ question: "Choose the correctly punctuated sentence:", answers: ["Its a beautiful day.", "It's a beautiful day.", "Its' a beautiful day.", "It's' a beautiful day."], correct: 1 },
+{ question: "What is the comparative form of 'good'?", answers: ["Goodest", "Better", "Best", "More good"], correct: 1 },
+{ question: "Which of these is a preposition?", answers: ["Quickly", "Behind", "Happy", "Beautiful"], correct: 1 },
+{ question: "What does the word 'verb' mean?", answers: ["An action or state of being", "A describing word", "A place or thing", "A joining word"], correct: 0 },
+{ question: "Which is spelled correctly?", answers: ["Definately", "Definitely", "Definitley", "Definatly"], correct: 1 },
+{ question: "What type of sentence is this? 'What time is the meeting?'", answers: ["Declarative", "Imperative", "Interrogative", "Exclamatory"], correct: 2 },
+{ question: "Which sentence is in passive voice?", answers: ["She ate the cake.", "The cake was eaten by her.", "They are baking a cake.", "The cake bakes quickly."], correct: 1 },
+{ question: "Which word is a homophone?", answers: ["Flour", "Flower", "Both", "None"], correct: 2 },
+{ question: "What is the plural of 'mouse'?", answers: ["Mouses", "Mice", "Mouse", "Mices"], correct: 1 },
+{ question: "What is the past participle of 'write'?", answers: ["Writing", "Wrote", "Written", "Writes"], correct: 2 },
+{ question: "Choose the correct spelling:", answers: ["Receive", "Recieve", "Receeve", "Receve"], correct: 0 },
+{ question: "What is an antonym for 'fast'?", answers: ["Slow", "Quick", "Swift", "Rapid"], correct: 0 },
+{ question: "What is the superlative form of 'happy'?", answers: ["Happiest", "Happier", "Most happy", "Happily"], correct: 0 },
+{ question: "Choose the correctly spelled word:", answers: ["Embarrass", "Embarass", "Embarras", "Embaras"], correct: 0 },
+{ question: "Which sentence is correctly capitalized?", answers: ["i like ice cream.", "I like Ice Cream.", "I like ice cream.", "I Like Ice cream."], correct: 2 },
+{ question: "Which is a complete sentence?", answers: ["Because it rained.", "The dog barked.", "Although she was late.", "Running quickly."], correct: 1 },
+{ question: "Which sentence is punctuated correctly?", answers: ["She said 'hello.'", "She said, 'hello.'", "She said, 'Hello.'", "She said hello.'"], correct: 2 },
+{ question: "What type of word is 'quickly' in this sentence? 'He runs quickly.'", answers: ["Adjective", "Adverb", "Verb", "Noun"], correct: 1 },
+{ question: "What is the plural form of 'goose'?", answers: ["Gooses", "Geese", "Geeses", "Goos"], correct: 1 },
+// Hard Grammar Questions (15)
+{ question: "Which sentence contains a misplaced modifier?", answers: ["The dog barked loudly after hearing the noise.", "After hearing the noise, the dog barked loudly.", "The dog, hearing the noise, barked loudly.", "The dog barked loudly hearing the noise."], correct: 0 },
+{ question: "Which sentence uses the subjunctive mood correctly?", answers: ["If I was you, I would study harder.", "If I were you, I would study harder.", "If I am you, I would study harder.", "If I would be you, I would study harder."], correct: 1 },
+{ question: "Which sentence is in the passive voice?", answers: ["The teacher helped the students.", "The students were helped by the teacher.", "The teacher was helping the students.", "The students helped the teacher."], correct: 1 },
+{ question: "What is the correct placement of the adverb in this sentence: 'She speaks French fluently'?", answers: ["She speaks fluently French.", "She fluently speaks French.", "She speaks French fluently.", "Fluently she speaks French."], correct: 2 },
+{ question: "Which sentence correctly uses a semicolon?", answers: ["He wanted to go swimming; however, the weather was bad.", "He wanted to go swimming, however; the weather was bad.", "He wanted to go swimming however; the weather was bad.", "He wanted to go swimming however, the weather was bad."], correct: 0 },
+{ question: "What is the correct use of an apostrophe?", answers: ["The dogs' toys are scattered around.", "The dog's toys are scattered around.", "The dogs toys' are scattered around.", "The dogs toys are scattered around."], correct: 1 },
+{ question: "Which sentence demonstrates subject-verb agreement?", answers: ["The teacher and the students was ready.", "The teacher and the students were ready.", "The teacher and the student were ready.", "The teacher and the students is ready."], correct: 1 },
+{ question: "Which of these sentences contains a parallel structure error?", answers: ["She likes to read, write, and swim.", "She likes reading, writing, and swimming.", "She likes to read, to write, and to swim.", "She likes to read, write, and swimming."], correct: 3 },
+{ question: "Which sentence uses 'who' correctly?", answers: ["The woman who I saw was my teacher.", "The woman whom I saw was my teacher.", "The woman which I saw was my teacher.", "The woman whose I saw was my teacher."], correct: 0 },
+{ question: "What is the correct use of a colon?", answers: ["She bought three things: apples, oranges, and bananas.", "She bought: three things apples, oranges, and bananas.", "She bought three things: apples, and oranges, and bananas.", "She bought three things: apples, oranges and bananas."], correct: 0 },
+{ question: "Which sentence correctly uses a dash?", answers: ["The answer to the question was – surprisingly – correct.", "The answer – to the question was surprisingly – correct.", "The answer to the question – was surprisingly – correct.", "The answer – to the question – was surprisingly correct."], correct: 0 },
+{ question: "Which sentence contains an error in verb tense?", answers: ["He had eaten dinner when I arrived.", "He has eaten dinner when I arrived.", "He eats dinner every night.", "He ate dinner last night."], correct: 1 },
+{ question: "What is the proper use of 'much' and 'many'?", answers: ["There are much cars in the parking lot.", "There are many cars in the parking lot.", "There is many cars in the parking lot.", "There is much cars in the parking lot."], correct: 1 },
+{ question: "Which sentence correctly uses the conditional mood?", answers: ["If I would know the answer, I would tell you.", "If I knew the answer, I would tell you.", "If I know the answer, I will tell you.", "If I have known the answer, I would have told you."], correct: 1 },
+{ question: "Which is the correct plural form of the word 'analysis'?", answers: ["Analysises", "Analysis", "Analyses", "Analys"], correct: 2 },
+
+],
+sports: [
+// Easy Questions (10)
+{ question: "What is the national sport of Japan?", answers: ["Sumo Wrestling", "Baseball", "Judo", "Karate"], correct: 0 },
+{ question: "In which sport would you perform a slam dunk?", answers: ["Tennis", "Basketball", "Volleyball", "Badminton"], correct: 1 },
+{ question: "Which country has won the most FIFA World Cup titles?", answers: ["Germany", "Brazil", "Italy", "Argentina"], correct: 1 },
+{ question: "What is the length of a standard marathon?", answers: ["26.2 miles", "24.5 miles", "22.3 miles", "20 miles"], correct: 0 },
+{ question: "Who is known as 'The King of Football'?", answers: ["Cristiano Ronaldo", "Pele", "Lionel Messi", "Diego Maradona"], correct: 1 },
+{ question: "In which sport is a shuttlecock used?", answers: ["Tennis", "Badminton", "Squash", "Table Tennis"], correct: 1 },
+{ question: "What is the maximum score in a single frame of bowling?", answers: ["200", "300", "250", "280"], correct: 1 },
+{ question: "Which sport is associated with Wimbledon?", answers: ["Cricket", "Tennis", "Golf", "Badminton"], correct: 1 },
+{ question: "Which country hosted the 2016 Summer Olympics?", answers: ["China", "Brazil", "Greece", "United States"], correct: 1 },
+{ question: "What is the diameter of a basketball hoop in inches?", answers: ["16 inches", "18 inches", "20 inches", "22 inches"], correct: 1 },
+
+// Normal Questions (25)
+{ question: "Which cricketer is known as 'The Little Master'?", answers: ["Don Bradman", "Virat Kohli", "Sachin Tendulkar", "M.S. Dhoni"], correct: 2 },
+{ question: "What is the name of the NFL trophy awarded to the Super Bowl winners?", answers: ["Lombardi Trophy", "Heisman Trophy", "Stanley Cup", "Larry O'Brien Trophy"], correct: 0 },
+{ question: "In what year did Roger Federer win his first Wimbledon title?", answers: ["2001", "2003", "2005", "2007"], correct: 1 },
+{ question: "What is the term for scoring three goals in a single hockey or soccer game?", answers: ["Hat trick", "Triple play", "Grand slam", "Hattrick"], correct: 0 },
+{ question: "Which athlete is nicknamed 'Lightning Bolt'?", answers: ["Michael Phelps", "Usain Bolt", "Carl Lewis", "Tyson Gay"], correct: 1 },
+{ question: "Which basketball player has the nickname 'Black Mamba'?", answers: ["LeBron James", "Michael Jordan", "Kobe Bryant", "Shaquille O'Neal"], correct: 2 },
+{ question: "What is the official distance of an Olympic swimming pool?", answers: ["25 meters", "50 meters", "100 meters", "75 meters"], correct: 1 },
+{ question: "Which country has won the most Cricket World Cups?", answers: ["India", "Australia", "West Indies", "England"], correct: 1 },
+{ question: "In what sport would you find a pommel horse?", answers: ["Gymnastics", "Equestrian", "Athletics", "Fencing"], correct: 0 },
+{ question: "Which country won the first FIFA World Cup in 1930?", answers: ["Brazil", "Argentina", "Uruguay", "Italy"], correct: 2 },
+{ question: "What sport is Tiger Woods famous for?", answers: ["Tennis", "Basketball", "Golf", "Baseball"], correct: 2 },
+{ question: "What is the term for a score of zero in tennis?", answers: ["Love", "Nil", "Duck", "Blank"], correct: 0 },
+{ question: "Which country has hosted the most Olympic Games?", answers: ["Japan", "France", "United Kingdom", "USA"], correct: 3 },
+{ question: "What sport involves tiebreaks, serves, and aces?", answers: ["Cricket", "Volleyball", "Tennis", "Basketball"], correct: 2 },
+{ question: "Who holds the record for the most home runs in MLB history?", answers: ["Barry Bonds", "Babe Ruth", "Hank Aaron", "Alex Rodriguez"], correct: 0 },
+{ question: "What is the term for a birdie in golf?", answers: ["Two strokes under par", "One stroke under par", "Even par", "One stroke over par"], correct: 1 },
+{ question: "Which team won the first-ever NBA championship in 1947?", answers: ["Chicago Stags", "Philadelphia Warriors", "Boston Celtics", "New York Knicks"], correct: 1 },
+{ question: "Which soccer club is nicknamed 'The Red Devils'?", answers: ["Liverpool", "Chelsea", "Manchester United", "Arsenal"], correct: 2 },
+{ question: "In which sport do teams compete for the Stanley Cup?", answers: ["Basketball", "Ice Hockey", "Baseball", "Football"], correct: 1 },
+{ question: "What year did Kenya first compete in the Olympics?", answers: ["1956", "1960", "1964", "1968"], correct: 2 },
+{ question: "Which Premier League club won the 2020-2021 season?", answers: ["Manchester United", "Manchester City", "Liverpool", "Chelsea"], correct: 1 },
+{ question: "Who holds the record for the most Premier League goals?", answers: ["Wayne Rooney", "Alan Shearer", "Sergio Agüero", "Thierry Henry"], correct: 1 },
+{ question: "Which Premier League club is known as 'The Red Devils'?", answers: ["Liverpool", "Arsenal", "Manchester United", "Chelsea"], correct: 2 },
+{ question: "Who won the Premier League Golden Boot for the 2019-2020 season?", answers: ["Mohamed Salah", "Harry Kane", "Pierre-Emerick Aubameyang", "Jamie Vardy"], correct: 3 },
+{ question: "Which team has the most Premier League titles?", answers: ["Manchester United", "Liverpool", "Arsenal", "Chelsea"], correct: 0 },
+
+// Hard Questions (15)
+{ question: "Who holds the record for the most goals scored in a single World Cup tournament?", answers: ["Marta", "Ronaldo", "Just Fontaine", "Miroslav Klose"], correct: 2 },
+{ question: "Which country won the 2014 FIFA World Cup?", answers: ["Argentina", "Germany", "Brazil", "Netherlands"], correct: 1 },
+{ question: "In which sport would you compete for the 'Vince Lombardi Trophy'?", answers: ["Basketball", "Baseball", "Football", "Hockey"], correct: 2 },
+{ question: "Which athlete has won the most Olympic gold medals in a single event?", answers: ["Michael Phelps", "Usain Bolt", "Larisa Latynina", "Paavo Nurmi"], correct: 0 },
+{ question: "Which country won the 2016 Summer Olympics medal tally?", answers: ["United States", "China", "Russia", "Brazil"], correct: 0 },
+{ question: "Which NFL team won the most Super Bowl championships in the 1970s?", answers: ["Dallas Cowboys", "Pittsburgh Steelers", "San Francisco 49ers", "Miami Dolphins"], correct: 1 },
+{ question: "Who is the fastest 100m sprinter of all time?", answers: ["Tyson Gay", "Usain Bolt", "Yohan Blake", "Asafa Powell"], correct: 1 },
+{ question: "In which city were the 2008 Summer Olympics held?", answers: ["London", "Beijing", "Sydney", "Athens"], correct: 1 },
+{ question: "Who was the first female tennis player to earn $100 million in prize money?", answers: ["Serena Williams", "Venus Williams", "Martina Navratilova", "Steffi Graf"], correct: 0 },
+{ question: "Which country has hosted the most Summer Olympics?", answers: ["United States", "France", "Japan", "Germany"], correct: 0 },
+{ question: "Who was the first female athlete to win a Nobel Prize?", answers: ["Marie Curie", "Dorothy Hamill", "Billie Jean King", "Lindsey Vonn"], correct: 0 },
+{ question: "Which country won the first Rugby World Cup?", answers: ["South Africa", "Australia", "New Zealand", "England"], correct: 2 },
+{ question: "Who won the first-ever Olympic gold medal in basketball?", answers: ["United States", "Yugoslavia", "Soviet Union", "Argentina"], correct: 0 },
+{ question: "Which sport has the most Olympic events?", answers: ["Swimming", "Track and Field", "Gymnastics", "Cycling"], correct: 1 },
+{ question: "Who is the only athlete to win the Olympic gold in both the 100m and 200m sprints in four consecutive Olympics?", answers: ["Michael Johnson", "Usain Bolt", "Carl Lewis", "Florence Griffith Joyner"], correct: 2 },
+
+],
+celebrities: [
+// Easy Celebrity Questions (10)
+{ question: "Who is known as the 'King of Pop'?", answers: ["Michael Jackson", "Elvis Presley", "Justin Bieber", "Chris Brown"], correct: 0 },
+{ question: "Which actor played Iron Man in the Marvel movies?", answers: ["Chris Hemsworth", "Robert Downey Jr.", "Mark Ruffalo", "Chris Evans"], correct: 1 },
+{ question: "Who won the Oscar for Best Actress in 2020?", answers: ["Charlize Theron", "Reese Witherspoon", "Renée Zellweger", "Julia Roberts"], correct: 2 },
+{ question: "Which singer is known for the hit song 'Shape of You'?", answers: ["Ed Sheeran", "Justin Bieber", "Shawn Mendes", "Ariana Grande"], correct: 0 },
+{ question: "Which actor is famous for playing Jack Dawson in 'Titanic'?", answers: ["Johnny Depp", "Brad Pitt", "Matt Damon", "Leonardo DiCaprio"], correct: 3 },
+{ question: "Who is the famous pop star behind the 'Bad Romance' song?", answers: ["Lady Gaga", "Beyoncé", "Ariana Grande", "Rihanna"], correct: 0 },
+{ question: "Which actor starred as Harry Potter?", answers: ["Matthew Lewis", "Rupert Grint", "Tom Felton", "Daniel Radcliffe"], correct: 3 },
+{ question: "Which famous footballer plays for Paris Saint-Germain (PSG)?", answers: ["Cristiano Ronaldo", "Lionel Messi", "Neymar", "Kylian Mbappé"], correct: 1 },
+{ question: "Who is known for the song 'Rolling in the Deep'?", answers: ["Adele", "Beyoncé", "Taylor Swift", "Katy Perry"], correct: 0 },
+{ question: "Which famous singer is known as 'The Queen of Pop'?", answers: ["Britney Spears", "Beyoncé", "Madonna", "Lady Gaga"], correct: 2 },
+// Normal Celebrity Questions (25)
+{ question: "Which actor won an Academy Award for his role in 'The Revenant'?", answers: ["Tom Hardy", "Leonardo DiCaprio", "Christian Bale", "Brad Pitt"], correct: 1 },
+{ question: "Which singer’s real name is Stefani Joanne Angelina Germanotta?", answers: ["Lady Gaga", "Ariana Grande", "Rihanna", "Selena Gomez"], correct: 0 },
+{ question: "Who is known for the 'Hunger Games' movie series?", answers: ["Jennifer Lawrence", "Emma Watson", "Natalie Portman", "Kristen Stewart"], correct: 0 },
+{ question: "Which actress is famous for playing Hermione Granger?", answers: ["Emma Watson", "Natalie Portman", "Sandra Bullock", "Julia Roberts"], correct: 0 },
+{ question: "Which actor is famous for playing the character of Wolverine?", answers: ["Chris Hemsworth", "Hugh Jackman", "Mark Ruffalo", "Ryan Reynolds"], correct: 1 },
+{ question: "Who is the female rapper known for the hits 'Anaconda' and 'Super Bass'?", answers: ["Nicki Minaj", "Cardi B", "Megan Thee Stallion", "Rihanna"], correct: 0 },
+{ question: "Which country is the pop star Shakira from?", answers: ["Colombia", "Mexico", "Brazil", "Argentina"], correct: 0 },
+{ question: "Which famous actor starred in 'The Godfather' movies?", answers: ["Al Pacino", "Marlon Brando", "Robert De Niro", "Jack Nicholson"], correct: 0 },
+{ question: "Which actress is known for her role as 'Elle Woods' in 'Legally Blonde'?", answers: ["Reese Witherspoon", "Julia Roberts", "Cameron Diaz", "Drew Barrymore"], correct: 0 },
+{ question: "Which famous soccer player is known as 'CR7'?", answers: ["Lionel Messi", "Cristiano Ronaldo", "Neymar", "Kylian Mbappé"], correct: 1 },
+{ question: "Which pop star is known for the hit 'Shake It Off'?", answers: ["Taylor Swift", "Katy Perry", "Ariana Grande", "Demi Lovato"], correct: 0 },
+{ question: "Which actor played the character of Spider-Man in the Marvel movies?", answers: ["Tom Holland", "Andrew Garfield", "Tobey Maguire", "Chris Hemsworth"], correct: 0 },
+{ question: "Which famous celebrity couple is known as 'Bennifer'?", answers: ["Jennifer Aniston and Brad Pitt", "Ben Affleck and Jennifer Lopez", "Kim Kardashian and Kanye West", "Ryan Reynolds and Blake Lively"], correct: 1 },
+{ question: "Which actor is famous for starring in 'Pirates of the Caribbean'?", answers: ["Johnny Depp", "Brad Pitt", "Orlando Bloom", "Will Smith"], correct: 0 },
+{ question: "Who is the pop singer known for the song 'Wrecking Ball'?", answers: ["Katy Perry", "Miley Cyrus", "Ariana Grande", "Selena Gomez"], correct: 1 },
+{ question: "Which actor is known for his portrayal of 'Deadpool'?", answers: ["Ryan Reynolds", "Chris Hemsworth", "Hugh Jackman", "Mark Ruffalo"], correct: 0 },
+{ question: "Which famous celebrity is married to singer Beyoncé?", answers: ["Jay-Z", "Drake", "Kanye West", "Chris Brown"], correct: 0 },
+{ question: "Which actress starred in the 'Twilight' saga?", answers: ["Kristen Stewart", "Emma Watson", "Scarlett Johansson", "Mila Kunis"], correct: 0 },
+{ question: "Who is the youngest person to ever win an Oscar?", answers: ["Tatum O'Neal", "Jodie Foster", "Emma Watson", "Drew Barrymore"], correct: 0 },
+{ question: "Which artist is known for the famous song 'Blinding Lights'?", answers: ["The Weeknd", "Drake", "Post Malone", "Travis Scott"], correct: 0 },
+{ question: "Which singer famously headlined the 2020 Super Bowl halftime show?", answers: ["Shakira", "Beyoncé", "Lady Gaga", "Katy Perry"], correct: 0 },
+{ question: "Which famous actor starred in 'Forrest Gump'?", answers: ["Tom Hanks", "Brad Pitt", "Leonardo DiCaprio", "Johnny Depp"], correct: 0 },
+{ question: "Which YouTuber was the first to reach 100 million subscribers on their channel in 2019?", answers: ["MrBeast", "PewDiePie", "T-Series", "DanTDM"], correct: 1 },
+{ question: "In 2020, which YouTuber did the documentary 'This Is Everything: Gigi Gorgeous' focus on?", answers: ["James Charles", "Tana Mongeau", "Gigi Gorgeous", "Shane Dawson"], correct: 2 },
+{ question: "Who is the son of Jordan Matter", answers: ["Henry Matter", "Hudson Matter", "Harrison Matter", "Hubert Matter"], correct: 1 },
+// Hard Questions 
+// Hard Questions (15)
+{ question: "Who was the first YouTuber to reach 200 million subscribers?", answers: ["PewDiePie", "MrBeast", "T-Series", "Cocomelon"], correct: 2 },
+{ question: "Which TikToker became the first to reach 100 million followers?", answers: ["Charli D'Amelio", "Addison Rae", "Bella Poarch", "Khaby Lame"], correct: 0 },
+{ question: "What is the name of MrBeast's gaming channel?", answers: ["MrBeast Gaming", "Beast Plays", "Gaming with Beast", "BeastMode"], correct: 0 },
+{ question: "Which TikToker is known for the viral song *Build a B****?", answers: ["Bella Poarch", "Charli D'Amelio", "Dixie D'Amelio", "Addison Rae"], correct: 0 },
+{ question: "Who created the *YouTube Rewind* videos before YouTube itself took over?", answers: ["PewDiePie", "TheFineBros", "MrBeast", "Marques Brownlee"], correct: 1 },
+{ question: "Which YouTube channel is known for unboxing toys and is one of the highest-earning channels?", answers: ["Ryan's World", "Cocomelon", "Dude Perfect", "Blippi"], correct: 0 },
+{ question: "Which TikToker is famous for silent comedy and overtook Charli D'Amelio in followers in 2022?", answers: ["Khaby Lame", "Bella Poarch", "Zach King", "Spencer X"], correct: 0 },
+{ question: "Which YouTuber is known for the series *'100 Days in Minecraft'*?", answers: ["Luke TheNotable", "Dream", "Technoblade", "DanTDM"], correct: 0 },
+{ question: "What is the title of Dixie D'Amelio's debut single?", answers: ["Be Happy", "Roommates", "One Whole Day", "Psycho"], correct: 0 },
+{ question: "Who is the most-followed TikToker as of 2024?", answers: ["Khaby Lame", "Charli D'Amelio", "Addison Rae", "Bella Poarch"], correct: 0 },
+{ question: "Which YouTuber is known for the phrase 'Top of the mornin' to ya!'?", answers: ["Jacksepticeye", "Markiplier", "Ninja", "DanTDM"], correct: 0 },
+{ question: "What is the name of the YouTube group featuring Sidemen members like KSI?", answers: ["The Sidemen", "Beast Crew", "Beta Squad", "Dude Perfect"], correct: 0 },
+{ question: "Which TikToker famously recreated real-life illusions in their videos?", answers: ["Zach King", "Khaby Lame", "Spencer X", "Michael Le"], correct: 0 },
+{ question: "Which YouTuber is the creator of the educational *Kurzgesagt – In a Nutshell* videos?", answers: ["Philipp Dettmer", "Vsauce", "Veritasium", "Mark Rober"], correct: 0 },
+{ question: "Which YouTube animator is known for *The Odd1sOut* series?", answers: ["James Rallison", "Jaiden Animations", "Domics", "Alex Clark"], correct: 0 }
+],
+lifestyle: [
+// Easy Questions (10)
+{ question: "Which fruit is known for its high vitamin C content?", answers: ["Apple", "Orange", "Banana", "Strawberry"], correct: 1 },
+{ question: "Which exercise is best for improving flexibility?", answers: ["Running", "Yoga", "Cycling", "Weightlifting"], correct: 1 },
+{ question: "Which of these is a common ingredient in a smoothie?", answers: ["Rice", "Spinach", "Cucumber", "Lettuce"], correct: 1 },
+{ question: "What is a popular type of workout that involves high-intensity intervals?", answers: ["Yoga", "Pilates", "HIIT", "Zumba"], correct: 2 },
+{ question: "Which of these is a form of meditation?", answers: ["Jogging", "Tai Chi", "Weightlifting", "Swimming"], correct: 1 },
+{ question: "Which type of food is known as a superfood?", answers: ["Chips", "Avocado", "Pizza", "Burger"], correct: 1 },
+{ question: "What is the term for eating three balanced meals per day?", answers: ["Intermittent fasting", "Meal prepping", "Balanced diet", "Skipping meals"], correct: 2 },
+{ question: "Which type of diet involves avoiding meat?", answers: ["Vegan", "Carnivore", "Paleo", "Mediterranean"], correct: 0 },
+{ question: "Which beverage is commonly associated with helping people wake up in the morning?", answers: ["Milk", "Coffee", "Tea", "Water"], correct: 1 },
+{ question: "Which vitamin is primarily obtained from the sun?", answers: ["Vitamin A", "Vitamin B", "Vitamin D", "Vitamin C"], correct: 2 },
+
+// Normal Questions (25)
+
+
+
+
+
+
+{ question: "Which of these is a practice of self-care?", answers: ["Ignoring your feelings", "Reading a book", "Overworking", "Skipping meals"], correct: 1 },
+{ question: "What is the recommended amount of sleep for an adult?", answers: ["4-5 hours", "6-7 hours", "7-9 hours", "10-12 hours"], correct: 2 },
+{ question: "Which lifestyle habit is most commonly associated with improving heart health?", answers: ["Smoking", "Exercising", "Eating junk food", "Sleeping late"], correct: 1 },
+{ question: "Which of the following is a benefit of drinking enough water?", answers: ["Better digestion", "Dry skin", "Weight gain", "Fatigue"], correct: 0 },
+{ question: "Which health trend focuses on reducing stress by performing controlled breathing exercises?", answers: ["Mindfulness", "HIIT", "Veganism", "Paleo"], correct: 0 },
+{ question: "What does the term 'mindful eating' refer to?", answers: ["Eating while distracted", "Eating as fast as possible", "Paying attention to what and how you eat", "Skipping meals"], correct: 2 },
+{ question: "Which of these activities is considered a form of strength training?", answers: ["Running", "Cycling", "Push-ups", "Yoga"], correct: 2 },
+{ question: "Which lifestyle change is often suggested to improve mental health?", answers: ["More social media time", "Regular exercise", "Drinking alcohol", "Excessive sleeping"], correct: 1 },
+{ question: "What is a key principle of the Mediterranean diet?", answers: ["High in red meat", "High in processed foods", "High in fruits, vegetables, and healthy fats", "Low in carbs"], correct: 2 },
+{ question: "Which of the following is an example of a stress management technique?", answers: ["Avoiding all social interaction", "Mindful breathing", "Ignoring feelings", "Working non-stop"], correct: 1 },
+{ question: "What is a common benefit of practicing yoga regularly?", answers: ["Increased flexibility and strength", "Reduced stamina", "Less focus", "Poor posture"], correct: 0 },
+{ question: "Which of these is a well-known superfood?", answers: ["Spinach", "Potatoes", "Bacon", "Ice cream"], correct: 0 },
+{ question: "Which type of exercise focuses on strengthening your core muscles?", answers: ["Cycling", "Pilates", "Running", "Swimming"], correct: 1 },
+{ question: "Which practice is typically associated with improving mindfulness?", answers: ["Watching TV", "Practicing gratitude", "Ignoring stress", "Drinking alcohol"], correct: 1 },
+{ question: "What is the concept of intermittent fasting?", answers: ["Eating whatever you want all day", "Fasting for short periods of time", "Eating three meals a day", "Eating only fruits"], correct: 1 },
+{ question: "What is the best way to improve sleep hygiene?", answers: ["Drinking caffeine before bed", "Staying up late every night", "Establishing a consistent sleep routine", "Watching TV in bed"], correct: 2 },
+{ question: "Which vitamin is essential for bone health?", answers: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"], correct: 3 },
+{ question: "Which food is commonly included in the ketogenic diet?", answers: ["Rice", "Bread", "Avocado", "Potatoes"], correct: 2 },
+{ question: "What kitchen appliance is commonly used for blending soups and smoothies?", answers: ["Microwave", "Blender", "Toaster", "Coffee maker"], correct: 1 },
+{ question: "Which cooking method involves submerging food in boiling water?", answers: ["Baking", "Frying", "Boiling", "Grilling"], correct: 2 },
+{ question: "What is the purpose of a whisk in the kitchen?", answers: ["Chopping vegetables", "Mixing ingredients", "Cutting meat", "Peeling fruit"], correct: 1 },
+{ question: "Which grain is traditionally used to make risotto?", answers: ["Basmati rice", "Wild rice", "Arborio rice", "Brown rice"], correct: 2 },
+{ question: "What is the main ingredient in guacamole?", answers: ["Tomato", "Avocado", "Cucumber", "Spinach"], correct: 1 },
+{ question: "What is the purpose of a colander in cooking?", answers: ["Slicing vegetables", "Straining liquids", "Measuring ingredients", "Serving food"], correct: 1 },
+{ question: "Which of the following poses the highest risk to a pregnant woman's health and the development of her baby?", answers: ["High mercury intake from certain fish (like shark or swordfish)", "Daily caffeine consumption under 200 mg", "Sleeping on the left side in the third trimester", "Consuming a lot of green Vegetables"], correct: 0 },
+// Hard Questions (15)
+{ question: "Which of these is the main focus of the DASH diet?", answers: ["Weight loss", "Heart health", "Detoxing", "Increasing muscle mass"], correct: 1 },
+{ question: "What is the primary health benefit of omega-3 fatty acids?", answers: ["Improved vision", "Enhanced brain function", "Increased energy levels", "Reduced cholesterol"], correct: 1 },
+{ question: "Which food is typically avoided in a gluten-free diet?", answers: ["Rice", "Bread", "Potatoes", "Eggs"], correct: 1 },
+{ question: "Which condition is commonly linked to prolonged stress?", answers: ["Asthma", "Heart disease", "Skin rashes", "Stomach ulcers"], correct: 1 },
+{ question: "Which of these is considered a Mediterranean diet staple?", answers: ["Processed meats", "Olive oil", "Fried foods", "Red meat"], correct: 1 },
+{ question: "Which of the following is a key feature of the paleo diet?", answers: ["Eating only meat", "Avoiding processed foods", "High carb intake", "No fruits or vegetables"], correct: 1 },
+{ question: "What is the main goal of a vegan diet?", answers: ["Losing weight", "Improving heart health", "Avoiding animal products", "Increasing energy levels"], correct: 2 },
+{ question: "Which of these practices is known to help lower blood pressure?", answers: ["Smoking", "Excessive alcohol consumption", "Exercise and stress management", "Eating processed foods"], correct: 2 },
+{ question: "Which lifestyle factor is most associated with reducing the risk of chronic diseases?", answers: ["High sugar consumption", "Regular exercise and a balanced diet", "Long working hours", "Sleeping too much"], correct: 1 },
+{ question: "Which of these is recommended for improving overall digestion?", answers: ["Eating processed foods", "Consuming more fiber-rich foods", "Skipping meals", "Drinking sugary beverages"], correct: 1 },
+{ question: "Which type of exercise is most effective for weight loss?", answers: ["Swimming", "Weightlifting", "Cardiovascular exercise", "Yoga"], correct: 2 },
+{ question: "What is the primary health benefit of mindfulness meditation?", answers: ["Increased muscle mass", "Improved mental clarity", "Better digestion", "Higher metabolism"], correct: 1 },
+{ question: "Which of these food types is part of the low-carb ketogenic diet?", answers: ["Bread", "Fruits", "Meat and fish", "Rice"], correct: 2 },
+{ question: "What type of diet is typically associated with increased energy levels and improved mood?", answers: ["High-carb diet", "Low-carb diet", "High-fat diet", "Balanced diet with whole foods"], correct: 3 },
+{ question: "Which health issue is most commonly linked to a lack of physical activity?", answers: ["Diabetes", "Skin conditions", "Asthma", "Headaches"], correct: 0 }
+],
+technology: [
+// Easy Questions (10)
+{ question: "What does the acronym 'Wi-Fi' stand for?", answers: ["Wireless Fidelity", "Wide Frequency", "Wireless Internet", "Web Frequency"], correct: 0 },
+{ question: "Which company developed the iPhone?", answers: ["Samsung", "Google", "Apple", "Microsoft"], correct: 2 },
+{ question: "What is the main function of a CPU in a computer?", answers: ["Storing data", "Processing instructions", "Displaying graphics", "Providing internet access"], correct: 1 },
+{ question: "What is the name of the operating system developed by Microsoft?", answers: ["Linux", "Windows", "macOS", "Android"], correct: 1 },
+{ question: "Which technology is commonly used for wireless communication?", answers: ["Bluetooth", "USB", "HDMI", "Ethernet"], correct: 0 },
+{ question: "What is the most common web browser?", answers: ["Safari", "Internet Explorer", "Chrome", "Edge"], correct: 2 },
+{ question: "Which of these devices is used for virtual reality?", answers: ["Smartphone", "Oculus Rift", "Laptop", "TV"], correct: 1 },
+{ question: "What is the primary purpose of an antivirus program?", answers: ["To increase internet speed", "To protect against malware", "To store passwords", "To improve graphics"], correct: 1 },
+{ question: "Which company created the Android operating system?", answers: ["Apple", "Microsoft", "Google", "Samsung"], correct: 2 },
+{ question: "What is the name of the first computer virus?", answers: ["ILOVEYOU", "Melissa", "Brain", "WannaCry"], correct: 2 },
+
+// Normal Questions (25)
+
+
+
+
+{ question: "Which programming language is often used for web development?", answers: ["Java", "Python", "HTML", "Ruby"], correct: 2 },
+{ question: "What is the main function of a router in a network?", answers: ["To store files", "To route data between devices", "To print documents", "To send emails"], correct: 1 },
+{ question: "Which technology is used for cryptocurrency?", answers: ["Blockchain", "Artificial Intelligence", "Cloud Computing", "Big Data"], correct: 0 },
+{ question: "What does 'HTTP' stand for in a website URL?", answers: ["HyperText Transfer Protocol", "High-Tech Protocol", "Hyper Transfer Text Protocol", "High-Tech Transmission Protocol"], correct: 0 },
+{ question: "What is the term for the process of making a device or software more efficient?", answers: ["Optimization", "Encryption", "Compression", "Virtualization"], correct: 0 },
+{ question: "Which device is used to input data into a computer?", answers: ["Printer", "Monitor", "Mouse", "Speakers"], correct: 2 },
+{ question: "Which social media platform is known for its 280-character posts?", answers: ["Facebook", "Instagram", "Twitter", "TikTok"], correct: 2 },
+{ question: "Which programming language is known for its use in machine learning?", answers: ["C", "Python", "Java", "JavaScript"], correct: 1 },
+{ question: "What is a 'cloud' in computing?", answers: ["A physical server", "A software program", "A type of data storage", "A programming language"], correct: 2 },
+{ question: "What is the name of Apple's voice assistant?", answers: ["Siri", "Cortana", "Alexa", "Google Assistant"], correct: 0 },
+{ question: "What does 'URL' stand for?", answers: ["Universal Resource Locator", "Uniform Resource Locator", "Uniform Retrieval Locator", "Universal Retrieval Locator"], correct: 1 },
+{ question: "What is the main function of a hard drive?", answers: ["Processing data", "Storing data", "Running applications", "Displaying images"], correct: 1 },
+{ question: "Which company owns the video sharing platform YouTube?", answers: ["Facebook", "Amazon", "Google", "Microsoft"], correct: 2 },
+{ question: "Which type of software is used to create and edit graphics?", answers: ["Word processor", "Spreadsheet", "Graphics editor", "Media player"], correct: 2 },
+{ question: "What is the primary purpose of an IP address?", answers: ["To identify a computer on the internet", "To encrypt internet traffic", "To provide internet speed", "To store files"], correct: 0 },
+{ question: "Which programming language is known for its simplicity and readability?", answers: ["C", "Python", "JavaScript", "Swift"], correct: 1 },
+{ question: "Which cloud service is provided by Microsoft?", answers: ["Google Cloud", "Microsoft Azure", "Amazon AWS", "IBM Cloud"], correct: 1 },
+{ question: "Which of these is a popular search engine?", answers: ["Bing", "Yahoo", "Google", "All of the above"], correct: 3 },
+{ question: "What does 'Wi-Fi' refer to?", answers: ["Wireless Fidelity", "Wireless Internet", "Web Frequency", "Wide Frequency"], correct: 0 },
+{ question: "What does ABS stand for in car technology?", answers: ["Automatic Braking System", "Anti-lock Braking System", "Advanced Brake Safety", "Auto Brake Support"], correct: 1 },
+{ question: "Which type of fuel do most electric cars use?", answers: ["Petrol", "Diesel", "Electricity", "Natural Gas"], correct: 2 },
+{ question: "What is the primary purpose of a car's GPS system?", answers: ["Detect speed", "Navigate locations", "Monitor engine health", "Control fuel efficiency"], correct: 1 },
+{ question: "Which brand is known for pioneering self-driving car technology?", answers: ["Tesla", "Toyota", "Ford", "BMW"], correct: 0 },
+{ question: "What is the function of a rear-view camera in cars?", answers: ["To enhance rear visibility", "To detect road signs", "To improve parking distance", "To measure speed"], correct: 0 },
+{ question: "Which technology is primarily used to create interactive web pages?", "answers": ["CSS", "HTML", "JavaScript", "SQL"], "correct": 2 },
+
+
+// Hard Questions (15)
+
+
+{ question: "What is the primary purpose of a VPN?", answers: ["To protect against malware", "To provide anonymity and privacy online", "To increase internet speed", "To improve Wi-Fi signal strength"], correct: 1 },
+{ question: "Which technology is most associated with self-driving cars?", answers: ["Blockchain", "Machine Learning", "Quantum Computing", "Augmented Reality"], correct: 1 },
+{ question: "What does the acronym 'AI' stand for in technology?", answers: ["Artificial Intelligence", "Automated Interaction", "Adaptive Interface", "Augmented Integration"], correct: 0 },
+{ question: "Which of these is a protocol used for secure online transactions?", answers: ["HTTP", "FTP", "HTTPS", "SMTP"], correct: 2 },
+{ question: "Which of the following is used to access the deep web?", answers: ["Google", "Tor browser", "Yahoo", "Facebook"], correct: 1 },
+{ question: "Which of these is the most common language used in web development?", answers: ["Ruby", "PHP", "JavaScript", "Perl"], correct: 2 },
+{ question: "What is the main purpose of a blockchain?", answers: ["Storing large files", "Transferring digital assets securely", "Optimizing internet speeds", "Running applications"], correct: 1 },
+{ question: "Which of the following companies developed the first commercial computer?", answers: ["IBM", "Microsoft", "Apple", "UNIVAC"], correct: 3 },
+{ question: "Which of these technologies uses quantum mechanics for computation?", answers: ["Quantum Computing", "Cloud Computing", "Big Data", "Machine Learning"], correct: 0 },
+{ question: "Which is the first programming language ever created?", answers: ["C", "Fortran", "Assembly", "Ada"], correct: 1 },
+{ question: "Which of these is a popular operating system used in servers?", answers: ["Windows", "Linux", "macOS", "Android"], correct: 1 },
+{ question: "Which type of computing involves distributing tasks across many computers?", answers: ["Distributed Computing", "Quantum Computing", "Cloud Computing", "Parallel Computing"], correct: 0 },
+{ question: "What is the term for a fake website designed to steal personal information?", answers: ["Phishing", "Hacking", "Spoofing", "Malware"], correct: 0 },
+{ question: "What is the name of the first computer virus for the MS-DOS system?", answers: ["ILOVEYOU", "Brain", "Melissa", "WannaCry"], correct: 1 },
+{ question: "Which protocol is used for sending emails?", answers: ["SMTP", "FTP", "HTTP", "DNS"], correct: 0 }
+],
+movies: [
+// Easy Questions (10)
+
+
+{ question: "In the movie 'Frozen,' what is the name of Elsa’s younger sister?", answers: ["Kristoff", "Anna", "Olaf", "Sven"], correct: 1 },
+{ question: "Which superhero movie includes the Infinity Gauntlet?", answers: ["Guardians of the Galaxy", "Justice League", "X-Men: Days of Future Past", "Avengers: Infinity War"], correct: 3 },
+{ question: "What type of creature is Shrek?", answers: ["Troll", "Goblin", "Giant", "Ogre"], correct: 3 },
+{ question: "What is the name of the planet where the Na’vi people live in 'Avatar'?", answers: ["Zion", "Asgard", "Pandora", "Krypton"], correct: 2 },
+{ question: "Which movie features a magical nanny who flies with an umbrella?", answers: ["The Sound of Music", "Mary Poppins", "Bedknobs and Broomsticks", "Nanny McPhee"], correct: 1 },
+{ question: "What is the name of Harry Potter’s owl?", answers: ["Hedwig", "Crookshanks", "Scabbers", "Pigwidgeon"], correct: 0 },
+{ question: "In 'The Lion King,' who is Simba’s father?", answers: ["Scar", "Timon", "Mufasa", "Pumbaa"], correct: 2 },
+{ question: "Which series follows the mysterious adventures of Eleven and her friends?", answers: ["The Umbrella Academy", "The 100", "Stranger Things", "Lost"], correct: 2 },
+{ question: "What kind of car is featured in 'Back to the Future'?", answers: ["DeLorean", "Mustang", "Ferrari", "Camaro"], correct: 0 },
+{ question: "Which Netflix series is centered on a robbery planned by 'The Professor'?", answers: ["Breaking Bad", "Money Heist", "Narcos", "The Crown"], correct: 1 },
+
+// Normal Questions (25)
+
+
+
+
+
+
+
+
+{ question: "In which movie does Katniss Everdeen volunteer to participate in a deadly competition?", answers: ["Ender’s Game", "The Hunger Games", "Divergent", "Maze Runner"], correct: 1 },
+{ question: "Which series is set in the fictional kingdom of Westeros?", answers: ["Merlin", "The Witcher", "Game of Thrones", "Vikings"], correct: 2 },
+{ question: "In 'Toy Story,' what is the name of the cowboy doll?", answers: ["Rex", "Woody", "Buzz", "Jessie"], correct: 1 },
+{ question: "Which Netflix series features Geralt of Rivia?", answers: ["The Sandman", "The Witcher", "The Mandalorian", "Shadow and Bone"], correct: 1 },
+{ question: "What is the subtitle of the second Avengers movie?", answers: ["Civil War", "Infinity War", "Age of Ultron", "Endgame"], correct: 2 },
+{ question: "What type of animal is Baloo in 'The Jungle Book'?", answers: ["Tiger", "Wolf", "Panther", "Bear"], correct: 3 },
+{ question: "Which movie features an archaeologist named Indiana Jones?", answers: ["National Treasure", "Raiders of the Lost Ark", "The Mummy", "The Da Vinci Code"], correct: 1 },
+{ question: "In 'Star Wars,' who is Luke Skywalker’s father?", answers: ["Yoda", "Han Solo", "Obi-Wan Kenobi", "Darth Vader"], correct: 3 },
+{ question: "Which movie features a computer program named 'Skynet'?", answers: ["The Matrix", "Blade Runner", "The Terminator", "RoboCop"], correct: 2 },
+{ question: "Which series features a haunted house called Hill House?", answers: ["American Horror Story", "Castle Rock", "The Haunting of Hill House", "Stranger Things"], correct: 2 },
+{ question: "Which movie features a magical wardrobe leading to a mystical land?", answers: ["Harry Potter", "Eragon", "The Chronicles of Narnia", "The Golden Compass"], correct: 2 },
+{ question: "What is the name of Frodo’s home in 'The Lord of the Rings'?", answers: ["Gondor", "The Shire", "Mordor", "Rivendell"], correct: 1 },
+{ question: "In which series does Walter White transform from a teacher to a drug lord?", answers: ["Narcos", "Breaking Bad", "Better Call Saul", "Ozark"], correct: 1 },
+{ question: "Which Netflix series is about teenagers trapped inside a dystopian society?", answers: ["Stranger Things", "The 100", "3%", "Dark"], correct: 2 },
+{ question: "Which superhero movie includes the villain Killmonger?", answers: ["Iron Man 3", "Captain Marvel", "Thor: Ragnarok", "Black Panther"], correct: 3 },
+{ question: "Which movie features a train traveling through a frozen wasteland?", answers: ["Murder on the Orient Express", "Train to Busan", "The Polar Express", "Snowpiercer"], correct: 3 },
+{ question: "Which series features Michael Scofield and his elaborate escape plans?", answers: ["Prison Break", "Suits", "Breaking Bad", "The Blacklist"], correct: 0 },
+{ question: "Which animated movie features a princess with magical long hair?", answers: ["Brave", "Moana", "Tangled", "Frozen"], correct: 2 },
+{ question: "Which movie includes the famous quote 'I’ll be back'?", answers: ["The Terminator", "RoboCop", "Predator", "Die Hard"], correct: 0 },
+{ question: "What game do the characters in 'Squid Game' play as the final challenge?", answers: ["Tug of War", "Squid Game", "Marbles", "Hopscotch"], correct: 1 },
+{ question: "In 'The Umbrella Academy,' what event reunites the Hargreeves siblings?", answers: ["The death of their father", "A wedding", "An alien invasion", "A school reunion"], correct: 0 },
+{ question: "Which Netflix series follows a group of teens solving a treasure hunt in the Outer Banks?", answers: ["13 Reasons Why", "Riverdale", " Outer Banks", "Elite"], correct: 2 },
+{ question: "In the series 'You,' what is Joe Goldberg's occupation in Season 1?", answers: ["Writer", "Bookstore manager", "Teacher", "Chef"], correct: 1 },
+{ question: "Which Netflix show is based on the British monarchy and covers the reign of Queen Elizabeth II?", answers: ["Bridgerton", "Downtown Abbey", "The Crown", "Victoria"], correct: 2 },
+{ question: "In 'Shadow and Bone,' what is Alina Starkov's unique magical ability?", answers: ["Healing wounds", "Controlling shadows", "Reading minds", "Summoning light"], correct: 3 },
+
+// Hard Questions (15)
+
+
+
+{ question: "In 'The Matrix,' what is Neo’s real name?", answers: ["Morpheus", "Thomas Anderson", "John Wick", "Trinity"], correct: 1 },
+{ question: "Which Netflix series is set in the small town of Winden and involves time travel?", answers: ["Dark", "Altered Carbon", "Stranger Things", "The OA"], correct: 0 },
+{ question: "What is the name of the spaceship in 'Alien'?", answers: ["Enterprise", "Discovery", "Serenity", "Nostromo"], correct: 3 },
+{ question: "In 'Inception,' what object does Cobb use as his totem?", answers: ["A ring", "A spinning top", "A dice", "A coin"], correct: 1 },
+{ question: "Which movie features the song 'City of Stars'?", answers: ["Frozen", "A Star is Born", "The Greatest Showman", "La La Land"], correct: 3 },
+{ question: "In 'Squid Game,' what shape represents the workers?", answers: ["Circle", "Star", "Square", "Triangle"], correct: 0 },
+{ question: "What is the name of the fictional African country in 'Black Panther'?", answers: ["Genosha", "Sokovia", "Zamunda", "Wakanda"], correct: 3 },
+{ question: "What is the real name of Black Panther in the Marvel Cinematic Universe?", answers: ["T'Challa", "Shuri", "Okoye", "M'Baku"], correct: 3 },
+{ question: "Which DC character uses the alias 'The Red Hood' at one point?", answers: ["Jason Todd", "Dick Grayson", "Barbara Gordon", "Damian Wayne"], correct: 1 },
+{ question: "In 'Avengers: Infinity War,' who forges Thor's weapon Stormbreaker?", answers: ["Eitri", "Rocket Raccoon", "Odin", "Groot"], correct: 0 },
+{ question: "What is the name of the supervillain group in 'The Suicide Squad' (2021)?", answers: ["Task Force X", "Legion of Doom", "Injustice League", "The Rogues"], correct: 2 },
+{ question: "In 'WandaVision,' what is the name of Wanda and Vision's Halloween episode?", answers: ["All-New Halloween Spooktacular!", "The Spooky Vision", "Trick or Treat", "The Hex Halloween"], correct: 3 },
+{ question: "In 'The Batman' (2022), who is revealed to be The Riddler's primary target?", answers: ["Bruce Wayne", "Carmine Falcone", "Commissioner Gordon", "Mayor Mitchell"], correct: 1 },
+{ question: "In 'Thor: Love and Thunder,' which character becomes the new wielder of Mjolnir?", answers: ["Jane Foster", "Loki", "Valkyrie", "Sif"], correct: 0 },
+{ question: "Which Marvel movie introduced the concept of the Quantum Realm?", answers: ["Ant-Man", "Doctor Strange", "Guardians of the Galaxy", "Iron Man 3"], correct: 2 },
+],
+cartoons: [
+
+
+{ question: "What is the name of the yellow sponge in 'SpongeBob SquarePants'?", "answers": ["Patrick Star", "SpongeBob SquarePants", "Squidward Tentacles", "Mr. Krabs"], "correct": 1 },
+{ question: "Which character is famous for saying 'What's up, Doc'?", "answers": ["Sylvester the Cat", "Elmer Fudd", "Bugs Bunny", "Daffy Duck"], "correct": 2 },
+{ question: "In 'Tom and Jerry', who is always chasing the mouse?", "answers": ["Tom", "Butch", "Spike", "Jerry"], "correct": 0 },
+{ question: "What type of animal is 'Dora the Explorer's' sidekick Boots?", "answers": ["Cat", "Bear", "Dog", "Monkey"], "correct": 3 },
+{ question: "Which cartoon features a dog named Scooby?", "answers": ["The Jetsons", "The Flintstones", "Scooby-Doo", "Mickey Mouse"], "correct": 2 },
+{ question: "In 'The Simpsons', who is Bart's dad?", "answers": ["Grampa Simpson", "Homer Simpson", "Maggie Simpson", "Marge Simpson"], "correct": 1 },
+{ question: "Which character lives in a pineapple under the sea?", "answers": ["Squidward Tentacles", "SpongeBob SquarePants", "Patrick Star", "Mr. Krabs"], "correct": 1 },
+{ question: "What is the name of the superhero family in 'The Incredibles'?", "answers": ["The Justice League", "The Simpsons", "The Incredibles", "The Avengers"], "correct": 2 },
+{ question: "What is the name of the pink cat in 'The Pink Panther'?", "answers": ["Felix the Cat", "The Pink Panther", "Tom", "Garfield"], "correct": 1 },
+{ question: "Which animated character says 'Yabba-Dabba-Doo'?", "answers": ["George Jetson", "Peter Griffin", "Fred Flintstone", "Homer Simpson"], "correct": 2 },
+{ question: "In 'SpongeBob SquarePants', who is SpongeBob’s best friend?", "answers": ["Patrick Star", "Squidward Tentacles", "Gary", "Mr. Krabs"], "correct": 0 },
+{ question: "Which character from 'The Simpsons' is known for his catchphrase 'D'oh!'?", "answers": ["Homer Simpson", "Marge Simpson", "Bart Simpson", "Maggie Simpson"], "correct": 0 },
+{ question: "What is the name of the evil scientist who constantly tries to defeat the Powerpuff Girls?", "answers": ["Mojo Jojo", "The Gangreen Gang", "Fuzzy Lumpkins", "Him"], "correct": 0 },
+{ question: "In 'Tom and Jerry', who is the dog that sometimes helps Jerry?", "answers": ["Tyke", "Tuffy", "Butch", "Spike"], "correct": 3 },
+{ question: "In 'Rugrats', who is the oldest child?", "answers": ["Chuckie Finster", "Phil DeVille", "Tommy Pickles", "Angelica Pickles"], "correct": 2 },
+{ question: "Which animated show is set in a post-apocalyptic future and features the character Fry?", "answers": ["Futurama", "Rick and Morty", "Family Guy", "The Simpsons"], "correct": 0 },
+{ question: "In 'The Jetsons', who is George Jetson’s wife?", "answers": ["Wilma Flintstone", "Marge Simpson", "Betty Rubble", "Jane Jetson"], "correct": 3 },
+{ question: "What is the name of the fish that works with SpongeBob at the Krusty Krab?", "answers": ["Patrick Star", "Larry the Lobster", "Squidward Tentacles", "Mr. Krabs"], "correct": 2 },
+{ question: "Which character is known for saying 'What's up, Doc'?", "answers": ["Daffy Duck", "Bugs Bunny", "Elmer Fudd", "Sylvester the Cat"], "correct": 1 },
+{ question: "In 'Adventure Time', what is the name of Finn’s best friend who is a dog?", "answers": ["Jake", "Princess Bubblegum", "Marceline", "BMO"], "correct": 0 },
+{ question: "Which cartoon features a superhero dog named Underdog?", "answers": ["Scooby-Doo", "Astro", "Underdog", "Poochie"], "correct": 2 },
+{ question: "Who is the main antagonist in 'The Fairly OddParents'?", "answers": ["Vicky", "Timmy Turner", "Cosmo", "Wanda"], "correct": 0 },
+{ question: "Which animated character is always hungry and loves lasagna?", "answers": ["SpongeBob", "Garfield", "Tom", "Mickey Mouse"], "correct": 1 },
+{ question: "In 'The Flintstones', what is the name of Fred Flintstone’s boss?", "answers": ["Barney Rubble", "Mr. Slate", "Homer Simpson", "George Jetson"], "correct": 1 },
+{ question: "Which cartoon character is known for his powerful strength and love for spinach?", "answers": ["Popeye", "Thor", "Superman", "Hercules"], "correct": 0 },
+{ question: "In 'The Simpsons', who is Bart's best friend?", "answers": ["Nelson Muntz", "Ralph Wiggum", "Jimbo Jones", "Millhouse Van Houten"], "correct": 3 },
+{ question: "What animal is the main character in 'Dora the Explorer'?", "answers": ["Dog", "Monkey", "Bear", "Cat"], "correct": 1 },
+{ question: "Which animated series features characters like Rick Sanchez and Morty Smith?", "answers": ["Futurama", "The Simpsons", "Rick and Morty", "Family Guy"], "correct": 2 },
+{ question: "Who is the main villain in 'The Incredibles'?", "answers": ["Frozone", "Dash", "Syndrome", "Violet"], "correct": 2 },
+{ question: "Which animated series is set in a world of anthropomorphic animals called Zootopia?", "answers": ["The Lion King", "Robin Hood", "Zootopia", "The Jungle Book"], "correct": 2 },
+{ question: "In 'Rick and Morty', who is Rick’s grandson?", "answers": ["Summer", "Beth", "Jerry", "Morty"], "correct": 3 },
+{ question: "Which character from 'Futurama' is a robot with a sarcastic attitude?", "answers": ["Leela", "Professor Farnsworth", "Bender", "Fry"], "correct": 2 },
+{ question: "Which character in 'Powerpuff Girls' is known for being the toughest?", "answers": ["Blossom", "Fuzzy Lumpkins", "Buttercup", "Bubbles"], "correct": 2 },
+{ question: "In 'Dragon Ball Z', what is the name of Goku's best friend who is a martial artist?", "answers": ["Vegeta", "Piccolo", "Krillin", "Trunks"], "correct": 2 },
+{ question: "In 'Scooby-Doo', what is the name of the gang’s van?", "answers": ["The Phantom", "The Mystery Mobile", "The Scooby Van", "The Mystery Machine"], "correct": 3 },
+{ question: "What is the real name of the superhero known as 'The Incredibles'?", "answers": ["Frozone", "Dash Parr", "Jack-Jack Parr", "Bob Parr"], "correct": 3 },
+{ question: "Which animated series features a post-apocalyptic world with a giant head that talks?", "answers": ["The Simpsons", "Rick and Morty", "The Jetsons", "Futurama"], "correct": 3 },
+{ question: "In 'Adventure Time', who is the Ice King’s true identity?", "answers": ["Jake the Dog", "Finn the Human", "Beast Boy", "Simon Petrikov"], "correct": 3 },
+{ question: "In 'SpongeBob SquarePants', who is the ghostly character that lives in the haunted house?", "answers": ["The Flying Dutchman", "Squidward Tentacles", "Mr. Krabs", "Patrick Star"], "correct": 0 },
+{ question: "Which animated character is famous for his catchphrase 'Nyeh heh heh!'", "answers": ["Pinky", "The Brain's twin", "Brain", "The General"], "correct": 2 },
+{ question: "What is the name of the ghost who haunts 'The Scooby-Doo' mysteries?", "answers": ["The Phantom", "Zombozo", "The Specter", "Fred"], "correct": 0 },
+{ question: "Which character from 'The Simpsons' works as a bartender?", "answers": ["Moe Szyslak", "Homer Simpson", "Apu Nahasapeemapetilon", "Ned Flanders"], "correct": 0 },
+{ question: "What is the name of the dog in 'The Flintstones'?", "answers": ["Astro", "Dino", "Fred", "Spike"], "correct": 1 },
+{ question: "Which animated series features characters like Rick Sanchez and Morty Smith?", "answers": ["Futurama", "The Simpsons", "Rick and Morty", "Family Guy"], "correct": 2 },
+{ question: "In 'Futurama', what is the name of Fry’s girlfriend?", "answers": ["Amy Wong", "Leela", "Bender", "Leela and Fry"], "correct": 1 },
+{ question: "In 'The Lion King', what is the name of Simba’s father?", "answers": ["Mufasa", "Scar", "Timon", "Zazu"], "correct": 0 },
+{ question: "What animal is 'Arthur's' main character?", "answers": ["Aardvark", "Lion", "Dog", "Rabbit"], "correct": 0 },
+
+],
+games: [
+// Easy Questions (10)
+{ question: "What is the main objective of the game 'Minecraft'?", "answers": ["Build", "Explore", "Fight", "Survive"], "correct": 3 },
+{ question: "Which game features the character Mario?", "answers": ["Super Mario", "The Legend of Zelda", "Pokemon", "Minecraft"], "correct": 0 },
+{ question: "What is the name of the battle royale game featuring 100 players, often played on an island?", "answers": ["Minecraft", "Apex Legends", "Fortnite", "PUBG"], "correct": 2 },
+{ question: "Which console is known for the game 'The Last of Us'?", "answers": ["PC", "Xbox", "Nintendo", "PlayStation"], "correct": 3 },
+{ question: "What is the name of the red barrel in 'Resident Evil' that explodes?", "answers": ["Danger Barrel", "Red Barrel", "Explosive Barrel", "Fire Barrel"], "correct": 1 },
+{ question: "Which gaming character is known for wearing a green tunic and a pointed hat?", "answers": ["Donkey Kong", "Sonic", "Mario", "Link"], "correct": 3 },
+{ question: "In 'Among Us,' what is the name of the character that you can control?", "answers": ["Captain", "Imposter", "Crewmate", "Spaceman"], "correct": 2 },
+{ question: "Which game involves building and battling with LEGO figures?", "answers": ["LEGO Star Wars", "SimCity", "LEGO City Undercover", "Minecraft"], "correct": 0 },
+{ question: "What is the main weapon used in 'The Legend of Zelda'?", "answers": ["Hammer", "Staff", "Bow", "Sword"], "correct": 3 },
+{ question: "In 'Animal Crossing,' what is the name of the raccoon character?", "answers": ["Blathers", "Tom Nook", "Kapp'n", "Isabelle"], "correct": 1 },
+
+// Normal Questions (25)
+{ question: "In 'The Witcher 3,' what is the name of the protagonist?", "answers": ["Ciri", "Geralt of Rivia", "Triss", "Yennefer"], "correct": 1 },
+{ question: "Which game features the main character named Master Chief?", "answers": ["Gears of War", "Destiny", "Halo", "Call of Duty"], "correct": 2 },
+{ question: "In which game do you play as a character named Lara Croft?", "answers": ["Uncharted", "Tomb Raider", "God of War", "Assassin's Creed"], "correct": 1 },
+{ question: "What is the name of the fictional city in 'Grand Theft Auto V'?", "answers": ["Liberty City", "Los Santos", "Los Angeles", "Vice City"], "correct": 1 },
+{ question: "Which game has a mode called 'Zombies'?", "answers": ["Battlefield", "Call of Duty", "Fortnite", "Apex Legends"], "correct": 1 },
+{ question: "What type of game is 'Fortnite'?", "answers": ["RPG", "Battle Royale", "Strategy", "First-Person Shooter"], "correct": 1 },
+{ question: "Which character is known for wearing a red hat and red overalls?", "answers": ["Luigi", "Waluigi", "Mario", "Donkey Kong"], "correct": 2 },
+{ question: "Which game is known for the phrase 'The cake is a lie'?", "answers": ["Half-Life", "Portal", "Bioshock", "The Talos Principle"], "correct": 1 },
+{ question: "Which game was created by Hideo Kojima and involves stealth mechanics?", "answers": ["Metal Gear Solid", "Silent Hill", "Resident Evil", "Final Fantasy"], "correct": 0 },
+{ question: "In 'Overwatch,' which character can summon a mech?", "answers": ["Winston", "Reaper", "Tracer", "D.Va"], "correct": 3 },
+{ question: "What is the name of the green dinosaur character in 'Yoshi's Island'?", "answers": ["Goomba", "Bowser", "Yoshi", "Toad"], "correct": 2 },
+{ question: "Which game has the setting of a post-apocalyptic world, with zombie-like creatures?", "answers": ["Dead Rising", "The Last of Us", "Resident Evil", "State of Decay"], "correct": 1 },
+{ question: "Which game features the character named Nathan Drake?", "answers": ["Tomb Raider", "Uncharted", "The Elder Scrolls", "Assassin's Creed"], "correct": 1 },
+{ question: "What is the name of the world in 'World of Warcraft'?", "answers": ["Eorzea", "Norrath", "Azeroth", "Tamriel"], "correct": 2 },
+{ question: "Which game involves collecting coins and power-ups while avoiding enemies?", "answers": ["Super Mario Bros.", "Sonic the Hedgehog", "Donkey Kong", "Mega Man"], "correct": 0 },
+{ question: "Which game is based on a battle between two teams of five players?", "answers": ["PUBG", "Dota 2", "Fortnite", "League of Legends"], "correct": 3 },
+{ question: "In 'Red Dead Redemption 2,' who is the protagonist?", "answers": ["Arthur Morgan", "Micah Bell", "Dutch van der Linde", "John Marston"], "correct": 0 },
+{ question: "In which game do players compete to control colored paint splashes?", "answers": ["Rocket League", "Minecraft", "Fortnite", "Splatoon"], "correct": 3 },
+{ question: "What is the title of the popular open-world game where players explore the wild west?", "answers": ["Skyrim", "Fallout 4", "Red Dead Redemption", "Grand Theft Auto"], "correct": 2 },
+{ question: "Which game is known for the phrase 'Would you kindly'?", "answers": ["Half-Life", "The Last of Us", "Assassin's Creed", "Bioshock"], "correct": 3 },
+{ question: "What is the name of the main character in Subway Surfers?", "answers": ["Max", "Leo", "Jake", "Tom"], "correct": 2 },
+{ question: "What item can you use to revive yourself after crashing in Subway Surfers?", "answers": ["Power-Ups", "Keys", "Boosters", "Coins"], "correct": 1 },
+{ question: "Which popular game allows players to design and manage their own theme park?", "answers": ["Zoo Tycoon", "RollerCoaster Tycoon", "SimCity", "Planet Coaster"], "correct": 1 },
+{ question: "Which of these games is set in a post-apocalyptic world where players must scavenge and survive?", "answers": ["Fallout 4", "Skyrim", "Final Fantasy XIII", "The Elder Scrolls Online"], "correct": 0 },
+{ question: "In the game 'Minecraft,' what do you need to craft a bed?", "answers": ["Wood, stone, and wool", "Wood, wool, and string", "Wood, wool, and iron", "Wood, wool, and sticks"], "correct": 3 },
+// Hard Questions (15)
+{ question: "What is the name of the monster hunter organization in 'Monster Hunter: World'?", "answers": ["The Hunters", "The League", "The Guild", "The Order"], "correct": 2 },
+{ question: "Which game features an open world where you can interact with over 200 unique characters, many of them having different abilities?", "answers": ["Dragon Age: Inquisition", "Genshin Impact", "Zelda: Breath of the Wild", "Final Fantasy XV"], "correct": 1 },
+{ question: "In 'The Elder Scrolls V: Skyrim,' what is the name of the dragonborn's primary shout?", "answers": ["Fus Ro Dah", "Dragon Rage", "Whirlwind Sprint", "Unrelenting Force"], "correct": 0 },
+{ question: "In 'Dark Souls,' what is the name of the first boss?", "answers": ["The Asylum Demon", "The Nameless King", "Nito", "Ornstein and Smough"], "correct": 0 },
+{ question: "What is the name of the series of supernatural creatures in 'Bloodborne'?", "answers": ["The Great Watchers", "The Great Ones", "The Old Ones", "The Eldritch"], "correct": 1 },
+{ question: "What is the name of the artificial intelligence antagonist in 'Halo'?", "answers": ["Cortana", "Mother Brain", "Shodan", "GLaDOS"], "correct": 0 },
+{ question: "In 'Final Fantasy VII,' what is the name of the main villain?", "answers": ["Cloud", "Barrett", "Vincent", "Sephiroth"], "correct": 3 },
+{ question: "Which game features a space-faring character known as Samus Aran?", "answers": ["Star Fox", "No Man's Sky", "Metroid", "Halo"], "correct": 2 },
+{ question: "Which game is set in the dystopian world of Rapture?", "answers": ["System Shock", "Fallout 3", "Bioshock", "Dishonored"], "correct": 2 },
+{ question: "What is the main protagonist's name in the 'Assassin's Creed' series?", "answers": ["Desmond Miles", "Ezio Auditore", "Altaïr Ibn-La'Ahad", "Connor Kenway"], "correct": 2 },
+{ question: "In 'Final Fantasy XV,' who is the prince?", "answers": ["Cloud Strife", "Noctis Lucis Caelum", "Zidane Tribal", "Balthier"], "correct": 1 },
+{ question: "What is the name of the main villain in 'The Legend of Zelda: Ocarina of Time'?", "answers": ["Majora", "Ganon", "Dark Link", "Vati"], "correct": 1 },
+{ question: "Which game was released by Nintendo as a successor to the Wii?", "answers": ["Switch", "NES", "GameCube", "Wii U"], "correct": 0 },
+{ question: "Which RPG features characters named Cloud, Tifa, and Aerith?", "answers": ["Dragon Quest", "Chrono Trigger", "Final Fantasy VII", "The Elder Scrolls"], "correct": 2 },
+{ question: "Which game popularized the battle royale genre?", "answers": ["Fortnite", "PUBG", "Apex Legends", "H1Z1"], "correct": 1 },
+
+],
+survival: [
+//Easy Questions 10
+{ question: "What is the most important item to carry for navigation in the wilderness?", answers: ["Map and compass", "Flashlight", "Whistle", "Food"], correct: 3 },
+{ question: "What should you do first if someone gets a snake bite?", answers: ["Keep the person calm", "Apply ice to the wound", "Cut the bite to remove venom", "Make the person walk to safety"], correct: 0 },
+{ question: "Which fire type is best for cooking in a survival situation?", answers: ["Teepee fire", "Log cabin fire", "Star fire", "Dakota fire hole"], correct: 2 },
+{ question: "Which is the universal distress signal in survival?", answers: ["Three of anything", "Five quick whistles", "Seven long sounds", "A single flare"], correct: 1 },
+{ question: "Which part of the body loses heat the fastest in cold conditions?", answers: ["Feet", "Fingers", "Head", "Torso"], correct: 0 },
+{ question: "What is the first thing to do if caught in a riptide?", answers: ["Swim parallel to the shore", "Swim straight back", "Float until it weakens", "Dive under the current"], correct: 3 },
+{ question: "Which direction do most mosses grow on trees?", answers: ["North", "South", "East", "West"], correct: 1 },
+{ question: "What is the best way to filter water in an emergency?", answers: ["Use a cloth", "Boil it", "Add salt", "Drink directly from a stream"], correct: 0 },
+{ question: "Which item is critical for signaling for rescue?", answers: ["Mirror", "Knife", "Paracord", "Bandana"], correct: 2 },
+{ question: "What color of clothing is best for search visibility?", answers: ["Red", "Black", "Green", "White"], correct: 0 },
+//Normal Questions 25
+{ question: "What is the most important step before drinking water from a natural source?", answers: ["Boil it to kill bacteria", "Smell it for odors", "Check its clarity", "Taste a small amount"], correct: 0 },
+{ question: "What material works best as tinder for starting a fire?", answers: ["Dry grass and bark", "Wet leaves", "Freshly cut branches", "Metal shavings"], correct: 0 },
+{ question: "How can you tell if a storm is approaching?", answers: ["Decreasing air pressure", "Cooler temperatures", "Increased bird activity", "Stronger sunlight"], correct: 0 },
+{ question: "Which knot is ideal for tying two ropes together?", answers: ["Sheet bend", "Square knot", "Clove hitch", "Bowline"], correct: 0 },
+{ question: "What type of shelter is most effective in the desert?", answers: ["Low to the ground for shade", "Treehouse-like", "Lean-to against a rock", "Deep trench"], correct: 0 },
+{ question: "Which direction do mosses typically grow in the Northern Hemisphere?", answers: ["North", "South", "East", "West"], correct: 0 },
+{ question: "How can you preserve meat without refrigeration?", answers: ["Drying or smoking it", "Washing in cold water", "Wrapping it in leaves", "Freezing it overnight"], correct: 0 },
+{ question: "How should you react if caught in a rip current?", answers: ["Swim parallel to the shore", "Swim straight to the shore", "Float and wait for rescue", "Dive beneath the current"], correct: 0 },
+{ question: "What is the most effective way to avoid a bear attack?", answers: ["Stay calm and avoid eye contact", "Run away as fast as possible", "Throw rocks or objects", "Play dead"], correct: 0 },
+{ question: "What is the first priority in a wilderness survival scenario?", answers: ["Finding shelter", "Starting a fire", "Looking for water", "Gathering food"], correct: 0 },
+{ question: "Which type of fish can be safely eaten raw in a survival scenario?", answers: ["Freshwater fish", "Oceanic fish", "Saltwater shellfish", "None"], correct: 3 },
+{ question: "How do you protect yourself from hypothermia in wet conditions?", answers: ["Remove wet clothes and insulate", "Run to generate heat", "Drink alcohol for warmth", "Stay in wet clothes until dry"], correct: 0 },
+{ question: "What is the best way to sterilize a wound in the wild?", answers: ["Flush with clean water", "Use alcohol", "Pack with mud", "Burn the wound"], correct: 0 },
+{ question: "Which plant can be used as a natural insect repellent?", answers: ["Citronella grass", "Oak leaves", "Poison ivy", "Fern fronds"], correct: 0 },
+{ question: "How should you purify water in an emergency if you can’t boil it?", answers: ["Use purification tablets", "Strain through a shirt", "Let it sit overnight", "Add vinegar"], correct: 0 },
+{ question: "What type of footwear is best for long-term hiking?", answers: ["Waterproof hiking boots", "Rubber sandals", "Athletic sneakers", "Heavy work boots"], correct: 0 },
+{ question: "What is the main purpose of building a windbreak around your campfire?", answers: ["Prevent heat loss", "Increase fire strength", "Reduce sparks", "Keep predators away"], correct: 0 },
+{ question: "What is the primary danger of using untreated river water?", answers: ["Microorganisms", "Debris", "Salt content", "Chlorine"], correct: 0 },
+{ question: "How do you treat frostbite on fingers?", answers: ["Warm gently with body heat", "Rub vigorously", "Soak in hot water", "Expose to sunlight"], correct: 0 },
+{ question: "What is the safest way to cross a river?", answers: ["At the shallowest and calmest point", "Directly downstream", "Near the widest area", "Close to rapids"], correct: 0 },
+{ question: "How can you tell if snow is safe to eat?", answers: ["Fresh, clean, and white", "Melts instantly on contact", "Powdery and dry", "Contains no ice chunks"], correct: 0 },
+{ question: "What should you do first if you encounter a snakebite?", answers: ["Keep the bite below the heart", "Suck out the venom", "Apply a tourniquet", "Wash the wound with water"], correct: 0 },
+{ question: "What is the best way to start a fire in damp conditions?", answers: ["Use dry inner wood or bark", "Gather large logs first", "Light leaves and grass", "Use sand to shield fire"], correct: 0 },
+{ question: "Which berry color is often associated with toxicity in the wild?", answers: ["White", "Blue", "Red", "Purple"], correct: 0 },
+{ question: "How can you protect yourself from lightning during a storm?", answers: ["Crouch low and avoid tall objects", "Lie flat on the ground", "Climb the nearest hill", "Hide under an isolated tree"], correct: 0 },
+//Hard Questions 15
+{ question: "What is the recommended method for identifying an unknown wild plant's edibility?", answers: ["Universal Edibility Test", "Visual inspection", "Taste test", "Touch reaction test"], correct: 0 },
+{ question: "In a survival situation, how can you extract water from plants?", answers: ["Using a transpiration bag", "Squeezing leaves", "Shaking branches", "Boiling sap"], correct: 1 },
+{ question: "What is the minimum safe thickness of ice to walk on?", answers: ["4 inches", "6 inches", "2 inches", "8 inches"], correct: 0 },
+{ question: "How should you signal for help using a mirror?", answers: ["Aim at the target with reflected light", "Wave the mirror rapidly", "Point directly at the sun", "Move the mirror in circles"], correct: 0 },
+{ question: "Which survival technique is best for escaping quicksand?", answers: ["Move slowly and lean back", "Jump to the side", "Dig your feet in deeper", "Pull your legs upward forcefully"], correct: 0 },
+{ question: "What is the best way to make seawater drinkable?", answers: ["Distillation", "Boiling", "Filtering through sand", "Adding chlorine tablets"], correct: 1 },
+{ question: "In a cold survival scenario, what is the first priority?", answers: ["Find shelter", "Build a fire", "Search for water", "Eat high-energy food"], correct: 0 },
+{ question: "What is the most effective way to navigate without a compass?", answers: ["Using the position of the sun and shadows", "Following animal tracks", "Walking in a straight line", "Using stars and constellations"], correct: 3 },
+{ question: "What is a Dakota fire hole used for?", answers: ["Efficient and concealed fire", "Boiling water faster", "Generating light", "Smoke signals"], correct: 0 },
+{ question: "What should you do first if stranded in a vehicle during a snowstorm?", answers: ["Stay in the vehicle", "Walk to the nearest town", "Run the engine for warmth", "Light a fire nearby"], correct: 2 },
+{ question: "What is the best defense against a charging wild animal?", answers: ["Use loud noises and appear larger", "Run away", "Climb a tree", "Throw stones"], correct: 0 },
+{ question: "How can you avoid altitude sickness while climbing?", answers: ["Ascend slowly and acclimate", "Drink caffeinated drinks", "Avoid stopping for long", "Descend immediately after symptoms"], correct: 0 },
+{ question: "Which type of tree bark can be safely eaten for sustenance?", answers: ["Pine bark", "Oak bark", "Cherry bark", "Maple bark"], correct: 0 },
+{ question: "What is the main cause of death in a flash flood?", answers: ["Being trapped in a vehicle", "Drowning in rushing water", "Being struck by debris", "Hypothermia"], correct: 1 },
+{ question: "How can you best avoid dehydration in a hot environment?", answers: ["Sip water frequently", "Ration water strictly", "Drink only when thirsty", "Consume salty snacks"], correct: 0 },
+],
+random: [
+{ question: "Which planet is known as the Red Planet?", answers: ["Earth", "Mars", "Venus", "Jupiter"], correct: 1 },
+{ question: "What is the capital city of France?", answers: ["Berlin", "London", "Rome", "Paris"], correct: 3 },
+{ question: "Who painted the Mona Lisa?", answers: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"], correct: 2 },
+{ question: "What is the chemical symbol for water?", answers: ["H2O", "O2", "CO2", "NaCl"], correct: 0 },
+{ question: "Which sport is known as 'the beautiful game'?", answers: ["Tennis", "Basketball", "Football", "Cricket"], correct: 2 },
+{ question: "How many continents are there on Earth?", answers: ["5", "6", "7", "8"], correct: 2 },
+{ question: "Who wrote *Romeo and Juliet*?", answers: ["William Shakespeare", "Charles Dickens", "Jane Austen", "Mark Twain"], correct: 0 },
+{ question: "Which animal is known as the king of the jungle?", answers: ["Tiger", "Elephant", "Lion", "Bear"], correct: 2 },
+{ question: "What is the largest organ in the human body?", answers: ["Heart", "Skin", "Liver", "Lungs"], correct: 1 },
+{ question: "What is the boiling point of water at sea level?", answers: ["90°C", "100°C", "110°C", "80°C"], correct: 1 },
+{ question: "What is the square root of 144?", answers: ["10", "12", "14", "16"], correct: 1 },
+{ question: "Which is the longest river in the world?", answers: ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"], correct: 1 },
+{ question: "In what year did World War II end?", answers: ["1943", "1944", "1945", "1946"], correct: 2 },
+{ question: "Which metal has the chemical symbol 'Fe'?", answers: ["Gold", "Silver", "Iron", "Copper"], correct: 2 },
+{ question: "Who discovered penicillin?", answers: ["Marie Curie", "Alexander Fleming", "Isaac Newton", "Louis Pasteur"], correct: 1 },
+{ question: "Which planet is the largest in our solar system?", answers: ["Saturn", "Jupiter", "Uranus", "Neptune"], correct: 1 },
+{ question: "Who is the founder of SpaceX?", answers: ["Jeff Bezos", "Elon Musk", "Bill Gates", "Richard Branson"], correct: 1 },
+{ question: "What is the main ingredient in guacamole?", answers: ["Tomato", "Avocado", "Lime", "Onion"], correct: 1 },
+{ question: "Which famous scientist developed the theory of relativity?", answers: ["Albert Einstein", "Stephen Hawking", "Marie Curie", "Galileo Galilei"], correct: 0 },
+{ question: "Which language is most widely spoken in South America?", answers: ["English", "Portuguese", "Spanish", "French"], correct: 2 },
+{ question: "What is the main ingredient in traditional Japanese sushi?", answers: ["Chicken", "Beef", "Fish", "Tofu"], correct: 2 },
+{ question: "Which famous artist cut off his own ear?", answers: ["Leonardo da Vinci", "Michelangelo", "Vincent van Gogh", "Pablo Picasso"], correct: 2 },
+{ question: "What is the fastest land animal?", answers: ["Lion", "Horse", "Cheetah", "Leopard"], correct: 2 },
+{ question: "In computing, what does 'CPU' stand for?", answers: ["Central Processing Unit", "Computer Peripheral Unit", "Central Performance Unit", "Core Processing Unit"], correct: 0 },
+{ question: "What does the term 'GIF' stand for?", answers: ["Graphics Interface File", "Graphics Interchange Format", "General Image File", "Graphical Image Format"], correct: 1 },
+{ question: "Which element is found in diamonds?", answers: ["Carbon", "Oxygen", "Hydrogen", "Nitrogen"], correct: 0 },
+{ question: "Which chess piece can only move diagonally?", answers: ["Rook", "Bishop", "Knight", "Queen"], correct: 1 },
+{ question: "Which country is famous for the Taj Mahal?", answers: ["India", "Pakistan", "Nepal", "Sri Lanka"], correct: 0 },
+{ question: "What is the hardest natural substance on Earth?", answers: ["Steel", "Iron", "Diamond", "Quartz"], correct: 2 },
+{ question: "Which type of galaxy is the Milky Way?", answers: ["Elliptical", "Spiral", "Irregular", "Barred Spiral"], correct: 3 },
+{ question: "What is the national sport of Canada?", answers: ["Hockey", "Lacrosse", "Baseball", "Soccer"], correct: 1 },
+{ question: "Which ancient civilization built the Pyramids of Giza?", answers: ["Romans", "Aztecs", "Egyptians", "Greeks"], correct: 2 },
+{ question: "What color is an emerald?", answers: ["Red", "Blue", "Green", "Yellow"], correct: 2 },
+{ question: "Which country invented pizza?", answers: ["France", "Italy", "Greece", "Turkey"], correct: 1 },
+{ question: "Who directed the movie *Inception*?", answers: ["Christopher Nolan", "Steven Spielberg", "James Cameron", "Quentin Tarantino"], correct: 0 },
+{ question: "What year was the first iPhone released?", answers: ["2005", "2006", "2007", "2008"], correct: 2 },
+{ question: "What is the rarest blood type?", answers: ["O-", "AB-", "A+", "B+"], correct: 1 },
+{ question: "Which country has the most spoken languages?", answers: ["India", "China", "Papua New Guinea", "Nigeria"], correct: 2 },
+{ question: "What is the smallest planet in our solar system?", answers: ["Mercury", "Mars", "Venus", "Pluto"], correct: 0 },
+{ question: "Who painted the ceiling of the Sistine Chapel?", answers: ["Leonardo da Vinci", "Michelangelo", "Raphael", "Donatello"], correct: 1 },
+{ question: "Which country has the oldest continuous monarchy?", answers: ["United Kingdom", "Japan", "Spain", "Sweden"], correct: 1 },
+{ question: "What does HTTP stand for?", answers: ["HyperText Transfer Protocol", "HyperText Transfer Port", "HyperText Translation Process", "HyperTransfer Text Program"], correct: 0 },
+{ question: "What is the highest mountain in the world?", answers: ["Mount Everest", "K2", "Kilimanjaro", "Denali"], correct: 0 },
+{ question: "Which two elements make up water?", answers: ["Oxygen and Hydrogen", "Nitrogen and Carbon", "Oxygen and Carbon", "Hydrogen and Helium"], correct: 0 },
+{ question: "Which Marvel character wields the weapon known as Stormbreaker?", answers: ["Thor", "Loki", "Odin", "Hela"], correct: 0 },
+{ question: "What is the real name of the Marvel superhero Black Panther?", answers: ["T'Chaka", "Shuri", "Erik Killmonger", "T'Challa"], correct: 3 },
+{ question: "In the *Harry Potter* series, what is the name of the charm used to repel Dementors?", answers: ["Expelliarmus", "Expecto Patronum", "Stupefy", "Obliviate"], correct: 1 },
+{ question: "Which director helmed the *Lord of the Rings* trilogy?", answers: ["Peter Jackson", "James Cameron", "Steven Spielberg", "Ridley Scott"], correct: 0 },
+{ question: "In *The Dark Knight*, what is the name of the villain played by Heath Ledger?", answers: ["Two-Face", "The Joker", "Scarecrow", "Bane"], correct: 1 },
+
+],
+languages: [
+// Easy (10)
+{ question: "Which language is most commonly spoken in Brazil?", answers: ["Portuguese", "Spanish", "English", "French"], correct: 0, rank: "easy" },
+{ question: "What language is spoken in most of Switzerland?", answers: ["German", "French", "Italian", "Romanche"], correct: 0, rank: "easy" },
+{ question: "Which of the following is not an official language of the United Nations?", answers: ["Arabic", "Chinese", "English", "Sheng"], correct: 3, rank: "easy" },
+{ question: "In which country is Swahili the official language?", answers: ["Kenya", "Uganda", "Tanzania", "Somalia"], correct: 2, rank: "easy" },
+{ question: "What is the official language of Japan?", answers: ["Korean", "Chinese", "Vietnamese", "Japanese"], correct: 3, rank: "easy" },
+{ question: "Which language is spoken in Paris?", answers: ["English", "French", "Spanish", "Italian"], correct: 1, rank: "easy" },
+{ question: "Which language has the most native speakers?", answers: ["Spanish", "English", "Hindi", "Mandarin Chinese"], correct: 3, rank: "easy" },
+{ question: "Which language is spoken by the largest number of people in Africa?", answers: ["Swahili", "Amharic", "Arabic", "Hausa"], correct: 2, rank: "easy" },
+{ question: "What language is the primary language spoken in South Korea?", answers: ["Korean", "Chinese", "Japanese", "English"], correct: 0, rank: "easy" },
+{ question: "Which language is spoken in Argentina?", answers: ["Italian", "Spanish", "Portuguese", "French"], correct: 1, rank: "easy" },
+
+// Normal (20)
+{ question: "Which language is native to the people of Iceland?", answers: ["Norwegian", "Danish", "Swedish", "Icelandic"], correct: 3, rank: "normal" },
+{ question: "Which language is primarily spoken in the Canadian province of Quebec?", answers: ["French", "English", "Spanish", "Italian"], correct: 0, rank: "normal" },
+{ question: "Which language is spoken in the majority of the Caribbean?", answers: ["French", "Spanish", "Creole", "English"], correct: 1, rank: "normal" },
+{ question: "In what language was the book 'Don Quixote' originally written?", answers: ["Spanish", "Italian", "French", "English"], correct: 0, rank: "normal" },
+{ question: "What is the most spoken language in India?", answers: ["Bengali", "Hindi", "Tamil", "Punjabi"], correct: 1, rank: "normal" },
+{ question: "Which language is spoken in the majority of South America?", answers: ["Portuguese", "Spanish", "French", "Dutch"], correct: 1, rank: "normal" },
+{ question: "Which language is official in Portugal?", answers: ["French", "Spanish", "English", "Portuguese"], correct: 3, rank: "normal" },
+{ question: "What is the official language of the Vatican City?", answers: ["Italian", "Latin", "French", "Spanish"], correct: 1, rank: "normal" },
+{ question: "Which language is the most widely spoken in Nigeria?", answers: ["Hausa", "Yoruba", "Igbo", "English"], correct: 0, rank: "normal" },
+{ question: "Which language is spoken in Egypt?", answers: ["Farsi", "Hebrew", "Amharic", "Arabic"], correct: 3, rank: "normal" },
+
+// Hard (15)
+{ question: "In which country do people speak Afrikaans?", answers: ["Namibia", "Botswana", "Kenya", "South Africa"], correct: 3, rank: "hard" },
+{ question: "Which language is primarily spoken in Israel?", answers: ["Arabic", "Hebrew", "English", "Aramaic"], correct: 1, rank: "hard" },
+{ question: "Which language is predominantly spoken in the Philippines?", answers: ["Cebuano", "Ilocano", "English", "Tagalog"], correct: 3, rank: "hard" },
+{ question: "Which language is the primary language spoken in Finland?", answers: ["Finnish", "Swedish", "Norwegian", "Estonian"], correct: 0, rank: "hard" },
+{ question: "What is the most spoken language in Saudi Arabia?", answers: ["Arabic", "English", "French", "Hindi"], correct: 0, rank: "hard" },
+{ question: "What language is spoken in Belgium?", answers: ["Dutch", "French", "German", "English"], correct: 1, rank: "hard" },
+{ question: "What is the most spoken language in the United States?", answers: ["Spanish", "Mandarin", "French", "English"], correct: 3, rank: "hard" },
+{ question: "Which language is spoken in Australia?", answers: ["French", "German", "Mandarin", "English"], correct: 3, rank: "hard" },
+{ question: "Which language is spoken in Mexico?", answers: ["Mayan", "Nahuatl", "English", "Spanish"], correct: 3, rank: "hard" },
+{ question: "Which language is spoken in Norway?", answers: ["Norwegian", "Danish", "Swedish", "Icelandic"], correct: 0, rank: "hard" },
+{ question: "Which language is spoken in the Netherlands?", answers: ["German", "French", "English", "Dutch"], correct: 3, rank: "hard" },
+{ question: "Which language is the main language spoken in the country of Peru?", answers: ["Quechua", "Aymara", "Portuguese", "Spanish"], correct: 3, rank: "hard" },
+{ question: "Which language is spoken in the African country of Ghana?", answers: ["Twi", "Hausa", "Yoruba", "English"], correct: 3, rank: "hard" },
+{ question: "What language is primarily spoken in the East African country of Ethiopia?", answers: ["Tigrinya", "Oromo", "Somali", "Amharic"], correct: 3, rank: "hard" },
+{ question: "What language is spoken in the Scandinavian country of Denmark?", answers: ["Norwegian", "Swedish", "Finnish", "Danish"], correct: 3, rank: "hard" },
+],
+travelAndWorldWonders: [
+// Easy (10)
+{ question: "Which country is home to the Eiffel Tower?", answers: ["Italy", "France", "Germany", "Spain"], correct: 1, rank: "easy" },
+{ question: "What is the capital city of Japan?", answers: ["Beijing", "Seoul", "Tokyo", "Kyoto"], correct: 2, rank: "easy" },
+{ question: "Which continent is known as the 'Land Down Under'?", answers: ["Europe", "Africa", "Asia", "Australia"], correct: 3, rank: "easy" },
+{ question: "What famous wall can be seen from space?", answers: ["The Berlin Wall", "The Great Wall of China", "The Wall of Troy", "The Wailing Wall"], correct: 1, rank: "easy" },
+{ question: "Which U.S. city is known as the 'Big Apple'?", answers: ["Los Angeles", "Chicago", "New York City", "San Francisco"], correct: 2, rank: "easy" },
+{ question: "Which country is famous for its pyramids?", answers: ["Mexico", "Egypt", "India", "Peru"], correct: 1, rank: "easy" },
+{ question: "What is the longest river in the world?", answers: ["Amazon", "Mississippi", "Yangtze", " Nile"], correct: 3, rank: "easy" },
+{ question: "Where is the Colosseum located?", answers: ["Athens", "Rome", "Paris", "Istanbul"], correct: 1, rank: "easy" },
+{ question: "What country has the most UNESCO World Heritage Sites?", answers: ["China", "India", "Italy ", "Greece"], correct: 2, rank: "easy" },
+{ question: "Which U.S. state is known for the Grand Canyon?", answers: ["Nevada", "Utah", " Arizona", "Colorado"], correct: 2, rank: "easy" },
+
+// Normal (20)
+{ question: "Which city is famous for its canals and gondolas?", answers: ["Amsterdam", "Venice", "Bangkok", "Bruges"], correct: 1, rank: "normal" },
+{ question: "Which landmark is known as the 'Gateway to the West'?", answers: ["Gateway Arch", "Golden Gate Bridge", "Mount Rushmore", "Niagara Falls"], correct: 0, rank: "normal" },
+{ question: "Which mountain is the tallest in the world?", answers: ["Mount Everest", "K2", "Kangchenjunga", "Mount Kilimanjaro"], correct: 0, rank: "normal" },
+{ question: "What country is the Taj Mahal located in?", answers: ["Pakistan", "Bangladesh", "India", "Nepal"], correct: 2, rank: "normal" },
+{ question: "Which European country is famous for tulips and windmills?", answers: ["Belgium", "Netherlands", "Germany", "Denmark"], correct: 1, rank: "normal" },
+{ question: "What is the official language of Brazil?", answers: ["Portuguese", "Spanish", "English", "French"], correct: 0, rank: "normal" },
+{ question: "Where is the Acropolis located?", answers: ["Rome", "Athens", "Istanbul", "Cairo"], correct: 1, rank: "normal" },
+{ question: "What desert is the largest in the world?", answers: ["Sahara", "Arabian", "Gobi", "Kalahari"], correct: 0, rank: "normal" },
+{ question: "Which city hosted the 2016 Summer Olympics?", answers: ["Beijing", "London", " Rio de Janeiro", "Tokyo"], correct: 2, rank: "normal" },
+{ question: "What is the name of the tallest waterfall in the world?", answers: ["Niagara Falls", "Angel Falls", "Victoria Falls", "Iguazu Falls"], correct: 1, rank: "normal" },
+{ question: "Which country is home to the Great Barrier Reef?", answers: ["New Zealand", "Thailand", "South Africa", "Australia "], correct: 3, rank: "normal" },
+{ question: "What is the smallest country in the world?", answers: ["Monaco", "Vatican City", "San Marino", "Liechtenstein"], correct: 1, rank: "normal" },
+{ question: "Which ocean is the largest?", answers: ["Atlantic Ocean", "Indian Ocean", "Pacific Ocean", "Arctic Ocean"], correct: 2, rank: "normal" },
+{ question: "Where is the Burj Khalifa located?", answers: ["Dubai", "Doha", "Riyadh", "Abu Dhabi"], correct: 0, rank: "normal" },
+{ question: "Where can you visit Machu Picchu?", answers: ["Peru", "Chile", "Bolivia", "Ecuador"], correct: 0, rank: "normal" },
+{ question: "Which ancient city is also known as the 'Lost City'?", answers: ["Pompeii", "Petra", "Machu Picchu", "Angkor Wat"], correct: 1, rank: "normal" },
+{ question: "What is the longest man-made structure in the world?", answers: ["Great Wall of China", "Panama Canal", "Hoover Dam", "Golden Gate Bridge"], correct: 0, rank: "normal" },
+{ question: "What is the capital city of Iceland?", answers: ["Oslo", "Stockholm", " Reykjavik ", "Helsinki"], correct: 2, rank: "normal" },
+
+// Hard (15)
+{ question: "What is the ancient name of Istanbul?", answers: ["Carthage", "Athens", "Sparta", "Byzantium "], correct: 3, rank: "hard" },
+{ question: "Which country is home to the ancient city of Petra?", answers: ["Jordan", "Syria", "Israel", "Lebanon"], correct: 0, rank: "hard" },
+{ question: "What is the name of the mountain range that separates Europe and Asia?", answers: ["Alps", "Himalayas", "Ural Mountains", "Andes"], correct: 2, rank: "hard" },
+{ question: "Which African country has the most pyramids?", answers: ["Sudan", "Egypt", "Ethiopia", "Morocco"], correct: 0, rank: "hard" },
+{ question: "Which ancient wonder was located in Babylon?", answers: ["Colossus of Rhodes", "Hanging Gardens ", "Great Pyramid", "Temple of Artemis"], correct: 1, rank: "hard" },
+{ question: "What is the tallest mountain in North America?", answers: ["Mount Logan", "Mount Denali", "Mount McKinley", "Mount Whitney"], correct: 1, rank: "hard" },
+{ question: "Which country is known as the 'Land of Fire and Ice'?", answers: ["Iceland", "Greenland", "Norway", "Finland"], correct: 0, rank: "hard" },
+{ question: "Where is the Valley of the Kings located?", answers: ["Greece", "India", "Egypt ", "Mexico"], correct: 2, rank: "hard" },
+{ question: "What is the largest island in the world?", answers: ["Greenland", "Australia", "Madagascar", "Borneo"], correct: 0, rank: "hard" },
+{ question: "Where is Angkor Wat located?", answers: ["Thailand", "Cambodia ", "Vietnam", "Myanmar"], correct: 1, rank: "hard" },
+{ question: "What country is home to the Blue Lagoon?", answers: ["Iceland", "Norway", "Finland", "Sweden"], correct: 0, rank: "hard" },
+{ question: "What is the smallest continent by land area?", answers: ["Europe", "Australia", "South America", "Antarctica"], correct: 1, rank: "hard" },
+{ question: "Which U.S. state has the most national parks?", answers: ["Utah", "Alaska", "Colorado", "California "], correct: 3, rank: "hard" },
+{ question: "Which country has the world's deepest lake?", answers: ["United States", "Canada", "Russia ", "China"], correct: 2, rank: "hard" },
+{ question: "What city is the Taj Mahal located in?", answers: ["Delhi", "Jaipur", "Agra", "Mumbai"], correct: 2, rank: "hard" },
+],
+
+
+foodsAndBeverages: [
+        // Easy Questions (10)
+        { question: "Which fruit is known as the 'king of fruits'?", answers: ["Mango", "Apple", "Pineapple", "Banana"], correct: 2 },
+        { question: "What is the main ingredient in guacamole?", answers: ["Tomatoes", "Avocado", "Cucumber", "Lettuce"], correct: 1 },
+        { question: "Which country is famous for sushi?", answers: ["Japan", "China", "Korea", "Thailand"], correct: 3 },
+        { question: "What type of pasta is shaped like small rice grains?", answers: ["Spaghetti", "Orzo", "Fusilli", "Penne"], correct: 1 },
+        { question: "Which spice is known as the most expensive in the world?", answers: ["Saffron", "Vanilla", "Cinnamon", "Nutmeg"], correct: 0 },
+        { question: "What is the main ingredient in hummus?", answers: ["Chickpeas", "Lentils", "Beans", "Peas"], correct: 3 },
+        { question: "Which soft drink is known as 'The Real Thing'?", answers: ["Pepsi", "Coca-Cola", "Sprite", "Dr Pepper"], correct: 2 },
+        { question: "What type of food is Brie?", answers: ["Bread", "Cheese", "Fruit", "Meat"], correct: 1 },
+        { question: "Which drink is often associated with the United Kingdom?", answers: ["Tea", "Coffee", "Lemonade", "Hot Chocolate"], correct: 3 },
+        { question: "What fruit is dried to make raisins?", answers: ["Apple", "Grape", "Plum", "Peach"], correct: 1 },
+
+        // Normal Questions (25)
+        { question: "What is the Italian word for 'sauce'?", answers: ["Sugo", "Ragu", "Brodo", "Pollo"], correct: 1 },
+        { question: "What is the name of the traditional rice dish of Spain?", answers: ["Paella", "Risotto", "Jambalaya", "Porridge"], correct: 2 },
+        { question: "What is the main ingredient in a classic Margherita pizza?", answers: ["Mozzarella", "Pepperoni", "Ham", "Olives"], correct: 0 },
+        { question: "Which beverage is made from fermented grapes?", answers: ["Beer", "Wine", "Cider", "Whiskey"], correct: 1 },
+        { question: "What type of meat is used in a traditional shepherd’s pie?", answers: ["Pork", "Beef", "Lamb", "Chicken"], correct: 3 },
+        { question: "Which country is known for its famous cheese fondue?", answers: ["France", "Switzerland", "Italy", "Belgium"], correct: 1 },
+        { question: "What is tofu made from?", answers: ["Rice", "Soybeans", "Corn", "Oats"], correct: 2 },
+        { question: "What is the national dish of Scotland?", answers: ["Haggis", "Fish and Chips", "Corned Beef", "Roast Beef"], correct: 0 },
+        { question: "Which nut is used to make Nutella?", answers: ["Peanut", "Almond", "Cashew", "Hazelnut"], correct: 3 },
+        { question: "Which tropical fruit has a spiky skin and sweet, juicy flesh?", answers: ["Pineapple", "Papaya", "Mango", "Lychee"], correct: 1 },
+        { question: "What is the main ingredient in a Caesar salad dressing?", answers: ["Ketchup", "Mayonnaise", "Anchovies", "Yogurt"], correct: 2 },
+        { question: "Which type of rice is commonly used for sushi?", answers: ["Basmati", "Arborio", "Sticky rice", "Jasmine"], correct: 3 },
+        { question: "What is the name of the popular Greek yogurt dish served with cucumbers and garlic?", answers: ["Tzatziki", "Souvlaki", "Moussaka", "Spanakopita"], correct: 0 },
+        { question: "What is the main ingredient in miso soup?", answers: ["Fish broth", "Soy paste", "Chicken stock", "Rice"], correct: 1 },
+        { question: "Which fruit is used to make cider?", answers: ["Pear", "Apple", "Peach", "Cherry"], correct: 2 },
+        { question: "What is the primary ingredient in gazpacho?", answers: ["Tomato", "Cucumber", "Carrot", "Lettuce"], correct: 0 },
+        { question: "Which pasta is commonly used in lasagna?", answers: ["Linguine", "Fettuccine", "Sheets", "Penne"], correct: 2 },
+        { question: "What is the name of the flatbread commonly served with Indian curries?", answers: ["Roti", "Naan", "Paratha", "Chapati"], correct: 3 },
+        { question: "What is the main ingredient in pesto sauce?", answers: ["Basil", "Parsley", "Oregano", "Coriander"], correct: 1 },
+        { question: "What fruit is traditionally used in a Black Forest cake?", answers: ["Strawberry", "Cherry", "Raspberry", "Blueberry"], correct: 1 },
+        { question: "Which beverage is traditionally paired with sushi?", answers: ["Sake", "Beer", "Wine", "Whiskey"], correct: 0 },
+        { question: "Which type of bean is used to make coffee?", answers: ["Black beans", "Soybeans", "Cocoa beans", "Arabica beans"], correct: 3 },
+        { question: "What is the name of the creamy Italian dessert made with mascarpone cheese?", answers: ["Panna cotta", "Tiramisu", "Gelato", "Cannoli"], correct: 1 },
+        { question: "What is the term for meat that has been preserved by smoking, curing, or salting?", answers: ["Charcuterie", "Marinated", "Carpaccio", "Braising"], correct: 0 },
+        { question: "Which fruit is known as 'dragon fruit'?", answers: ["Pitaya", "Rambutan", "Mangosteen", "Durian"], correct: 1 },
+
+        // Hard Questions (15)
+        { question: "Which country is famous for its blue cheese, Roquefort?", answers: ["Italy", "France", "Switzerland", "Greece"], correct: 1 },
+        { question: "What is the term for raw fish served as a delicacy in Japanese cuisine?", answers: ["Sushi", "Sashimi", "Tempura", "Nigiri"], correct: 2 },
+        { question: "What is the name of the spicy soup popular in Thailand?", answers: ["Pho", "Tom Yum", "Laksa", "Miso"], correct: 1 },
+        { question: "Which Italian cheese is aged and often grated over pasta?", answers: ["Parmesan", "Mozzarella", "Ricotta", "Burrata"], correct: 0 },
+        { question: "Which country is known for inventing chocolate?", answers: ["Switzerland", "Mexico", "Belgium", "Spain"], correct: 1 },
+        { question: "What is the name of the Scottish drink made from malted barley?", answers: ["Whiskey", "Ale", "Gin", "Vodka"], correct: 0 },
+        { question: "What is the name of the Spanish dish made with seafood and rice?", answers: ["Paella", "Frittata", "Tapas", "Risotto"], correct: 3 },
+        { question: "Which sauce is named after a river in Thailand?", answers: ["Pad Thai sauce", "Nam Prik sauce", "Sriracha sauce", "Tom Kha sauce"], correct: 2 },
+        { question: "What is the name of the fermented cabbage dish popular in Germany?", answers: ["Kimchi", "Sauerkraut", "Pickled Cabbage", "Coleslaw"], correct: 1 },
+        { question: "What is the primary flavoring ingredient in a traditional mojito?", answers: ["Lemon", "Lime", "Mint", "Basil"], correct: 2 },
+        { question: "Which French dessert is made from a rich custard base and caramelized sugar topping?", answers: ["Creme Brulee", "Mousse", "Eclair", "Macaron"], correct: 0 },
+    ],
+
+
+    space: [
+        { question: "What is the name of the galaxy we live in?", answers: ["Milky Way", "Andromeda", "Whirlpool", "Sombrero"], correct: 2 },
+        { question: "What is the closest planet to the Sun?", answers: ["Mercury", "Venus", "Earth", "Mars"], correct: 1 },
+        { question: "Which planet is known as the 'Red Planet'?", answers: ["Mars", "Jupiter", "Saturn", "Neptune"], correct: 3 },
+        { question: "What is the name of the first artificial satellite launched into space?", answers: ["Sputnik 1", "Voyager 1", "Hubble", "Luna 2"], correct: 0 },
+        { question: "Which planet has the most moons?", answers: ["Saturn", "Jupiter", "Mars", "Uranus"], correct: 3 },
+        { question: "What is the name of NASA's Mars rover launched in 2020?", answers: ["Perseverance", "Curiosity", "Opportunity", "Spirit"], correct: 2 },
+        { question: "What is the name of Earth's natural satellite?", answers: ["Moon", "Phobos", "Europa", "Titan"], correct: 1 },
+        { question: "What is the term for a star that suddenly increases in brightness?", answers: ["Supernova", "Quasar", "Pulsar", "Nebula"], correct: 0 },
+        { question: "What is the name of the first human to walk on the Moon?", answers: ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "Michael Collins"], correct: 1 },
+        { question: "What is the name of the largest planet in our solar system?", answers: ["Jupiter", "Saturn", "Uranus", "Neptune"], correct: 3 },
+        
+        { question: "Which planet is known as the 'Evening Star'?", answers: ["Venus", "Mars", "Mercury", "Saturn"], correct: 2 },
+        { question: "What type of star is the Sun?", answers: ["Yellow dwarf", "Red giant", "White dwarf", "Neutron star"], correct: 0 },
+        { question: "Which space probe was the first to leave the solar system?", answers: ["Voyager 1", "Pioneer 10", "New Horizons", "Cassini"], correct: 1 },
+        { question: "What is the name of the largest volcano in the solar system?", answers: ["Olympus Mons", "Mauna Kea", "Mount Everest", "Pavonis Mons"], correct: 3 },
+        { question: "Which planet is tilted on its side, making its axis nearly horizontal?", answers: ["Uranus", "Neptune", "Pluto", "Jupiter"], correct: 0 },
+        { question: "What is the name of the boundary between the Earth and outer space?", answers: ["Kármán Line", "Event Horizon", "Van Allen Belt", "Ozone Layer"], correct: 2 },
+        { question: "What is the speed of light in vacuum?", answers: ["299,792 km/s", "300,000 km/s", "150,000 km/s", "250,000 km/s"], correct: 0 },
+        { question: "Which planet is called Earth's 'twin' because of its similar size and composition?", answers: ["Venus", "Mars", "Mercury", "Saturn"], correct: 1 },
+        { question: "What are comets primarily made of?", answers: ["Ice and dust", "Metal and rock", "Gas and plasma", "Molten lava"], correct: 3 },
+        { question: "What is the name of the telescope launched in 1990 that orbits Earth?", answers: ["Hubble Space Telescope", "James Webb Telescope", "Chandra Telescope", "Kepler Telescope"], correct: 2 },
+
+        { question: "Which planet has a day longer than its year?", answers: ["Venus", "Mercury", "Earth", "Neptune"], correct: 0 },
+        { question: "Which planet is known as the 'Gas Giant'?", answers: ["Jupiter", "Saturn", "Neptune", "Uranus"], correct: 3 },
+        { question: "What is the main component of the Sun?", answers: ["Hydrogen", "Helium", "Oxygen", "Carbon"], correct: 1 },
+        { question: "What is the name of the dwarf planet located in the asteroid belt?", answers: ["Ceres", "Pluto", "Haumea", "Makemake"], correct: 3 },
+        { question: "What is the brightest star in the night sky?", answers: ["Sirius", "Vega", "Betelgeuse", "Proxima Centauri"], correct: 2 },
+        { question: "What is the term for the apparent path the Sun takes across the sky?", answers: ["Ecliptic", "Equator", "Horizon", "Zodiac"], correct: 0 },
+        { question: "Which planet is known for its massive storm called the 'Great Red Spot'?", answers: ["Jupiter", "Saturn", "Neptune", "Mars"], correct: 2 },
+        { question: "What is the term for a group of stars that form a pattern?", answers: ["Constellation", "Galaxy", "Cluster", "Nebula"], correct: 1 },
+        { question: "Which moon is the largest in the solar system?", answers: ["Ganymede", "Titan", "Europa", "Callisto"], correct: 3 },
+        { question: "What is the name of the first private company to send humans to space?", answers: ["SpaceX", "Blue Origin", "Virgin Galactic", "Boeing"], correct: 0 },
+
+        { question: "What is the term for a planet outside of our solar system?", answers: ["Exoplanet", "Rogue Planet", "Dwarf Planet", "Proto Planet"], correct: 1 },
+        { question: "Which planet has the coldest surface temperature?", answers: ["Uranus", "Neptune", "Pluto", "Mars"], correct: 0 },
+        { question: "What is the phenomenon called when the Moon passes directly between the Earth and the Sun?", answers: ["Solar Eclipse", "Lunar Eclipse", "New Moon", "Supermoon"], correct: 2 },
+        { question: "What is the name of the closest star system to our solar system?", answers: ["Alpha Centauri", "Sirius", "Proxima Centauri", "Betelgeuse"], correct: 1 },
+        { question: "Which planet has the fastest winds in the solar system?", answers: ["Neptune", "Uranus", "Saturn", "Jupiter"], correct: 3 },
+        { question: "What is the name of the space mission that landed the first humans on the Moon?", answers: ["Apollo 11", "Gemini 6", "Lunar 9", "Viking 1"], correct: 1 },
+        { question: "What is the name of the probe that studied Pluto in 2015?", answers: ["New Horizons", "Voyager 2", "Pioneer 11", "Cassini"], correct: 3 },
+        { question: "Which planet has the highest mountain in the solar system?", answers: ["Mars", "Earth", "Venus", "Jupiter"], correct: 2 },
+        { question: "Which moon is believed to have an ocean beneath its icy surface?", answers: ["Europa", "Io", "Ganymede", "Titan"], correct: 1 },
+        { question: "What is the term for the boundary where a black hole's gravity becomes inescapable?", answers: ["Event Horizon", "Singularity", "Accretion Disk", "Schwarzschild Radius"], correct: 0 }
+    ],
+   minecraft: [
+  { question: "What is the main material used to craft a pickaxe?", answers: ["Wood", "Stone", "Iron", "Diamond"], correct: 0 },
+  { question: "What is the rarest ore in Minecraft?", answers: ["Diamond", "Emerald", "Gold", "Netherite"], correct: 1 },
+  { question: "Which hostile mob explodes when near a player?", answers: ["Zombie", "Skeleton", "Creeper", "Enderman"], correct: 2 },
+  { question: "Which dimension is home to the Ender Dragon?", answers: ["Overworld", "Nether", "End", "Aether"], correct: 2 },
+  { question: "What tool is needed to mine Obsidian?", answers: ["Iron Pickaxe", "Stone Pickaxe", "Diamond Pickaxe", "Gold Pickaxe"], correct: 2 },
+  { question: "What do you need to enter the Nether?", answers: ["A special potion", "A Nether Portal", "A boat", "A stronghold"], correct: 1 },
+  { question: "Which mob drops Ender Pearls?", answers: ["Zombie", "Skeleton", "Enderman", "Blaze"], correct: 2 },
+  { question: "What is the strongest armor in Minecraft?", answers: ["Iron", "Diamond", "Gold", "Netherite"], correct: 3 },
+  { question: "Which block is affected by gravity?", answers: ["Cobblestone", "Dirt", "Sand", "Obsidian"], correct: 2 },
+  { question: "What do villagers use to trade?", answers: ["Gold", "Iron", "Emeralds", "Lapis"], correct: 2 },
+  { question: "Which item allows you to respawn in the Nether?", answers: ["Bed", "Respawn Anchor", "Totem of Undying", "Beacon"], correct: 1 },
+  { question: "Which biome has the most snow?", answers: ["Desert", "Jungle", "Taiga", "Snowy Tundra"], correct: 3 },
+  { question: "What can be used to tame a wolf?", answers: ["Fish", "Carrot", "Bone", "Wheat"], correct: 2 },
+  { question: "How do you make a Nether Portal?", answers: ["Iron and Water", "Diamond and Lava", "Obsidian and Flint & Steel", "Glass and Fire"], correct: 2 },
+  { question: "What do you need to brew potions?", answers: ["Crafting Table", "Brewing Stand", "Smithing Table", "Anvil"], correct: 1 },
+  { question: "Which food restores the most hunger points?", answers: ["Bread", "Golden Apple", "Steak", "Melon"], correct: 2 },
+  { question: "Which mob can be ridden?", answers: ["Creeper", "Skeleton", "Pig", "Zombie"], correct: 2 },
+  { question: "What happens if you sleep in the Nether?", answers: ["You wake up in the Overworld", "You teleport to the End", "The bed explodes", "Nothing"], correct: 2 },
+  { question: "Which block cannot be broken in Survival Mode?", answers: ["Obsidian", "Bedrock", "Netherite Block", "Beacon"], correct: 1 },
+  { question: "Which plant grows the tallest?", answers: ["Cactus", "Sugar Cane", "Bamboo", "Tree"], correct: 2 },
+  { question: "How many slots are in a player's hotbar?", answers: ["5", "7", "9", "10"], correct: 2 },
+  { question: "What is the default game mode in Minecraft?", answers: ["Creative", "Survival", "Adventure", "Spectator"], correct: 1 },
+  { question: "Which block do you need to craft a map?", answers: ["Redstone", "Paper", "Compass", "Clock"], correct: 2 },
+  { question: "What happens if you name a sheep 'jeb_'?", answers: ["Nothing", "It glows", "It turns rainbow", "It disappears"], correct: 2 },
+  { question: "Which tool is used to break stone?", answers: ["Axe", "Pickaxe", "Shovel", "Hoe"], correct: 1 },
+  { question: "What is the maximum number of enchantments a single item can have?", answers: ["3", "5", "7", "It depends"], correct: 3 },
+  { question: "Which mob is immune to lava?", answers: ["Creeper", "Zombie", "Blaze", "Witch"], correct: 2 },
+  { question: "What do Ghasts shoot at players?", answers: ["Fireballs", "Arrows", "Rocks", "Poison"], correct: 0 },
+  { question: "What do villagers become when hit by lightning?", answers: ["Zombies", "Witches", "Pillagers", "Nothing"], correct: 1 },
+  { question: "What color is the rarest sheep in Minecraft?", answers: ["White", "Pink", "Blue", "Black"], correct: 1 },
+  { question: "Which mob is the largest in Minecraft?", answers: ["Ghast", "Ender Dragon", "Wither", "Giant"], correct: 3 },
+  { question: "What can be used to make infinite water?", answers: ["A bucket", "A cauldron", "Two water sources", "A river"], correct: 2 },
+  { question: "What do you need to craft an Enchantment Table?", answers: ["Books, Lapis, Diamond", "Obsidian, Diamond, Book", "Gold, Book, Emerald", "Glass, Lapis, Redstone"], correct: 1 },
+  { question: "Which mob is neutral until provoked?", answers: ["Zombie Piglin", "Creeper", "Spider", "Skeleton"], correct: 0 },
+  { question: "What is the primary use of Redstone?", answers: ["Decoration", "Magic", "Electrical circuits", "Crafting weapons"], correct: 2 },
+  { question: "Which food item gives fire resistance?", answers: ["Cooked Chicken", "Golden Apple", "Enchanted Golden Apple", "Raw Beef"], correct: 2 },
+  { question: "How do you get a Totem of Undying?", answers: ["Kill a Pillager", "Find in a chest", "Defeat an Evoker", "Mine it"], correct: 2 },
+  { question: "What happens if you mine a bee nest?", answers: ["Nothing", "Bees attack you", "You get honey", "The nest disappears"], correct: 1 },
+  { question: "Which material is used to craft Elytra?", answers: ["Leather", "Phantom Membrane", "Dragon Scales", "Can't be crafted"], correct: 3 },
+  { question: "What is the function of a Beacon?", answers: ["Heals the player", "Gives status effects", "Teleports you", "Decorates the base"], correct: 1 },
+  { question: "Which enchantment increases underwater mining speed?", answers: ["Respiration", "Depth Strider", "Aqua Affinity", "Efficiency"], correct: 2 },
+  { question: "Which mob is attracted to turtles?", answers: ["Drowned", "Zombies", "Skeletons", "Phantoms"], correct: 0 },
+  { question: "What is needed to make Shears?", answers: ["Iron Ingots", "Gold Ingots", "Diamonds", "Copper"], correct: 0 },
+  { question: "What is the maximum level for the Fortune enchantment?", answers: ["I", "II", "III", "IV"], correct: 2 },
+  { question: "Which biome is the only place where you can find pandas?", answers: ["Jungle", "Taiga", "Savanna", "Plains"], correct: 0 },
+  { question: "What structure generates in the End?", answers: ["Nether Fortress", "End City", "Stronghold", "Pillager Outpost"], correct: 1 },
+  { question: "Which potion lets you see in the dark?", answers: ["Potion of Healing", "Potion of Strength", "Potion of Night Vision", "Potion of Swiftness"], correct: 2 },
+],
+    roblox: [
+  { question: "What year was Roblox officially released?", answers: ["2004", "2006", "2008", "2010"], correct: 1 },
+  { question: "What is the in-game currency of Roblox?", answers: ["Tickets", "Robux", "Gold", "V-Bucks"], correct: 1 },
+  { question: "Which of these is NOT a Roblox game?", answers: ["Adopt Me!", "Brookhaven", "Minecraft", "Bloxburg"], correct: 2 },
+  { question: "Who is the creator of Roblox?", answers: ["Mark Zuckerberg", "David Baszucki", "Bill Gates", "Elon Musk"], correct: 1 },
+  { question: "What was the old currency in Roblox before Robux?", answers: ["V-Bucks", "Gold Coins", "Tickets", "Diamonds"], correct: 2 },
+  { question: "Which game allows players to raise pets?", answers: ["Murder Mystery 2", "Jailbreak", "Adopt Me!", "Tower of Hell"], correct: 2 },
+  { question: "What is the name of the default Roblox character?", answers: ["Noob", "Steve", "Guest", "John Doe"], correct: 0 },
+  { question: "What does 'Obby' stand for in Roblox?", answers: ["Obstacle Course", "Old Building", "Online Battle", "Official Block"], correct: 0 },
+  { question: "Which Roblox game is known for bank robberies and police chases?", answers: ["Jailbreak", "Bloxburg", "Piggy", "Arsenal"], correct: 0 },
+  { question: "What is the max number of friends you can have on Roblox?", answers: ["50", "100", "200", "500"], correct: 2 },
+  { question: "Which game features Piggy, inspired by Peppa Pig?", answers: ["Bloxburg", "Adopt Me!", "Piggy", "MeepCity"], correct: 2 },
+  { question: "What does the Builders Club subscription give players?", answers: ["More Robux", "Exclusive items", "Access to premium games", "All of the above"], correct: 3 },
+  { question: "What year was Tix removed from Roblox?", answers: ["2014", "2016", "2018", "2020"], correct: 1 },
+  { question: "Which of these games is a battle royale game?", answers: ["Murder Mystery 2", "Arsenal", "Tower of Hell", "MeepCity"], correct: 1 },
+  { question: "Which Roblox game is known for sword fighting?", answers: ["BedWars", "MeepCity", "Bloxburg", "Royale High"], correct: 0 },
+  { question: "What do you use to buy items in the Avatar Shop?", answers: ["Gold", "Tickets", "Robux", "Credits"], correct: 2 },
+  { question: "Which event introduced free limited-time hats and accessories?", answers: ["Halloween Spooktacular", "Egg Hunt", "Roblox Championship", "Winter Wonderland"], correct: 1 },
+  { question: "Which of these is a horror game on Roblox?", answers: ["MeepCity", "Arsenal", "DOORS", "Welcome to Bloxburg"], correct: 2 },
+  { question: "What happens if you touch the red parts in an Obby?", answers: ["You get a speed boost", "You teleport", "You die", "Nothing"], correct: 2 },
+  { question: "What do players use to communicate in Roblox games?", answers: ["Morse Code", "Text Chat", "Hand Signals", "Only Voice"], correct: 1 },
+  { question: "Which Roblox game lets players roleplay as superheroes and villains?", answers: ["Superhero Tycoon", "Arsenal", "MeepCity", "Tower Defense Simulator"], correct: 0 },
+  { question: "Which game is about escaping a house while being hunted by a monster?", answers: ["Murder Mystery 2", "Piggy", "Jailbreak", "Tower of Hell"], correct: 1 },
+  { question: "What do you call custom-made 3D objects in Roblox?", answers: ["Plugins", "Meshes", "Scripts", "Gears"], correct: 1 },
+  { question: "What is the premium membership in Roblox called?", answers: ["VIP Pass", "Roblox Premium", "Builders Club", "Elite Club"], correct: 1 },
+  { question: "Which Roblox game is about running a pizza place?", answers: ["Bloxburg", "Work at a Pizza Place", "MeepCity", "Restaurant Tycoon"], correct: 1 },
+  { question: "What is the name of the scripting language used in Roblox?", answers: ["Python", "C++", "Lua", "Java"], correct: 2 },
+  { question: "What is the name of the virtual world-building tool in Roblox?", answers: ["Roblox Maker", "World Editor", "Roblox Studio", "Game Builder"], correct: 2 },
+  { question: "Which item allows you to change your appearance in-game?", answers: ["Morph", "Power-Up", "Perk", "Booster"], correct: 0 },
+  { question: "Which event allows developers to showcase their creations?", answers: ["Roblox Awards", "Developer Showcase", "Bloxy Awards", "Game Jam"], correct: 2 },
+  { question: "Which game mode lets players create their own game inside a game?", answers: ["Studio Mode", "Developer Mode", "Admin Mode", "Sandbox"], correct: 3 },
+  { question: "Which of these is a game where players can customize and decorate their own house?", answers: ["Tower of Hell", "Bloxburg", "Arsenal", "Jailbreak"], correct: 1 },
+  { question: "What can you do with VIP servers?", answers: ["Get free Robux", "Invite only specific players", "Unlock rare items", "Access developer tools"], correct: 1 },
+  { question: "What game type involves completing jobs and earning money?", answers: ["Tycoon", "Adventure", "Survival", "Simulator"], correct: 0 },
+  { question: "Which game allows players to become detectives and find the murderer?", answers: ["Arsenal", "Murder Mystery 2", "Jailbreak", "DOORS"], correct: 1 },
+  { question: "What does an 'obby' usually consist of?", answers: ["Parkour challenges", "Puzzles", "Shooting levels", "Treasure hunts"], correct: 0 },
+  { question: "Which Roblox game has players running a restaurant?", answers: ["Bloxburg", "Adopt Me!", "Restaurant Tycoon", "Work at a Pizza Place"], correct: 2 },
+  { question: "What is the most popular Roblox game of all time?", answers: ["MeepCity", "Adopt Me!", "Brookhaven", "Tower of Hell"], correct: 1 },
+  { question: "What happens when you step on a speed coil in an obby?", answers: ["You slow down", "You jump higher", "You run faster", "You get stuck"], correct: 2 },
+  { question: "Which game allows players to become police officers and criminals?", answers: ["Jailbreak", "Murder Mystery 2", "Bloxburg", "DOORS"], correct: 0 },
+  { question: "What is the main theme of 'Survive the Disasters'?", answers: ["Escaping a prison", "Building houses", "Surviving random events", "Racing"], correct: 2 },
+  { question: "Which game lets players battle using various weapons in a fast-paced setting?", answers: ["Arsenal", "Adopt Me!", "Piggy", "MeepCity"], correct: 0 },
+  { question: "Which game lets you mine ores and build structures?", answers: ["Brookhaven", "Bloxburg", "Minecraft Tycoon", "Miners Haven"], correct: 3 },
+  { question: "Which Roblox group is known for banning rule-breakers?", answers: ["Admin Club", "Moderator Team", "Roblox Moderation", "Roblox Devs"], correct: 2 },
+  { question: "Which game is centered around surviving a tornado?", answers: ["Natural Disaster Survival", "Survive the Disasters", "Weather Simulator", "Tower of Hell"], correct: 0 },
+  { question: "What is the max player count for most Roblox games?", answers: ["20", "50", "100", "200"], correct: 1 },
+]
+
+
+};
+
+     
+
+let currentCategory = "";
+let currentQuestionIndex = 0;
+let score = 0;
+let timerInterval;
+let timeLeft = 260;
+
+function startQuiz() {
+    document.getElementById("splash").style.display = "none";
+    document.getElementById("categories").style.display = "flex";
+}
+document.addEventListener("DOMContentLoaded", () => {
+    let streaks = parseInt(localStorage.getItem("streaks")) || 0;
+    let sparksbux = parseInt(localStorage.getItem("sparksbux")) || 0;
+    let lastPlayed = localStorage.getItem("lastPlayed");
+    let today = new Date().toDateString();
+    let extraTimePurchased = false;
+    let highScores = JSON.parse(localStorage.getItem("highScores")) || {};
+
+    console.log("Initial streaks:", streaks);
+    console.log("Initial sparksbux:", sparksbux);
+    console.log("Last played:", lastPlayed);
+    console.log("Today:", today);
+
+    const streakDisplay = document.querySelectorAll("#streak-count");
+    const sparksbuxDisplay = document.querySelectorAll("#sparksbux-count");
+    const notification = document.getElementById("quiz-notification");
+    const skipQuestionButton = document.getElementById("skip-question-button");
+
+    if (!streakDisplay.length || !sparksbuxDisplay.length || !notification || !skipQuestionButton) {
+        console.error("One or more elements not found in the DOM.");
+        return;
+    }
+
+    function updateStreak() {
+    const today = new Date().toDateString(); // Get today's date as a string
+    const lastPlayed = localStorage.getItem("lastPlayed"); // Get the last played date from localStorage
+
+    if (lastPlayed === today) {
+        // If the user has already played today, do nothing
+        console.log("Streak already updated for today.");
+        return;
+    }
+
+    if (lastPlayed) {
+        const lastPlayedDate = new Date(lastPlayed);
+        const currentDate = new Date(today);
+
+        // Calculate the difference in days
+        const daysDifference = Math.floor((currentDate - lastPlayedDate) / (1000 * 60 * 60 * 24));
+
+        if (daysDifference === 1) {
+            // Increment streak if the user played yesterday
+            streaks++;
+        } else {
+            // Reset streak if more than 1 day has passed
+            streaks = 1;
+        }
+    } else {
+        // If no last played date exists, start a new streak
+        streaks = 1;
+    }
+
+    // Save the updated streak and today's date in localStorage
+    localStorage.setItem("streaks", streaks);
+    localStorage.setItem("lastPlayed", today);
+
+    // Update the streak display
+    streakDisplay.forEach(display => display.innerText = streaks);
+    console.log("Updated streak:", streaks);
+}
+
+    function calculateSparksbux(score) {
+        if (score >= 50) return 1000;
+        if (score >= 40) return 400;
+        if (score >= 30) return 300;
+        if (score >= 20) return 200;
+        if (score >= 10) return 100;
+        return 50;
+    }
+
+    function awardSparksbux(score) {
+        let earned = calculateSparksbux(score);
+        sparksbux += earned;
+        localStorage.setItem("sparksbux", sparksbux);
+        sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
+        showNotification(`🎉 You earned ${earned} Sparksbux!`);
+        console.log("Awarded Sparksbux:", earned);
+        console.log("Total Sparksbux:", sparksbux);
+    }
+
+    let notificationQueue = [];
+    let isNotificationVisible = false;
+    
+    function showNotification(message) {
+        notificationQueue.push(message);
+        if (!isNotificationVisible) {
+            displayNextNotification();
+        }
+    }
+    
+    function displayNextNotification() {
+        if (notificationQueue.length === 0) {
+            isNotificationVisible = false;
+            return;
+        }
+    
+        isNotificationVisible = true;
+        const notification = document.getElementById("quiz-notification");
+        const message = notificationQueue.shift();
+    
+        notification.innerText = message;
+        notification.style.opacity = "1";
+        notification.style.transform = "scale(1.1)";
+    
+        setTimeout(() => {
+            notification.style.opacity = "0";
+            notification.style.transform = "scale(1)";
+            setTimeout(displayNextNotification, 500);
+        }, 3000);
+    }
+
+    function purchaseItem(item, cost) {
+      if (sparksbux >= cost) {
+          sparksbux -= cost;
+          localStorage.setItem("sparksbux", sparksbux);
+          sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
+          showNotification(`🎉 You successfully purchased ${item}!`);
+  
+          switch (item) {
+              case 'extraTime':
+                  extraTimePurchased = true;
+                  showNotification("⏳ Extra Time added for your next quiz!");
+                  break;
+  
+              case 'multiplier':
+                  activateMultiplier();
+                  showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
+                  break;
+  
+              case 'answers':
+                  addCorrectAnswers(25);
+                  showNotification("📚 25 Correct Answers added to your account!");
+                  break;
+  
+              
+  
+              case 'streakSaver':
+                  activateStreakSaver();
+                  showNotification("🔥 Streak Saver activated for 48 hours!");
+                  break;
+  
+              default:
+                  showNotification("❓ Unknown item purchased.");
+          }
+      } else {
+          showNotification("❌ Insufficient Sparksbux!");
+      }
+  }
+
+
+let multiplierActive = false;
+let multiplierTimeout;
+
+function activateMultiplier() {
+    if (multiplierActive) {
+        showNotification("⚡ Sparksbux Multiplier is already active!");
+        return;
+    }
+
+    multiplierActive = true;
+    showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
+
+    // Set a timeout to deactivate the multiplier after 48 hours
+    multiplierTimeout = setTimeout(() => {
+        multiplierActive = false;
+        showNotification("⚡ Sparksbux Multiplier expired!");
+    }, 48 * 60 * 60 * 1000); // 48 hours in milliseconds
+}
+
+function calculateSparksbux(score) {
+    let baseSparksbux = score >= 50 ? 1000 : score >= 40 ? 400 : score >= 30 ? 300 : score >= 20 ? 200 : score >= 10 ? 100 : 50;
+    return multiplierActive ? baseSparksbux * 2 : baseSparksbux; // Double Sparksbux if multiplier is active
+}
+
+let correctAnswersPurchased = 0;
+
+function addCorrectAnswers(count) {
+    correctAnswersPurchased += count;
+    localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
+    showNotification(`📚 You now have ${correctAnswersPurchased} correct answers available!`);
+}
+
+function checkAnswer(index) {
+  const questionData = questions[currentCategory][currentQuestionIndex];
+  if (index === questionData.correct) {
+      score++;
+  } else if (correctAnswersPurchased > 0) {
+      correctAnswersPurchased--;
+      localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
+      showNotification(`📚 Used a purchased correct answer! Remaining: ${correctAnswersPurchased}`);
+      score++;
+  } else {
+      showNotification("❌ Incorrect answer!");
+  }
+  nextQuestion();
+}
+
+let streakSaverActive = false;
+let streakSaverTimeout;
+
+function activateStreakSaver() {
+    if (streakSaverActive) {
+        showNotification("🔥 Streak Saver is already active!");
+        return;
+    }
+
+    function activateStreakSaver() {
+      if (streakSaverActive) {
+          showNotification("🔥 Streak Saver is already active!");
+          return;
+      }
+  
+      streakSaverActive = true;
+      showNotification("🔥 Streak Saver activated for 48 hours!");
+  
+      setTimeout(() => {
+          streakSaverActive = false;
+          showNotification("🔥 Streak Saver expired!");
+      }, 48 * 60 * 60 * 1000); // 48 hours
+  }}
+
+  function updateStreak() {
+    const today = new Date().toDateString();
+    const lastPlayed = localStorage.getItem("lastPlayed");
+
+    if (lastPlayed === today) return;
+
+    if (lastPlayed) {
+        const lastPlayedDate = new Date(lastPlayed);
+        const currentDate = new Date(today);
+        const daysDifference = Math.floor((currentDate - lastPlayedDate) / (1000 * 60 * 60 * 24));
+
+        if (daysDifference === 1 || (daysDifference > 1 && streakSaverActive)) {
+            streaks++;
+        } else {
+            streaks = 1;
+        }
+    } else {
+        streaks = 1;
+    }
+
+    localStorage.setItem("streaks", streaks);
+    localStorage.setItem("lastPlayed", today);
+    streakDisplay.forEach(display => display.innerText = streaks);
+}
+
+    function skipQuestion() {
+        const cost = 80;
+        if (sparksbux >= cost) {
+            sparksbux -= cost;
+            localStorage.setItem("sparksbux", sparksbux);
+            sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
+            showNotification("⏭️ Question skipped!");
+            nextQuestion();
+        } else {
+            showNotification("❌ Insufficient Sparksbux!");
+        }
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions[currentCategory].length) {
+            showQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+
+    function updateHighScores(category, score) {
+        if (!highScores[category] || score > highScores[category]) {
+            highScores[category] = score;
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+            showNotification("🎉 Congratulations! You beat your high score!");
+        }
+    }
+
+    function displayHighScores() {
+    const highScoresSection = document.getElementById("high-scores-section");
+    highScoresSection.innerHTML = `
+        <h1>🏆 High Scores 🏆</h1>
+        <p style="font-style: italic; color: #ccc;">High Scores will be displayed once accomplished.</p>
+    `;
+
+    for (const category in highScores) {
+        highScoresSection.innerHTML += `
+            <div style="
+                background: linear-gradient(135deg, #1a1a2e, #16213e);
+                padding: 20px;
+                border-radius: 15px;
+                margin: 15px 0;
+                text-align: center;
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+            ">
+                <h2 style="
+                    font-size: 24px;
+                    font-weight: bold;
+                    color: #ffd700;
+                    text-transform: uppercase;
+                    margin-bottom: 10px;
+                    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+                ">
+                    ${category}
+                </h2>
+                <p style="
+                    font-size: 20px;
+                    color: #ffffff;
+                    font-weight: bold;
+                    margin: 0;
+                ">
+                    High Score: ${highScores[category]}
+                </p>
+            </div>
+        `;
+    }
+}
+
+
+
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault();
+        const sectionId = this.dataset.section;
+
+        if (sectionId === "high-scores") {
+            displayHighScores();
+            showSection(sectionId);
+
+        // Update active link styling
+        document.querySelectorAll('.nav-link').forEach(otherLink => {
+            otherLink.classList.remove('active');
+        });
+        this.classList.add('active');
+}});
+});
+
+
+
+    // Initial UI Update
+    streakDisplay.forEach(display => display.innerText = streaks);
+    sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
+    displayHighScores();
+    console.log("Initial UI update complete");
+
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+            section.style.display = 'none';
+        });
+
+        const activeSection = document.getElementById(sectionId);
+        activeSection.style.display = 'block';
+        setTimeout(() => {
+            activeSection.classList.add('active');
+        }, 10);
+    }
+
+    showSection('home'); // Show home section by default
+
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const sectionId = this.dataset.section;
+            showSection(sectionId);
+
+            // Remove active class from all links.
+            navLinks.forEach(otherLink => {
+                otherLink.classList.remove('active');
+            });
+            // Add active class to current link.
+            this.classList.add('active');
+        });
+    });
+
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        } else {
+            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+        }
+    });
+
+    // Security: Disable right-click and certain keys
+    document.addEventListener("contextmenu", (e) => e.preventDefault());
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "F12" || (e.ctrlKey && ["U", "I", "J", "C", "S"].includes(e.key.toUpperCase()))) {
+            e.preventDefault();
+        }
+    });
+
+    // Detect Developer Tools (Prevents cheating)
+    (function detectDevTools() {
+        const element = new Image();
+        element.__defineGetter__('id', function () {
+            alert("Developer Tools Detected! Please close it.");
+            window.location.reload();
+        });
+        console.log("%c", element);
+    })();
+    
+  function setSecureItem(key, value) {
+    const encryptedValue = btoa(value); // Base64 encode
+    localStorage.setItem(key, encryptedValue);
+}
+
+function getSecureItem(key) {
+    const encryptedValue = localStorage.getItem(key);
+    return encryptedValue ? atob(encryptedValue) : null; // Base64 decode
+}
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+document.addEventListener("keydown", (e) => {
+    if (e.key === "F12" || (e.ctrlKey && ["U", "I", "J", "C", "S"].includes(e.key.toUpperCase())) || e.key === "PrintScreen") {
+        e.preventDefault();
+    }
+});
+function encryptData(data) {
+  return btoa(unescape(encodeURIComponent(data))); // Base64 encode
+}
+
+function decryptData(data) {
+  return decodeURIComponent(escape(atob(data))); // Base64 decode
+}
+
+// Usage
+localStorage.setItem("encryptedSparksbux", encryptData(sparksbux));
+const decryptedSparksbux = decryptData(localStorage.getItem("encryptedSparksbux"));
+
+
+
+
+
+    // Fisher-Yates Shuffle Algorithm
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        }
+    }
+
+    // Load quiz with shuffled questions
+    function loadQuiz(category) {
+      currentCategory = category;
+      currentQuestionIndex = 0;
+      score = 0;
+      document.getElementById("categories").style.display = "none";
+      document.getElementById("quiz").style.display = "flex";
+      document.getElementById("quiz-category").innerText = category.toUpperCase();
+      timeLeft = extraTimePurchased ? 300 : 260;
+      extraTimePurchased = false; // Reset extra time purchase after use
+      startTimer();
+  
+      // Shuffle questions before displaying
+      shuffleArray(questions[category]);
+      showQuestion();
+  }
+
+    function showQuestion() {
+        const questionData = questions[currentCategory][currentQuestionIndex];
+        const container = document.getElementById("question-container");
+        container.innerHTML = `<h3>${questionData.question}</h3>`;
+        questionData.answers.forEach((answer, index) => {
+            container.innerHTML += `<button onclick="checkAnswer(${index})">${answer}</button>`;
+        });
+    }
+
+    function goBack() {
+        clearInterval(timerInterval);
+        document.getElementById("timer").innerText = "Time Left: 260s";
+        document.getElementById('quiz').style.display = 'none';
+        document.getElementById('categories').style.display = 'flex';
+        // Reset values
+        currentQuestionIndex = 0;
+        score = 0;
+        timeLeft = 260;
+    }
+
+    function checkAnswer(index) {
+        const questionData = questions[currentCategory][currentQuestionIndex];
+        if (index === questionData.correct) score++;
+        nextQuestion();
+    }
+
+    function startTimer() {
+      const timerElement = document.getElementById("timer");
+      clearInterval(timerInterval); // Clear any existing timer
+  
+  
+      // Start the timer
+      timerInterval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timerElement.innerText = `Time Left: ${timeLeft}s`;
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null; // Mark the timer as stopped
+            endQuiz();
+        }
+    }, 1000);
+}
+
+function endQuiz() {
+  clearInterval(timerInterval);
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("results").style.display = "flex";
+  document.getElementById("score").innerText = `Your Score: ${score}`;
+  const percentage = (score / questions[currentCategory].length) * 100;
+  document.getElementById("rank").innerText = getRank(percentage);
+
+  // Award Sparksbux for the quiz
+  awardSparksbux(score);
+
+  // Update streaks and high scores
+  updateStreak();
+  updateHighScores(currentCategory, score);
+
+  // Reset flags
+ 
+  extraTimePurchased = false;
+}
+
+    function getRank(percentage) {
+        if (percentage === 100) {
+            return "Legendary IQ Award! You’ve shattered expectations and reached the pinnacle of brilliance! No one thought it was possible, but you’ve proven everyone wrong. You are truly a genius! 🎊";
+        } else if (percentage >= 90) {
+            return "Excellent work! You're nearly there, just one step away from a Legendary IQ Award. Keep pushing your limits; you're unstoppable!";
+        } else if (percentage >= 75) {
+            return "Fantastic effort! You're closing in on greatness. Keep honing your skills, and soon enough, you'll be at the top!";
+        } else if (percentage >= 50) {
+            return "Good job! You're definitely on the right path. A little more practice, and you'll be reaching new heights. Keep at it, the journey has just begun!";
+        } else if (percentage >= 25) {
+            return "You're making progress, but there's still a way to go. Stay motivated, practice more, and watch your IQ skyrocket!";
+        } else if (percentage >= 1) {
+            return "I know it was quite a tough journey. But stay motivated. There is still room for improvement.";
+        } else {
+            return "Oops! Don’t worry, it’s not the end. Every setback is a setup for a greater comeback. Try again with confidence—success is just a few steps away!";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const music = document.getElementById("bg-music");
+  
+      // Optional volume setting (0.0 - 1.0)
+      music.volume = 0.5;
+  
+      // Try to autoplay
+      music.play().catch(() => {
+          // If blocked, play on first user interaction
+          document.addEventListener("click", () => {
+              music.play();
+          }, { once: true });
+      });
+  });
+  
+
+  function restartQuiz() {
+    document.getElementById("results").style.display = "none";
+    document.getElementById("categories").style.display = "flex";
+
+    // Reset flags
+   
+    extraTimePurchased = false;
+}
+
+    // Reset streak at midnight if the user doesn't play
+    function resetStreakAtMidnight() {
+        const now = new Date();
+        const millisTillMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0) - now;
+        setTimeout(() => {
+            if (localStorage.getItem("lastPlayed") !== new Date().toDateString()) {
+                streaks = 0;
+                localStorage.setItem("streaks", streaks);
+                streakDisplay.forEach(display => display.innerText = streaks);
+                console.log("Streak reset at midnight");
+            }
+            resetStreakAtMidnight(); // Schedule the next reset
+        }, millisTillMidnight);
+    }
+    document.addEventListener("DOMContentLoaded", () => {
+    resetStreakAtMidnight();
+});
+document.addEventListener("DOMContentLoaded", () => {
+    streaks = parseInt(localStorage.getItem("streaks")) || 0; // Load streaks or default to 0
+    streakDisplay.forEach(display => display.innerText = streaks); // Update the streak display
+});
+    resetStreakAtMidnight(); // Initialize the first reset
+
+    // Expose functions to global scope for button onclick handlers
+    window.loadQuiz = loadQuiz;
+    window.checkAnswer = checkAnswer;
+    window.goBack = goBack;
+    window.restartQuiz = restartQuiz;
+    window.purchaseItem = purchaseItem;
+    window.skipQuestion = skipQuestion;
+});
+</script>
+
+</body>
+</html>
