@@ -2242,23 +2242,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+// Multiplier Functionality
 let multiplierActive = false;
-let multiplierTimeout;
 
 function activateMultiplier() {
-    if (multiplierActive) {
-        showNotification("⚡ Sparksbux Multiplier is already active!");
-        return;
-    }
+    const now = Date.now(); // Current timestamp
+    const multiplierEndTime = now + 48 * 60 * 60 * 1000; // 48 hours from now
 
+    localStorage.setItem("multiplierEndTime", multiplierEndTime); // Save end time in localStorage
     multiplierActive = true;
     showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
+}
 
-    // Set a timeout to deactivate the multiplier after 48 hours
-    multiplierTimeout = setTimeout(() => {
+function checkMultiplier() {
+    const multiplierEndTime = parseInt(localStorage.getItem("multiplierEndTime")) || 0;
+    const now = Date.now();
+
+    if (now < multiplierEndTime) {
+        multiplierActive = true;
+        const remainingTime = Math.ceil((multiplierEndTime - now) / (60 * 60 * 1000)); // Remaining time in hours
+        showNotification(`⚡ Sparksbux Multiplier is active! Time left: ${remainingTime} hours.`);
+    } else {
         multiplierActive = false;
-        showNotification("⚡ Sparksbux Multiplier expired!");
-    }, 48 * 60 * 60 * 1000); // 48 hours in milliseconds
+        localStorage.removeItem("multiplierEndTime"); // Clear expired multiplier
+    }
 }
 
 function calculateSparksbux(score) {
@@ -2289,29 +2296,65 @@ function checkAnswer(index) {
   nextQuestion();
 }
 
+
+
+
+// Streak Saver Functionality
 let streakSaverActive = false;
 let streakSaverTimeout;
-
+    
 function activateStreakSaver() {
-    if (streakSaverActive) {
-        showNotification("🔥 Streak Saver is already active!");
-        return;
+    const now = Date.now(); // Current timestamp
+    const streakSaverEndTime = now + 48 * 60 * 60 * 1000; // 48 hours from now
+
+    localStorage.setItem("streakSaverEndTime", streakSaverEndTime); // Save end time in localStorage
+    streakSaverActive = true;
+    showNotification("🔥 Streak Saver activated for 48 hours!");
+}
+
+function checkStreakSaver() {
+    const streakSaverEndTime = parseInt(localStorage.getItem("streakSaverEndTime")) || 0;
+    const now = Date.now();
+
+    if (now < streakSaverEndTime) {
+        streakSaverActive = true;
+        const remainingTime = Math.ceil((streakSaverEndTime - now) / (60 * 60 * 1000)); // Remaining time in hours
+        showNotification(`🔥 Streak Saver is active! Time left: ${remainingTime} hours.`);
+    } else {
+        streakSaverActive = false;
+        localStorage.removeItem("streakSaverEndTime"); // Clear expired streak saver
+    }
+}
+    // Update Streak with Streak Saver
+function updateStreak() {
+    const today = new Date().toDateString();
+    const lastPlayed = localStorage.getItem("lastPlayed");
+
+    if (lastPlayed === today) return;
+
+    if (lastPlayed) {
+        const lastPlayedDate = new Date(lastPlayed);
+        const currentDate = new Date(today);
+        const daysDifference = Math.floor((currentDate - lastPlayedDate) / (1000 * 60 * 60 * 24));
+
+        if (daysDifference === 1 || (daysDifference > 1 && streakSaverActive)) {
+            streaks++;
+        } else {
+            streaks = 1;
+        }
+    } else {
+        streaks = 1;
     }
 
-    function activateStreakSaver() {
-      if (streakSaverActive) {
-          showNotification("🔥 Streak Saver is already active!");
-          return;
-      }
-  
-      streakSaverActive = true;
-      showNotification("🔥 Streak Saver activated for 48 hours!");
-  
-      setTimeout(() => {
-          streakSaverActive = false;
-          showNotification("🔥 Streak Saver expired!");
-      }, 48 * 60 * 60 * 1000); // 48 hours
-  }}
+    localStorage.setItem("streaks", streaks);
+    localStorage.setItem("lastPlayed", today);
+    streakDisplay.forEach(display => display.innerText = streaks);
+}
+    // Check Multiplier and Streak Saver on Page Load
+document.addEventListener("DOMContentLoaded", () => {
+    checkMultiplier(); // Check if multiplier is still active
+    checkStreakSaver(); // Check if streak saver is still active
+});
 
   function updateStreak() {
     const today = new Date().toDateString();
