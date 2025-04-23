@@ -2244,34 +2244,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Multiplier Functionality
 let multiplierActive = false;
+let streakSaverActive = false;
+let multiplierExpiration = null;
+let streakSaverExpiration = null;
 
+// Function to activate the Multiplier
 function activateMultiplier() {
-    const now = Date.now(); // Current timestamp
-    const multiplierEndTime = now + 48 * 60 * 60 * 1000; // 48 hours from now
-
-    localStorage.setItem("multiplierEndTime", multiplierEndTime); // Save end time in localStorage
-    multiplierActive = true;
-    showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
-}
-
-function checkMultiplier() {
-    const multiplierEndTime = parseInt(localStorage.getItem("multiplierEndTime")) || 0;
-    const now = Date.now();
-
-    if (now < multiplierEndTime) {
-        multiplierActive = true;
-        const remainingTime = Math.ceil((multiplierEndTime - now) / (60 * 60 * 1000)); // Remaining time in hours
-        showNotification(`⚡ Sparksbux Multiplier is active! Time left: ${remainingTime} hours.`);
-    } else {
-        multiplierActive = false;
-        localStorage.removeItem("multiplierEndTime"); // Clear expired multiplier
+    if (multiplierActive) {
+        showNotification("⚡ Sparksbux Multiplier is already active!");
+        return;
     }
+
+    multiplierActive = true;
+    multiplierExpiration = new Date(Date.now() + 48 * 60 * 60 * 1000); // 48 hours from now
+    localStorage.setItem("multiplierExpiration", multiplierExpiration.toISOString());
+    showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
+
+    // Automatically deactivate after 48 hours
+    setTimeout(() => {
+        deactivateMultiplier();
+    }, 48 * 60 * 60 * 1000);
 }
 
+// Function to deactivate the Multiplier
+function deactivateMultiplier() {
+    multiplierActive = false;
+    multiplierExpiration = null;
+    localStorage.removeItem("multiplierExpiration");
+    showNotification("⚡ Sparksbux Multiplier expired!");
+}
+// Function to calculate Sparksbux with Multiplier
 function calculateSparksbux(score) {
     let baseSparksbux = score >= 50 ? 1000 : score >= 40 ? 400 : score >= 30 ? 300 : score >= 20 ? 200 : score >= 10 ? 100 : 50;
     return multiplierActive ? baseSparksbux * 2 : baseSparksbux; // Double Sparksbux if multiplier is active
 }
+
+    
 
 let correctAnswersPurchased = 0;
 
@@ -2300,32 +2308,32 @@ function checkAnswer(index) {
 
 
 // Streak Saver Functionality
-let streakSaverActive = false;
-let streakSaverTimeout;
-    
+// Function to activate the StreakSaver
 function activateStreakSaver() {
-    const now = Date.now(); // Current timestamp
-    const streakSaverEndTime = now + 48 * 60 * 60 * 1000; // 48 hours from now
-
-    localStorage.setItem("streakSaverEndTime", streakSaverEndTime); // Save end time in localStorage
-    streakSaverActive = true;
-    showNotification("🔥 Streak Saver activated for 48 hours!");
-}
-
-function checkStreakSaver() {
-    const streakSaverEndTime = parseInt(localStorage.getItem("streakSaverEndTime")) || 0;
-    const now = Date.now();
-
-    if (now < streakSaverEndTime) {
-        streakSaverActive = true;
-        const remainingTime = Math.ceil((streakSaverEndTime - now) / (60 * 60 * 1000)); // Remaining time in hours
-        showNotification(`🔥 Streak Saver is active! Time left: ${remainingTime} hours.`);
-    } else {
-        streakSaverActive = false;
-        localStorage.removeItem("streakSaverEndTime"); // Clear expired streak saver
+    if (streakSaverActive) {
+        showNotification("🔥 Streak Saver is already active!");
+        return;
     }
+
+    streakSaverActive = true;
+    streakSaverExpiration = new Date(Date.now() + 48 * 60 * 60 * 1000); // 48 hours from now
+    localStorage.setItem("streakSaverExpiration", streakSaverExpiration.toISOString());
+    showNotification("🔥 Streak Saver activated for 48 hours!");
+
+    // Automatically deactivate after 48 hours
+    setTimeout(() => {
+        deactivateStreakSaver();
+    }, 48 * 60 * 60 * 1000);
 }
-    // Update Streak with Streak Saver
+
+// Function to deactivate the StreakSaver
+function deactivateStreakSaver() {
+    streakSaverActive = false;
+    streakSaverExpiration = null;
+    localStorage.removeItem("streakSaverExpiration");
+    showNotification("🔥 Streak Saver expired!");
+}
+    // Function to update streaks with StreakSaver logic
 function updateStreak() {
     const today = new Date().toDateString();
     const lastPlayed = localStorage.getItem("lastPlayed");
@@ -2350,10 +2358,45 @@ function updateStreak() {
     localStorage.setItem("lastPlayed", today);
     streakDisplay.forEach(display => display.innerText = streaks);
 }
-    // Check Multiplier and Streak Saver on Page Load
+
+// Function to check and restore active states on page load
+function restoreActiveStates() {
+    const savedMultiplierExpiration = localStorage.getItem("multiplierExpiration");
+    const savedStreakSaverExpiration = localStorage.getItem("streakSaverExpiration");
+
+    if (savedMultiplierExpiration) {
+        const expirationDate = new Date(savedMultiplierExpiration);
+        if (expirationDate > new Date()) {
+            multiplierActive = true;
+            multiplierExpiration = expirationDate;
+
+            // Set timeout to deactivate when it expires
+            setTimeout(() => {
+                deactivateMultiplier();
+            }, expirationDate - Date.now());
+        } else {
+            deactivateMultiplier();
+        }
+    }
+    if (savedStreakSaverExpiration) {
+        const expirationDate = new Date(savedStreakSaverExpiration);
+        if (expirationDate > new Date()) {
+            streakSaverActive = true;
+            streakSaverExpiration = expirationDate;
+
+            // Set timeout to deactivate when it expires
+            setTimeout(() => {
+                deactivateStreakSaver();
+            }, expirationDate - Date.now());
+        } else {
+            deactivateStreakSaver();
+        }
+    }
+}
+
+// Call restoreActiveStates on page load
 document.addEventListener("DOMContentLoaded", () => {
-    checkMultiplier(); // Check if multiplier is still active
-    checkStreakSaver(); // Check if streak saver is still active
+    restoreActiveStates();
 });
 
   function updateStreak() {
