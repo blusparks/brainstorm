@@ -2353,27 +2353,68 @@ function showNotification(message) {
 }
     
 
-let correctAnswersPurchased = parseInt(localStorage.getItem("correctAnswersPurchased")) || 0;
-let remainingCorrectAnswers = 0;
+const PURCHASED_ANSWERS_KEY = 'correctAnswersPurchased';
+const REMAINING_ROUNDS_KEY = 'remainingRounds';
+const ANSWERS_PER_PURCHASE = 20; // Number of correct answers purchased at once
+const ROUNDS_TO_USE = 5; // Number of rounds the purchased answers are valid
+
+let correctAnswersPurchased = parseInt(localStorage.getItem(PURCHASED_ANSWERS_KEY)) || 0;
+let remainingRounds = parseInt(localStorage.getItem(REMAINING_ROUNDS_KEY)) || 0;
+let glowActive = false; // Track the glow state
+
+function loadAnswerState() {
+    const storedAnswers = localStorage.getItem(PURCHASED_ANSWERS_KEY);
+    const storedRounds = localStorage.getItem(REMAINING_ROUNDS_KEY);
+
+    correctAnswersPurchased = storedAnswers ? parseInt(storedAnswers, 10) : 0;
+    remainingRounds = storedRounds ? parseInt(storedRounds, 10) : 0;
+
+    if (remainingRounds > 0 && correctAnswersPurchased > 0) {
+        //  No notification here,  checkAnswer will handle it
+    } else {
+        //reset state
+        correctAnswersPurchased = 0;
+        remainingRounds = 0;
+        localStorage.removeItem(PURCHASED_ANSWERS_KEY);
+        localStorage.removeItem(REMAINING_ROUNDS_KEY);
+    }
+}
+
+function saveAnswerState() {
+    localStorage.setItem(PURCHASED_ANSWERS_KEY, correctAnswersPurchased.toString());
+    localStorage.setItem(REMAINING_ROUNDS_KEY, remainingRounds.toString());
+}
+
+function clearAnswerState() {
+    localStorage.removeItem(PURCHASED_ANSWERS_KEY);
+    localStorage.removeItem(REMAINING_ROUNDS_KEY);
+    correctAnswersPurchased = 0;
+    remainingRounds = 0;
+    removeGlowEffect(); // Also remove glow when state is cleared
+}
 
 // Function to add purchased correct answers
-function addCorrectAnswers(count) {
-    correctAnswersPurchased += count;
-    remainingCorrectAnswers = count; // Set remaining correct answers for the next 5 rounds
-    localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
-    showNotification(`📚 You now have ${correctAnswersPurchased} correct answers available!`);
+function addCorrectAnswers() {
+    if (remainingRounds > 0) {
+        showNotification(`📚 You already have ${correctAnswersPurchased} correct answers for ${remainingRounds}  rounds.`);
+        return; // prevent buying again.
+    }
+    correctAnswersPurchased += ANSWERS_PER_PURCHASE;
+    remainingRounds = ROUNDS_TO_USE;
+    saveAnswerState();
+    showNotification(`📚 You have purchased 20 correct answers for the next 5 rounds!`);
+    applyGlowEffect(); // Apply glow when purchased
 }
 
 // Function to check the answer
 function checkAnswer(index) {
     const questionData = questions[currentCategory][currentQuestionIndex];
 
-    if (remainingCorrectAnswers > 0) {
+    if (correctAnswersPurchased > 0 && remainingRounds > 0) {
         // Automatically mark the answer as correct if purchased answers are available
-        remainingCorrectAnswers--;
         correctAnswersPurchased--;
-        localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
-        showNotification(`📚 Used a purchased correct answer! Remaining: ${remainingCorrectAnswers}`);
+        saveAnswerState(); // Save immediately after decrementing
+        showNotification(`📚 Used a purchased correct answer! Remaining: ${correctAnswersPurchased} answers, Rounds: ${remainingRounds}`);
         score++;
     } else if (index === questionData.correct) {
         // Normal correct answer
@@ -2383,23 +2424,48 @@ function checkAnswer(index) {
         showNotification("❌ Incorrect answer!");
     }
 
-    nextQuestion();
+    if (correctAnswersPurchased <= 0 && remainingRounds > 0) { //check if answers are finished.
+        clearAnswerState();
+        showNotification("📚 Your purchased correct answers have run out!");
+    }
+    nextQuestion(); //call nextQuestion
 }
 
-// Function to reset remaining correct answers after 5 rounds
-function resetRemainingCorrectAnswers() {
-    remainingCorrectAnswers = 0;
-    localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
-}
-
-// Call this function at the end of 5 rounds
-function endRound() {
-    if (remainingCorrectAnswers === 0) {
-        resetRemainingCorrectAnswers();
+// Function to decrement rounds.  Call this at the beginning of each new round.
+function startNewRound() {
+    if (remainingRounds > 0) {
+        remainingRounds--;
+        if (remainingRounds === 0 && correctAnswersPurchased > 0) {
+            clearAnswerState(); //clears all.
+            showNotification("📚 Your purchased correct answers have expired!");
+        } else if (remainingRounds === 0 && correctAnswersPurchased <= 0)
+        {
+            clearAnswerState();
+            showNotification("📚 Your purchased correct answers have run out!");
+        }
+        saveAnswerState(); //save the round.
     }
 }
 
+// Initialize on page load
+loadAnswerState();
 
+// --- Visual Glow Effect (Optional) ---
+function applyGlowEffect() {
+    if (!glowActive) {
+        document.body.classList.add("correct-boost"); // Add the CSS class
+        glowActive = true;
+    }
+}
+
+function removeGlowEffect() {
+    if (glowActive) {
+        document.body.classList.remove("correct-boost"); // Remove the CSS class
+        glowActive = false;
+    }
+}
+
+// You would also need to define the CSS class somewhere, like in a <style> tag:
 
 
 // Streak Saver Functionality
