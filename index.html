@@ -2243,12 +2243,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Multiplier Functionality
+
+const MULTIPLIER_KEY = 'sparksbuxMultiplierActive';
+const EXPIRY_KEY = 'sparksbuxMultiplierExpiry';
+const MULTIPLIER_DURATION = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
+
 let multiplierActive = false;
 let streakSaverActive = false;
 let multiplierExpiration = null;
 let streakSaverExpiration = null;
 
-// Function to activate the Multiplier
+
+function loadMultiplierState() {
+    const storedActive = localStorage.getItem(MULTIPLIER_KEY);
+    const storedExpiry = localStorage.getItem(EXPIRY_KEY);
+
+    if (storedActive === 'true' && storedExpiry) {
+        const expiryTime = parseInt(storedExpiry, 10);
+        if (new Date().getTime() < expiryTime) {
+            multiplierActive = true;
+            multiplierExpiry = expiryTime;
+            startExpiryTimer(expiryTime);
+            showNotification("⚡ Sparksbux Multiplier is active!");
+            return;
+        }
+    }
+    // If not active or expired, ensure local storage is clean
+    localStorage.removeItem(MULTIPLIER_KEY);
+    localStorage.removeItem(EXPIRY_KEY);
+    multiplierActive = false;
+    multiplierExpiry = null;
+}
+
+function saveMultiplierState() {
+    if (multiplierActive && multiplierExpiry) {
+        localStorage.setItem(MULTIPLIER_KEY, 'true');
+        localStorage.setItem(EXPIRY_KEY, String(multiplierExpiry)); // Explicit string conversion
+    } else {
+        localStorage.removeItem(MULTIPLIER_KEY);
+        localStorage.removeItem(EXPIRY_KEY);
+    }
+}
+
+function clearMultiplierState() {
+    localStorage.removeItem(MULTIPLIER_KEY);
+    localStorage.removeItem(EXPIRY_KEY);
+    multiplierActive = false;
+    multiplierExpiry = null;
+    if (multiplierTimeout) {
+        clearTimeout(multiplierTimeout);
+        multiplierTimeout = null;
+    }
+}
+
+function startExpiryTimer(expiryTime) {
+    const remainingTime = expiryTime - new Date().getTime();
+    if (remainingTime > 0) {
+        multiplierTimeout = setTimeout(() => {
+            clearMultiplierState();
+            showNotification("⚡ Sparksbux Multiplier expired!");
+        }, remainingTime);
+    } else {
+        clearMultiplierState(); // Expired already, clean up
+    }
+}
+
 function activateMultiplier() {
     if (multiplierActive) {
         showNotification("⚡ Sparksbux Multiplier is already active!");
@@ -2256,29 +2315,32 @@ function activateMultiplier() {
     }
 
     multiplierActive = true;
-    multiplierExpiration = new Date(Date.now() + 48 * 60 * 60 * 1000); // 48 hours from now
-    localStorage.setItem("multiplierExpiration", multiplierExpiration.toISOString());
+    multiplierExpiry = new Date().getTime() + MULTIPLIER_DURATION;
+    saveMultiplierState();
+    startExpiryTimer(multiplierExpiry);
     showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
-
-    // Automatically deactivate after 48 hours
-    setTimeout(() => {
-        deactivateMultiplier();
-    }, 48 * 60 * 60 * 1000);
 }
 
-// Function to deactivate the Multiplier
-function deactivateMultiplier() {
-    multiplierActive = false;
-    multiplierExpiration = null;
-    localStorage.removeItem("multiplierExpiration");
-    showNotification("⚡ Sparksbux Multiplier expired!");
-}
-// Function to calculate Sparksbux with Multiplier
 function calculateSparksbux(score) {
     let baseSparksbux = score >= 50 ? 1000 : score >= 40 ? 400 : score >= 30 ? 300 : score >= 20 ? 200 : score >= 10 ? 100 : 50;
     return multiplierActive ? baseSparksbux * 2 : baseSparksbux; // Double Sparksbux if multiplier is active
 }
 
+// Initialize the multiplier state when the page loads
+loadMultiplierState();
+
+// Example of how you might trigger the activation (e.g., button click)
+// document.getElementById('activateButton').addEventListener('click', activateMultiplier);
+
+// Placeholder for showNotification function (you'll need to define this)
+function showNotification(message) {
+    console.log(message); // Replace with your actual notification logic
+    // For example, you might update a specific HTML element:
+    // const notificationDiv = document.getElementById('notification');
+    // if (notificationDiv) {
+    //     notificationDiv.textContent = message;
+    // }
+}
     
 
 let correctAnswersPurchased = parseInt(localStorage.getItem("correctAnswersPurchased")) || 0;
