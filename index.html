@@ -2281,27 +2281,50 @@ function calculateSparksbux(score) {
 
     
 
-let correctAnswersPurchased = 0;
+let correctAnswersPurchased = parseInt(localStorage.getItem("correctAnswersPurchased")) || 0;
+let remainingCorrectAnswers = 0;
 
+// Function to add purchased correct answers
 function addCorrectAnswers(count) {
     correctAnswersPurchased += count;
+    remainingCorrectAnswers = count; // Set remaining correct answers for the next 5 rounds
     localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
     showNotification(`📚 You now have ${correctAnswersPurchased} correct answers available!`);
 }
 
+// Function to check the answer
 function checkAnswer(index) {
-  const questionData = questions[currentCategory][currentQuestionIndex];
-  if (index === questionData.correct) {
-      score++;
-  } else if (correctAnswersPurchased > 0) {
-      correctAnswersPurchased--;
-      localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
-      showNotification(`📚 Used a purchased correct answer! Remaining: ${correctAnswersPurchased}`);
-      score++;
-  } else {
-      showNotification("❌ Incorrect answer!");
-  }
-  nextQuestion();
+    const questionData = questions[currentCategory][currentQuestionIndex];
+
+    if (remainingCorrectAnswers > 0) {
+        // Automatically mark the answer as correct if purchased answers are available
+        remainingCorrectAnswers--;
+        correctAnswersPurchased--;
+        localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
+        showNotification(`📚 Used a purchased correct answer! Remaining: ${remainingCorrectAnswers}`);
+        score++;
+    } else if (index === questionData.correct) {
+        // Normal correct answer
+        score++;
+    } else {
+        // Incorrect answer
+        showNotification("❌ Incorrect answer!");
+    }
+
+    nextQuestion();
+}
+
+// Function to reset remaining correct answers after 5 rounds
+function resetRemainingCorrectAnswers() {
+    remainingCorrectAnswers = 0;
+    localStorage.setItem("correctAnswersPurchased", correctAnswersPurchased);
+}
+
+// Call this function at the end of 5 rounds
+function endRound() {
+    if (remainingCorrectAnswers === 0) {
+        resetRemainingCorrectAnswers();
+    }
 }
 
 
