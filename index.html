@@ -5,7 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brainstorm </title>
     <link rel="icon" type="image" href="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg">
-    
+    <!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<!-- Firebase Auth -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+
     <style>
       body {
         margin: 0;
@@ -75,17 +82,17 @@
       }
       
       .main-title {
-        font-size: clamp(2rem, 8vw, 4rem); /* Dynamically adjusts font size */
-        font-weight: bold;
-        font-family: 'Monotype Corsiva', cursive;
-        color: #ffffff;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 0;
-        animation: typewriter 1.5s steps(30) 4.5s forwards, glow 1.5s infinite alternate;
-        text-shadow: 0 0 10px rgba(160, 32, 240, 0.7), 0 0 30px rgba(120, 20, 200, 0.6), 0 0 40px rgba(90, 10, 160, 0.5);
-        text-align: center;
-    }
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: bold;
+  font-family: 'Monotype Corsiva', cursive;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typewriter 1.5s steps(30) 4.5s forwards, glow 1.5s infinite alternate;
+  text-shadow: 0 0 10px rgba(160, 32, 240, 0.7), 0 0 30px rgba(120, 20, 200, 0.6), 0 0 40px rgba(90, 10, 160, 0.5);
+  text-align: center;
+}
     
     .sub-title {
       font-size: clamp(1rem, 2vw, 1.5rem); /* Reduced font size for better scaling */
@@ -762,7 +769,103 @@
       #buy-answer-button.error {
           background-color: #dc3545; /* Red */
       }
-    
+    /* Account Management Styles */
+#account-overlay {
+  position: fixed;
+  z-index: 3000;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 30, 0.97);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-card {
+  background: #181b2a;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  padding: 32px 28px 24px 28px;
+  min-width: 320px;
+  max-width: 95vw;
+  width: 350px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-logo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 18px;
+  box-shadow: 0 0 10px #fff2;
+}
+
+#account-overlay input[type="text"],
+#account-overlay input[type="password"] {
+  width: 90%;
+  padding: 10px 12px;
+  margin: 8px 0 14px 0;
+  border: none;
+  border-radius: 8px;
+  background: #23243a;
+  color: #fff;
+  font-size: 1.1rem;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#account-overlay button {
+  width: 100%;
+  padding: 12px 0;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #005ea5 0%, #580000 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-bottom: 8px;
+}
+
+#account-overlay button:hover {
+  background: linear-gradient(90deg, #580000 0%, #005ea5 100%);
+  transform: scale(1.03);
+}
+
+.account-switch {
+  margin-top: 10px;
+  font-size: 0.98rem;
+  color: #ccc;
+}
+.account-switch a {
+  color: #ffd700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#account-notification {
+  margin-top: 10px;
+  min-height: 24px;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: opacity 0.3s;
+}
+
+@media (max-width: 500px) {
+  .account-card {
+    min-width: 90vw;
+    width: 98vw;
+    padding: 18px 4vw 14px 4vw;
+  }
+  .account-logo {
+    width: 44px;
+    height: 44px;
+  }
+}
       
           </style>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -772,16 +875,54 @@
   <div id="pre-splash" class="pre-splash">
       <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Brainstorm Logo">
       
-      <h1>Powered By Sparks</h1>
+      <h1>By Sparks</h1>
   </div>
   <!-- Splash Screen -->
-  <div id="splash" class="splash-screen">
-      <div class="main-title">Welcome to Brainstorm</div>
-      <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Trivia Game Icon">
-      <div class="sub-title">The <strong style="color:green;">HARDERST QUIZ GAME ON THE INTERNET</strong> Test your knowledge across various topics and claim your IQ ranking! Wish You the best of LUCK!!😂😈</div>
-      <button onclick="startQuiz()">Get Started</button>
-  </div>
 
+  <!-- Account Management UI -->
+<div id="account-overlay">
+  <div class="account-card">
+    <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Brainstorm Logo" class="account-logo">
+    <div id="signUp-section">
+      <h2>Sign Up</h2>
+      <input type="text" id="signUp-username" placeholder="Username (letters, numbers, _, ., -)">
+      <input type="password" id="signUp-password" placeholder="Password">
+      <div style="text-align:left; margin-bottom:8px;">
+  <input type="checkbox" id="show-signUp-password" onclick="togglePassword('signUp-password','signUp-password2','show-signUp-password')">
+  <label for="show-signUp-password" style="font-size:0.95em;">Show Passwords</label>
+</div>
+      <input type="password" id="signUp-password2" placeholder="Re-enter Password">
+      <button onclick="signUp()">Sign Up</button>
+      <div class="account-switch">
+        Already have an account? <a href="#" onclick="showLogin()">Log in</a>
+      </div>
+    </div>
+    <div id="login-section" style="display:none;">
+      <h2>Log In</h2>
+      <input type="text" id="login-username" placeholder="Username">
+      <input type="password" id="login-password" placeholder="Password">
+      <div style="text-align:left; margin-bottom:8px;">
+  <input type="checkbox" id="show-login-password" onclick="togglePassword('login-password',null,'show-login-password')">
+<label for="show-login-password" style="font-size:0.95em;">Show Password</label>
+</div>
+      <button onclick="logIn()">Log In</button>
+      <div class="account-switch">
+        Don't have an account? <a href="#" onclick="showSignUp()">Sign up</a>
+      </div>
+    </div>
+    <div id="account-notification"></div>
+  </div>
+</div>
+  <div id="splash" class="splash-screen" style="display:none;">
+  <div class="main-title">Welcome to Brainstorm</div>
+  <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Trivia Game Icon">
+  <div class="sub-title">Test your knowledge across various topics and claim your IQ ranking! Wish You the best of LUCK!!😂😈</div>
+  <div id="splash-loading-bar-container" style="width: 80%; max-width: 400px; margin: 30px auto 0 auto; background: #222; border-radius: 10px; overflow: hidden;">
+    <div id="splash-loading-bar" style="height: 18px; width: 0; background: linear-gradient(90deg, #ffd700, #005ea5); transition: width 0.2s;"></div>
+  </div>
+  <div id="splash-loading-percent" style="color: #ffd700; font-weight: bold; margin-top: 8px;">0%</div>
+ <button id="get-started-btn" onclick="startQuiz()" style="display:none;">Get Started</button>
+</div>
   <!-- Category Selection -->
   <div id="categories" class="container">
       <nav id="navbar">
@@ -791,13 +932,13 @@
           <a href="#" class="nav-link" data-section="news">News</a>
           <a href="#" class="nav-link" data-section="bank">Bank</a>
           <a href="#" class="nav-link" data-section="shop">Shop</a>
-          <a href="#" class="nav-link" data-section="contact">Contact</a>
+            <a href="#" class="nav-link" data-section="profile">Profile</a>
       </nav>
 
       <section id="home" class="section active">
           <div class="category-content">
               <h2 class="category-header" style="font-size: 250%;">Select a Category</h2>
-              <p class="category-header">It is NOT AS EASY. Prove your IQ strength on a particular category across the various categories below. But still believe in yourself.Earn SPARKSBUX as you play.</p>
+              <p class="category-header">It is Not as easy as you think. But still believe in yourself. Try Beat This and Get a Legendary IQ Award.</p>
               <div class="category-buttons">
                   <button onclick="loadQuiz('math')">Math</button>
                   <button onclick="loadQuiz('science')">Science</button>
@@ -866,7 +1007,20 @@
         
         <h2>🏆 Can You Handle the Heat?</h2>
         <p>With the **clock ticking** and your brain firing on all cylinders, it’s all about **speed, strategy, and pure skill**! **Will you rise to the challenge or crack under pressure?** 🚀⚡</p>
-    </section>
+         <h1>🚀 Get in Touch with Us! 🔥</h1>
+          <p>Got questions, ideas, or just want to say hi? Don't be shy—drop us a message! We're always ready to connect. ⚡</p>
+          <div class="contact-links">
+              <p>📬 Find us on:</p>
+              <a href="mailto:Dec.Mshindi@gmail.com" class="email">
+                  
+                  <span>Gmail – Let’s Talk! 📩</span>
+              </a>
+
+<p><strong style="color:maroon">NOTE:</strong>In case of any problem or lag in any functionality, click <a href="mailto:Dec.Mshindi@gmail.com" class="email">Here</a> to report the issue. We will gladly appreciate.</p>
+          </div>
+      
+  </div>
+</section>
     
 
       
@@ -911,8 +1065,6 @@
         <h2>⚡ Sparksbux Multiplier</h2>
         <p>Doubles the Sparksbux you earn during this quiz. Get paid twice as much for your brilliance!</p>
         <h2 class="price">3000 Sparksbux</h2>
-             
-        <h2 style="color:red;">FOR 48 HOURS!!</h2>
         <button onclick="purchaseItem('multiplier', 3000)">Buy</button>
     </div>
     <div class="shop-item">
@@ -920,9 +1072,6 @@
       <h2>📚 Buy 25 Correct Answers</h2>
       <p>Instantly marks 25 questions as correct. Whether you're stuck or just stacking points, this is a serious power move.</p>
       <h2 class="price">5000 Sparksbux</h2>
-
-           
-        <h2 style="color:red;">FOR 5 ROUNDS!!</h2>
       <button onclick="purchaseItem('answers', 5000)">Buy</button>
   </div>
  
@@ -937,21 +1086,9 @@
 </section>
 
 <!-- Sparksbux Notification -->
-<div id="notification" class="notification" style="font-weight: bold; color: gold;"></div>
-      <section id="contact" class="section">
-          <h1>🚀 Get in Touch with Us! 🔥</h1>
-          <p>Got questions, ideas, or just want to say hi? Don't be shy—drop us a message! We're always ready to connect. ⚡</p>
-          <div class="contact-links">
-              <p>📬 Find us on:</p>
-              <a href="mailto:Dec.Mshindi@gmail.com" class="email">
-                  
-                  <span>Gmail – Let’s Talk! 📩</span>
-              </a>
 
-<p><strong style="color:maroon">NOTE:</strong>In case of any problem or lag in any functionality, click <a href="mailto:Dec.Mshindi@gmail.com" class="email">Here</a> to report the issue. We will gladly appreciate.</p>
-          </div>
-      </section>
-  </div>
+      
+         
 
 <!-- Quiz Section -->
 <div id="quiz" class="container quiz-container">
@@ -978,6 +1115,38 @@
   <audio id="bg-music" src="assets/audio/brainstorm-theme.mp3" autoplay loop></audio>
 </body>
     <script>
+
+// Initialize Firebase (Compat version)
+const firebaseConfig = {
+    
+  apiKey: "AIzaSyAYCO93uETEfLUMb3jtOQAy2LHxQtRjP78",
+  authDomain: "brainstorm-c2038.firebaseapp.com",
+  projectId: "brainstorm-c2038",
+  storageBucket: "brainstorm-c2038.firebasestorage.app",
+  messagingSenderId: "817998422989",
+  appId: "1:817998422989:web:2a24f83e515094eb8f9a84",
+  measurementId: "G-Q4P7XF92R8"
+};
+firebase.initializeApp(firebaseConfig);
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Show pre-splash, hide everything else
+  document.getElementById("pre-splash").style.display = "flex";
+  document.getElementById("account-overlay").style.display = "none";
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("categories").style.display = "none";
+  document.getElementById("quiz").style.display = "none";
+  document.getElementById("results").style.display = "none";
+
+  // After 3 seconds, hide pre-splash and show account overlay
+  setTimeout(() => {
+    document.getElementById("pre-splash").style.display = "none";
+    document.getElementById("account-overlay").style.display = "flex";
+  }, 3000);
+});
+
+
+
 
         const questions = {
     math: [
@@ -1015,29 +1184,7 @@
 { question: "What is 13 × 8?", answers: ["100", "112", "104", "90"], correct: 2 },
 { question: "What is the result of 45 ÷ 9?", answers: ["4", "5", "6", "7"], correct: 1 },
 { question: "What is 12 × 12?", answers: ["144", "150", "130", "120"], correct: 0 },
-{ question: "What is the perimeter of a rectangle with sides 8 and 5?", answers: ["30", "26", "24", "20"], correct: 1 },
-        // Slightly Hard Math Questions (20)
-{ question: "What is the value of 5² + 3 × 4?", answers: ["37", "49", "31", "41"], correct: 0 },
-{ question: "Simplify: (6 + 4) ÷ 2 × 3", answers: ["15", "30", "12", "9"], correct: 0 },
-{ question: "Solve for x: 3x + 5 = 20", answers: ["3", "5", "7", "15"], correct: 1 },
-{ question: "What is 25% of 160?", answers: ["20", "40", "25", "45"], correct: 1 },
-{ question: "Convert 0.75 into a fraction.", answers: ["1/2", "3/4", "2/5", "1/4"], correct: 1 },
-{ question: "Find the square root of 144.", answers: ["11", "12", "13", "14"], correct: 1 },
-{ question: "What is the value of 3³ + 2²?", answers: ["35", "29", "31", "33"], correct: 2 },
-{ question: "If a triangle has angles 90° and 45°, what is the third angle?", answers: ["30°", "60°", "45°", "90°"], correct: 2 },
-{ question: "Simplify: 2(3x – 3) = 12", answers: ["x = 2", "x = 3", "x = 4", "x = 5"], correct: 1 },
-{ question: "Which is greater: 3/5 or 4/7?", answers: ["3/5", "4/7", "They are equal", "Can't determine"], correct: 0 },
-{ question: "What is the cube of 4?", answers: ["16", "64", "32", "48"], correct: 1 },
-{ question: "If x = 2, evaluate: x² + 4x + 4", answers: ["12", "16", "20", "24"], correct: 1 },
-{ question: "What is the LCM of 6 and 8?", answers: ["12", "18", "24", "48"], correct: 2 },
-{ question: "How many degrees are in a straight line?", answers: ["90°", "180°", "270°", "360°"], correct: 1 },
-{ question: "Convert 3.25 into a fraction.", answers: ["3 1/4", "3 2/5", "3 3/5", "3 1/2"], correct: 0 },
-{ question: "What is 1.2 × 0.5?", answers: ["0.5", "0.6", "0.8", "1.2"], correct: 1 },
-{ question: "If 3 pens cost Ksh 90, what is the cost of 5 pens?", answers: ["Ksh 120", "Ksh 150", "Ksh 160", "Ksh 180"], correct: 1 },
-{ question: "How many sides does a regular hexagon have?", answers: ["5", "6", "7", "8"], correct: 1 },
-{ question: "What is the perimeter of a square with side 9cm?", answers: ["27cm", "36cm", "18cm", "81cm"], correct: 1 },
-{ question: "If x – 3 = 9, what is the value of x?", answers: ["6", "9", "12", "3"], correct: 2 },
-
+{ question: "What is the perimeter of a rectangle with sides 8 and 5?", answers: ["30", "26", "24", "20"], correct: 1 }
 ],
 science: [
 { question: "What is the chemical symbol for water?", answers: ["O2", "H2O", "CO2", "HO"], correct: 1 },
@@ -1483,7 +1630,7 @@ technology: [
 { question: "What is the primary purpose of a car's GPS system?", answers: ["Detect speed", "Navigate locations", "Monitor engine health", "Control fuel efficiency"], correct: 1 },
 { question: "Which brand is known for pioneering self-driving car technology?", answers: ["Tesla", "Toyota", "Ford", "BMW"], correct: 0 },
 { question: "What is the function of a rear-view camera in cars?", answers: ["To enhance rear visibility", "To detect road signs", "To improve parking distance", "To measure speed"], correct: 0 },
-{ question: "Which technology is primarily used to create interactive web pages?", "answers": ["CSS", "HTML", "JavaScript", "SQL"], "correct": 2 },
+{ question: "Which technology is primarily used to create interactive web pages?", answers: ["CSS", "HTML", "JavaScript", "SQL"], correct: 2 },
 
 
 // Hard Questions (15)
@@ -1578,110 +1725,110 @@ movies: [
 cartoons: [
 
 
-{ question: "What is the name of the yellow sponge in 'SpongeBob SquarePants'?", "answers": ["Patrick Star", "SpongeBob SquarePants", "Squidward Tentacles", "Mr. Krabs"], "correct": 1 },
-{ question: "Which character is famous for saying 'What's up, Doc'?", "answers": ["Sylvester the Cat", "Elmer Fudd", "Bugs Bunny", "Daffy Duck"], "correct": 2 },
-{ question: "In 'Tom and Jerry', who is always chasing the mouse?", "answers": ["Tom", "Butch", "Spike", "Jerry"], "correct": 0 },
-{ question: "What type of animal is 'Dora the Explorer's' sidekick Boots?", "answers": ["Cat", "Bear", "Dog", "Monkey"], "correct": 3 },
-{ question: "Which cartoon features a dog named Scooby?", "answers": ["The Jetsons", "The Flintstones", "Scooby-Doo", "Mickey Mouse"], "correct": 2 },
-{ question: "In 'The Simpsons', who is Bart's dad?", "answers": ["Grampa Simpson", "Homer Simpson", "Maggie Simpson", "Marge Simpson"], "correct": 1 },
-{ question: "Which character lives in a pineapple under the sea?", "answers": ["Squidward Tentacles", "SpongeBob SquarePants", "Patrick Star", "Mr. Krabs"], "correct": 1 },
-{ question: "What is the name of the superhero family in 'The Incredibles'?", "answers": ["The Justice League", "The Simpsons", "The Incredibles", "The Avengers"], "correct": 2 },
-{ question: "What is the name of the pink cat in 'The Pink Panther'?", "answers": ["Felix the Cat", "The Pink Panther", "Tom", "Garfield"], "correct": 1 },
-{ question: "Which animated character says 'Yabba-Dabba-Doo'?", "answers": ["George Jetson", "Peter Griffin", "Fred Flintstone", "Homer Simpson"], "correct": 2 },
-{ question: "In 'SpongeBob SquarePants', who is SpongeBob’s best friend?", "answers": ["Patrick Star", "Squidward Tentacles", "Gary", "Mr. Krabs"], "correct": 0 },
-{ question: "Which character from 'The Simpsons' is known for his catchphrase 'D'oh!'?", "answers": ["Homer Simpson", "Marge Simpson", "Bart Simpson", "Maggie Simpson"], "correct": 0 },
-{ question: "What is the name of the evil scientist who constantly tries to defeat the Powerpuff Girls?", "answers": ["Mojo Jojo", "The Gangreen Gang", "Fuzzy Lumpkins", "Him"], "correct": 0 },
-{ question: "In 'Tom and Jerry', who is the dog that sometimes helps Jerry?", "answers": ["Tyke", "Tuffy", "Butch", "Spike"], "correct": 3 },
-{ question: "In 'Rugrats', who is the oldest child?", "answers": ["Chuckie Finster", "Phil DeVille", "Tommy Pickles", "Angelica Pickles"], "correct": 2 },
-{ question: "Which animated show is set in a post-apocalyptic future and features the character Fry?", "answers": ["Futurama", "Rick and Morty", "Family Guy", "The Simpsons"], "correct": 0 },
-{ question: "In 'The Jetsons', who is George Jetson’s wife?", "answers": ["Wilma Flintstone", "Marge Simpson", "Betty Rubble", "Jane Jetson"], "correct": 3 },
-{ question: "What is the name of the fish that works with SpongeBob at the Krusty Krab?", "answers": ["Patrick Star", "Larry the Lobster", "Squidward Tentacles", "Mr. Krabs"], "correct": 2 },
-{ question: "Which character is known for saying 'What's up, Doc'?", "answers": ["Daffy Duck", "Bugs Bunny", "Elmer Fudd", "Sylvester the Cat"], "correct": 1 },
-{ question: "In 'Adventure Time', what is the name of Finn’s best friend who is a dog?", "answers": ["Jake", "Princess Bubblegum", "Marceline", "BMO"], "correct": 0 },
-{ question: "Which cartoon features a superhero dog named Underdog?", "answers": ["Scooby-Doo", "Astro", "Underdog", "Poochie"], "correct": 2 },
-{ question: "Who is the main antagonist in 'The Fairly OddParents'?", "answers": ["Vicky", "Timmy Turner", "Cosmo", "Wanda"], "correct": 0 },
-{ question: "Which animated character is always hungry and loves lasagna?", "answers": ["SpongeBob", "Garfield", "Tom", "Mickey Mouse"], "correct": 1 },
-{ question: "In 'The Flintstones', what is the name of Fred Flintstone’s boss?", "answers": ["Barney Rubble", "Mr. Slate", "Homer Simpson", "George Jetson"], "correct": 1 },
-{ question: "Which cartoon character is known for his powerful strength and love for spinach?", "answers": ["Popeye", "Thor", "Superman", "Hercules"], "correct": 0 },
-{ question: "In 'The Simpsons', who is Bart's best friend?", "answers": ["Nelson Muntz", "Ralph Wiggum", "Jimbo Jones", "Millhouse Van Houten"], "correct": 3 },
-{ question: "What animal is the main character in 'Dora the Explorer'?", "answers": ["Dog", "Monkey", "Bear", "Cat"], "correct": 1 },
-{ question: "Which animated series features characters like Rick Sanchez and Morty Smith?", "answers": ["Futurama", "The Simpsons", "Rick and Morty", "Family Guy"], "correct": 2 },
-{ question: "Who is the main villain in 'The Incredibles'?", "answers": ["Frozone", "Dash", "Syndrome", "Violet"], "correct": 2 },
-{ question: "Which animated series is set in a world of anthropomorphic animals called Zootopia?", "answers": ["The Lion King", "Robin Hood", "Zootopia", "The Jungle Book"], "correct": 2 },
-{ question: "In 'Rick and Morty', who is Rick’s grandson?", "answers": ["Summer", "Beth", "Jerry", "Morty"], "correct": 3 },
-{ question: "Which character from 'Futurama' is a robot with a sarcastic attitude?", "answers": ["Leela", "Professor Farnsworth", "Bender", "Fry"], "correct": 2 },
-{ question: "Which character in 'Powerpuff Girls' is known for being the toughest?", "answers": ["Blossom", "Fuzzy Lumpkins", "Buttercup", "Bubbles"], "correct": 2 },
-{ question: "In 'Dragon Ball Z', what is the name of Goku's best friend who is a martial artist?", "answers": ["Vegeta", "Piccolo", "Krillin", "Trunks"], "correct": 2 },
-{ question: "In 'Scooby-Doo', what is the name of the gang’s van?", "answers": ["The Phantom", "The Mystery Mobile", "The Scooby Van", "The Mystery Machine"], "correct": 3 },
-{ question: "What is the real name of the superhero known as 'The Incredibles'?", "answers": ["Frozone", "Dash Parr", "Jack-Jack Parr", "Bob Parr"], "correct": 3 },
-{ question: "Which animated series features a post-apocalyptic world with a giant head that talks?", "answers": ["The Simpsons", "Rick and Morty", "The Jetsons", "Futurama"], "correct": 3 },
-{ question: "In 'Adventure Time', who is the Ice King’s true identity?", "answers": ["Jake the Dog", "Finn the Human", "Beast Boy", "Simon Petrikov"], "correct": 3 },
-{ question: "In 'SpongeBob SquarePants', who is the ghostly character that lives in the haunted house?", "answers": ["The Flying Dutchman", "Squidward Tentacles", "Mr. Krabs", "Patrick Star"], "correct": 0 },
-{ question: "Which animated character is famous for his catchphrase 'Nyeh heh heh!'", "answers": ["Pinky", "The Brain's twin", "Brain", "The General"], "correct": 2 },
-{ question: "What is the name of the ghost who haunts 'The Scooby-Doo' mysteries?", "answers": ["The Phantom", "Zombozo", "The Specter", "Fred"], "correct": 0 },
-{ question: "Which character from 'The Simpsons' works as a bartender?", "answers": ["Moe Szyslak", "Homer Simpson", "Apu Nahasapeemapetilon", "Ned Flanders"], "correct": 0 },
-{ question: "What is the name of the dog in 'The Flintstones'?", "answers": ["Astro", "Dino", "Fred", "Spike"], "correct": 1 },
-{ question: "Which animated series features characters like Rick Sanchez and Morty Smith?", "answers": ["Futurama", "The Simpsons", "Rick and Morty", "Family Guy"], "correct": 2 },
-{ question: "In 'Futurama', what is the name of Fry’s girlfriend?", "answers": ["Amy Wong", "Leela", "Bender", "Leela and Fry"], "correct": 1 },
-{ question: "In 'The Lion King', what is the name of Simba’s father?", "answers": ["Mufasa", "Scar", "Timon", "Zazu"], "correct": 0 },
-{ question: "What animal is 'Arthur's' main character?", "answers": ["Aardvark", "Lion", "Dog", "Rabbit"], "correct": 0 },
+{ question: "What is the name of the yellow sponge in 'SpongeBob SquarePants'?", answers: ["Patrick Star", "SpongeBob SquarePants", "Squidward Tentacles", "Mr. Krabs"], correct: 1 },
+{ question: "Which character is famous for saying 'What's up, Doc'?", answers: ["Sylvester the Cat", "Elmer Fudd", "Bugs Bunny", "Daffy Duck"], correct: 2 },
+{ question: "In 'Tom and Jerry', who is always chasing the mouse?", answers: ["Tom", "Butch", "Spike", "Jerry"], correct: 0 },
+{ question: "What type of animal is 'Dora the Explorer's' sidekick Boots?", answers: ["Cat", "Bear", "Dog", "Monkey"], correct: 3 },
+{ question: "Which cartoon features a dog named Scooby?", answers: ["The Jetsons", "The Flintstones", "Scooby-Doo", "Mickey Mouse"], correct: 2 },
+{ question: "In 'The Simpsons', who is Bart's dad?", answers: ["Grampa Simpson", "Homer Simpson", "Maggie Simpson", "Marge Simpson"], correct: 1 },
+{ question: "Which character lives in a pineapple under the sea?", answers: ["Squidward Tentacles", "SpongeBob SquarePants", "Patrick Star", "Mr. Krabs"], correct: 1 },
+{ question: "What is the name of the superhero family in 'The Incredibles'?", answers: ["The Justice League", "The Simpsons", "The Incredibles", "The Avengers"], correct: 2 },
+{ question: "What is the name of the pink cat in 'The Pink Panther'?", answers: ["Felix the Cat", "The Pink Panther", "Tom", "Garfield"], correct: 1 },
+{ question: "Which animated character says 'Yabba-Dabba-Doo'?", answers: ["George Jetson", "Peter Griffin", "Fred Flintstone", "Homer Simpson"], correct: 2 },
+{ question: "In 'SpongeBob SquarePants', who is SpongeBob’s best friend?", answers: ["Patrick Star", "Squidward Tentacles", "Gary", "Mr. Krabs"], correct: 0 },
+{ question: "Which character from 'The Simpsons' is known for his catchphrase 'D'oh!'?", answers: ["Homer Simpson", "Marge Simpson", "Bart Simpson", "Maggie Simpson"], correct: 0 },
+{ question: "What is the name of the evil scientist who constantly tries to defeat the Powerpuff Girls?", answers: ["Mojo Jojo", "The Gangreen Gang", "Fuzzy Lumpkins", "Him"], correct: 0 },
+{ question: "In 'Tom and Jerry', who is the dog that sometimes helps Jerry?", answers: ["Tyke", "Tuffy", "Butch", "Spike"], correct: 3 },
+{ question: "In 'Rugrats', who is the oldest child?", answers: ["Chuckie Finster", "Phil DeVille", "Tommy Pickles", "Angelica Pickles"], correct: 2 },
+{ question: "Which animated show is set in a post-apocalyptic future and features the character Fry?", answers: ["Futurama", "Rick and Morty", "Family Guy", "The Simpsons"], correct: 0 },
+{ question: "In 'The Jetsons', who is George Jetson’s wife?", answers: ["Wilma Flintstone", "Marge Simpson", "Betty Rubble", "Jane Jetson"], correct: 3 },
+{ question: "What is the name of the fish that works with SpongeBob at the Krusty Krab?", answers: ["Patrick Star", "Larry the Lobster", "Squidward Tentacles", "Mr. Krabs"], correct: 2 },
+{ question: "Which character is known for saying 'What's up, Doc'?", answers: ["Daffy Duck", "Bugs Bunny", "Elmer Fudd", "Sylvester the Cat"], correct: 1 },
+{ question: "In 'Adventure Time', what is the name of Finn’s best friend who is a dog?", answers: ["Jake", "Princess Bubblegum", "Marceline", "BMO"], correct: 0 },
+{ question: "Which cartoon features a superhero dog named Underdog?", answers: ["Scooby-Doo", "Astro", "Underdog", "Poochie"], correct: 2 },
+{ question: "Who is the main antagonist in 'The Fairly OddParents'?", answers: ["Vicky", "Timmy Turner", "Cosmo", "Wanda"], correct: 0 },
+{ question: "Which animated character is always hungry and loves lasagna?", answers: ["SpongeBob", "Garfield", "Tom", "Mickey Mouse"], correct: 1 },
+{ question: "In 'The Flintstones', what is the name of Fred Flintstone’s boss?", answers: ["Barney Rubble", "Mr. Slate", "Homer Simpson", "George Jetson"], correct: 1 },
+{ question: "Which cartoon character is known for his powerful strength and love for spinach?", answers: ["Popeye", "Thor", "Superman", "Hercules"], correct: 0 },
+{ question: "In 'The Simpsons', who is Bart's best friend?", answers: ["Nelson Muntz", "Ralph Wiggum", "Jimbo Jones", "Millhouse Van Houten"], correct: 3 },
+{ question: "What animal is the main character in 'Dora the Explorer'?", answers: ["Dog", "Monkey", "Bear", "Cat"], correct: 1 },
+{ question: "Which animated series features characters like Rick Sanchez and Morty Smith?", answers: ["Futurama", "The Simpsons", "Rick and Morty", "Family Guy"], correct: 2 },
+{ question: "Who is the main villain in 'The Incredibles'?", answers: ["Frozone", "Dash", "Syndrome", "Violet"], correct: 2 },
+{ question: "Which animated series is set in a world of anthropomorphic animals called Zootopia?", answers: ["The Lion King", "Robin Hood", "Zootopia", "The Jungle Book"], correct: 2 },
+{ question: "In 'Rick and Morty', who is Rick’s grandson?", answers: ["Summer", "Beth", "Jerry", "Morty"], correct: 3 },
+{ question: "Which character from 'Futurama' is a robot with a sarcastic attitude?", answers: ["Leela", "Professor Farnsworth", "Bender", "Fry"], correct: 2 },
+{ question: "Which character in 'Powerpuff Girls' is known for being the toughest?", answers: ["Blossom", "Fuzzy Lumpkins", "Buttercup", "Bubbles"], correct: 2 },
+{ question: "In 'Dragon Ball Z', what is the name of Goku's best friend who is a martial artist?", answers: ["Vegeta", "Piccolo", "Krillin", "Trunks"], correct: 2 },
+{ question: "In 'Scooby-Doo', what is the name of the gang’s van?", answers: ["The Phantom", "The Mystery Mobile", "The Scooby Van", "The Mystery Machine"], correct: 3 },
+{ question: "What is the real name of the superhero known as 'The Incredibles'?", answers: ["Frozone", "Dash Parr", "Jack-Jack Parr", "Bob Parr"], correct: 3 },
+{ question: "Which animated series features a post-apocalyptic world with a giant head that talks?", answers: ["The Simpsons", "Rick and Morty", "The Jetsons", "Futurama"], correct: 3 },
+{ question: "In 'Adventure Time', who is the Ice King’s true identity?", answers: ["Jake the Dog", "Finn the Human", "Beast Boy", "Simon Petrikov"], correct: 3 },
+{ question: "In 'SpongeBob SquarePants', who is the ghostly character that lives in the haunted house?", answers: ["The Flying Dutchman", "Squidward Tentacles", "Mr. Krabs", "Patrick Star"], correct: 0 },
+{ question: "Which animated character is famous for his catchphrase 'Nyeh heh heh!'", answers: ["Pinky", "The Brain's twin", "Brain", "The General"], correct: 2 },
+{ question: "What is the name of the ghost who haunts 'The Scooby-Doo' mysteries?", answers: ["The Phantom", "Zombozo", "The Specter", "Fred"], correct: 0 },
+{ question: "Which character from 'The Simpsons' works as a bartender?", answers: ["Moe Szyslak", "Homer Simpson", "Apu Nahasapeemapetilon", "Ned Flanders"], correct: 0 },
+{ question: "What is the name of the dog in 'The Flintstones'?", answers: ["Astro", "Dino", "Fred", "Spike"], correct: 1 },
+{ question: "Which animated series features characters like Rick Sanchez and Morty Smith?", answers: ["Futurama", "The Simpsons", "Rick and Morty", "Family Guy"], correct: 2 },
+{ question: "In 'Futurama', what is the name of Fry’s girlfriend?", answers: ["Amy Wong", "Leela", "Bender", "Leela and Fry"], correct: 1 },
+{ question: "In 'The Lion King', what is the name of Simba’s father?", answers: ["Mufasa", "Scar", "Timon", "Zazu"], correct: 0 },
+{ question: "What animal is 'Arthur's' main character?", answers: ["Aardvark", "Lion", "Dog", "Rabbit"], correct: 0 },
 
 ],
 games: [
 // Easy Questions (10)
-{ question: "What is the main objective of the game 'Minecraft'?", "answers": ["Build", "Explore", "Fight", "Survive"], "correct": 3 },
-{ question: "Which game features the character Mario?", "answers": ["Super Mario", "The Legend of Zelda", "Pokemon", "Minecraft"], "correct": 0 },
-{ question: "What is the name of the battle royale game featuring 100 players, often played on an island?", "answers": ["Minecraft", "Apex Legends", "Fortnite", "PUBG"], "correct": 2 },
-{ question: "Which console is known for the game 'The Last of Us'?", "answers": ["PC", "Xbox", "Nintendo", "PlayStation"], "correct": 3 },
-{ question: "What is the name of the red barrel in 'Resident Evil' that explodes?", "answers": ["Danger Barrel", "Red Barrel", "Explosive Barrel", "Fire Barrel"], "correct": 1 },
-{ question: "Which gaming character is known for wearing a green tunic and a pointed hat?", "answers": ["Donkey Kong", "Sonic", "Mario", "Link"], "correct": 3 },
-{ question: "In 'Among Us,' what is the name of the character that you can control?", "answers": ["Captain", "Imposter", "Crewmate", "Spaceman"], "correct": 2 },
-{ question: "Which game involves building and battling with LEGO figures?", "answers": ["LEGO Star Wars", "SimCity", "LEGO City Undercover", "Minecraft"], "correct": 0 },
-{ question: "What is the main weapon used in 'The Legend of Zelda'?", "answers": ["Hammer", "Staff", "Bow", "Sword"], "correct": 3 },
-{ question: "In 'Animal Crossing,' what is the name of the raccoon character?", "answers": ["Blathers", "Tom Nook", "Kapp'n", "Isabelle"], "correct": 1 },
+{ question: "What is the main objective of the game 'Minecraft'?", answers: ["Build", "Explore", "Fight", "Survive"], correct: 3 },
+{ question: "Which game features the character Mario?", answers: ["Super Mario", "The Legend of Zelda", "Pokemon", "Minecraft"], correct: 0 },
+{ question: "What is the name of the battle royale game featuring 100 players, often played on an island?", answers: ["Minecraft", "Apex Legends", "Fortnite", "PUBG"], correct: 2 },
+{ question: "Which console is known for the game 'The Last of Us'?", answers: ["PC", "Xbox", "Nintendo", "PlayStation"], correct: 3 },
+{ question: "What is the name of the red barrel in 'Resident Evil' that explodes?", answers: ["Danger Barrel", "Red Barrel", "Explosive Barrel", "Fire Barrel"], correct: 1 },
+{ question: "Which gaming character is known for wearing a green tunic and a pointed hat?", answers: ["Donkey Kong", "Sonic", "Mario", "Link"], correct: 3 },
+{ question: "In 'Among Us,' what is the name of the character that you can control?", answers: ["Captain", "Imposter", "Crewmate", "Spaceman"], correct: 2 },
+{ question: "Which game involves building and battling with LEGO figures?", answers: ["LEGO Star Wars", "SimCity", "LEGO City Undercover", "Minecraft"], correct: 0 },
+{ question: "What is the main weapon used in 'The Legend of Zelda'?", answers: ["Hammer", "Staff", "Bow", "Sword"], correct: 3 },
+{ question: "In 'Animal Crossing,' what is the name of the raccoon character?", answers: ["Blathers", "Tom Nook", "Kapp'n", "Isabelle"], correct: 1 },
 
 // Normal Questions (25)
-{ question: "In 'The Witcher 3,' what is the name of the protagonist?", "answers": ["Ciri", "Geralt of Rivia", "Triss", "Yennefer"], "correct": 1 },
-{ question: "Which game features the main character named Master Chief?", "answers": ["Gears of War", "Destiny", "Halo", "Call of Duty"], "correct": 2 },
-{ question: "In which game do you play as a character named Lara Croft?", "answers": ["Uncharted", "Tomb Raider", "God of War", "Assassin's Creed"], "correct": 1 },
-{ question: "What is the name of the fictional city in 'Grand Theft Auto V'?", "answers": ["Liberty City", "Los Santos", "Los Angeles", "Vice City"], "correct": 1 },
-{ question: "Which game has a mode called 'Zombies'?", "answers": ["Battlefield", "Call of Duty", "Fortnite", "Apex Legends"], "correct": 1 },
-{ question: "What type of game is 'Fortnite'?", "answers": ["RPG", "Battle Royale", "Strategy", "First-Person Shooter"], "correct": 1 },
-{ question: "Which character is known for wearing a red hat and red overalls?", "answers": ["Luigi", "Waluigi", "Mario", "Donkey Kong"], "correct": 2 },
-{ question: "Which game is known for the phrase 'The cake is a lie'?", "answers": ["Half-Life", "Portal", "Bioshock", "The Talos Principle"], "correct": 1 },
-{ question: "Which game was created by Hideo Kojima and involves stealth mechanics?", "answers": ["Metal Gear Solid", "Silent Hill", "Resident Evil", "Final Fantasy"], "correct": 0 },
-{ question: "In 'Overwatch,' which character can summon a mech?", "answers": ["Winston", "Reaper", "Tracer", "D.Va"], "correct": 3 },
-{ question: "What is the name of the green dinosaur character in 'Yoshi's Island'?", "answers": ["Goomba", "Bowser", "Yoshi", "Toad"], "correct": 2 },
-{ question: "Which game has the setting of a post-apocalyptic world, with zombie-like creatures?", "answers": ["Dead Rising", "The Last of Us", "Resident Evil", "State of Decay"], "correct": 1 },
-{ question: "Which game features the character named Nathan Drake?", "answers": ["Tomb Raider", "Uncharted", "The Elder Scrolls", "Assassin's Creed"], "correct": 1 },
-{ question: "What is the name of the world in 'World of Warcraft'?", "answers": ["Eorzea", "Norrath", "Azeroth", "Tamriel"], "correct": 2 },
-{ question: "Which game involves collecting coins and power-ups while avoiding enemies?", "answers": ["Super Mario Bros.", "Sonic the Hedgehog", "Donkey Kong", "Mega Man"], "correct": 0 },
-{ question: "Which game is based on a battle between two teams of five players?", "answers": ["PUBG", "Dota 2", "Fortnite", "League of Legends"], "correct": 3 },
-{ question: "In 'Red Dead Redemption 2,' who is the protagonist?", "answers": ["Arthur Morgan", "Micah Bell", "Dutch van der Linde", "John Marston"], "correct": 0 },
-{ question: "In which game do players compete to control colored paint splashes?", "answers": ["Rocket League", "Minecraft", "Fortnite", "Splatoon"], "correct": 3 },
-{ question: "What is the title of the popular open-world game where players explore the wild west?", "answers": ["Skyrim", "Fallout 4", "Red Dead Redemption", "Grand Theft Auto"], "correct": 2 },
-{ question: "Which game is known for the phrase 'Would you kindly'?", "answers": ["Half-Life", "The Last of Us", "Assassin's Creed", "Bioshock"], "correct": 3 },
-{ question: "What is the name of the main character in Subway Surfers?", "answers": ["Max", "Leo", "Jake", "Tom"], "correct": 2 },
-{ question: "What item can you use to revive yourself after crashing in Subway Surfers?", "answers": ["Power-Ups", "Keys", "Boosters", "Coins"], "correct": 1 },
-{ question: "Which popular game allows players to design and manage their own theme park?", "answers": ["Zoo Tycoon", "RollerCoaster Tycoon", "SimCity", "Planet Coaster"], "correct": 1 },
-{ question: "Which of these games is set in a post-apocalyptic world where players must scavenge and survive?", "answers": ["Fallout 4", "Skyrim", "Final Fantasy XIII", "The Elder Scrolls Online"], "correct": 0 },
-{ question: "In the game 'Minecraft,' what do you need to craft a bed?", "answers": ["Wood, stone, and wool", "Wood, wool, and string", "Wood, wool, and iron", "Wood, wool, and sticks"], "correct": 3 },
+{ question: "In 'The Witcher 3,' what is the name of the protagonist?", answers: ["Ciri", "Geralt of Rivia", "Triss", "Yennefer"], correct: 1 },
+{ question: "Which game features the main character named Master Chief?", answers: ["Gears of War", "Destiny", "Halo", "Call of Duty"], correct: 2 },
+{ question: "In which game do you play as a character named Lara Croft?", answers: ["Uncharted", "Tomb Raider", "God of War", "Assassin's Creed"], correct: 1 },
+{ question: "What is the name of the fictional city in 'Grand Theft Auto V'?", answers: ["Liberty City", "Los Santos", "Los Angeles", "Vice City"], correct: 1 },
+{ question: "Which game has a mode called 'Zombies'?", answers: ["Battlefield", "Call of Duty", "Fortnite", "Apex Legends"], correct: 1 },
+{ question: "What type of game is 'Fortnite'?", answers: ["RPG", "Battle Royale", "Strategy", "First-Person Shooter"], correct: 1 },
+{ question: "Which character is known for wearing a red hat and red overalls?", answers: ["Luigi", "Waluigi", "Mario", "Donkey Kong"], correct: 2 },
+{ question: "Which game is known for the phrase 'The cake is a lie'?", answers: ["Half-Life", "Portal", "Bioshock", "The Talos Principle"], correct: 1 },
+{ question: "Which game was created by Hideo Kojima and involves stealth mechanics?", answers: ["Metal Gear Solid", "Silent Hill", "Resident Evil", "Final Fantasy"], correct: 0 },
+{ question: "In 'Overwatch,' which character can summon a mech?", answers: ["Winston", "Reaper", "Tracer", "D.Va"], correct: 3 },
+{ question: "What is the name of the green dinosaur character in 'Yoshi's Island'?", answers: ["Goomba", "Bowser", "Yoshi", "Toad"], correct: 2 },
+{ question: "Which game has the setting of a post-apocalyptic world, with zombie-like creatures?", answers: ["Dead Rising", "The Last of Us", "Resident Evil", "State of Decay"], correct: 1 },
+{ question: "Which game features the character named Nathan Drake?", answers: ["Tomb Raider", "Uncharted", "The Elder Scrolls", "Assassin's Creed"], correct: 1 },
+{ question: "What is the name of the world in 'World of Warcraft'?", answers: ["Eorzea", "Norrath", "Azeroth", "Tamriel"], correct: 2 },
+{ question: "Which game involves collecting coins and power-ups while avoiding enemies?", answers: ["Super Mario Bros.", "Sonic the Hedgehog", "Donkey Kong", "Mega Man"], correct: 0 },
+{ question: "Which game is based on a battle between two teams of five players?", answers: ["PUBG", "Dota 2", "Fortnite", "League of Legends"], correct: 3 },
+{ question: "In 'Red Dead Redemption 2,' who is the protagonist?", answers: ["Arthur Morgan", "Micah Bell", "Dutch van der Linde", "John Marston"], correct: 0 },
+{ question: "In which game do players compete to control colored paint splashes?", answers: ["Rocket League", "Minecraft", "Fortnite", "Splatoon"], correct: 3 },
+{ question: "What is the title of the popular open-world game where players explore the wild west?", answers: ["Skyrim", "Fallout 4", "Red Dead Redemption", "Grand Theft Auto"], correct: 2 },
+{ question: "Which game is known for the phrase 'Would you kindly'?", answers: ["Half-Life", "The Last of Us", "Assassin's Creed", "Bioshock"], correct: 3 },
+{ question: "What is the name of the main character in Subway Surfers?", answers: ["Max", "Leo", "Jake", "Tom"], correct: 2 },
+{ question: "What item can you use to revive yourself after crashing in Subway Surfers?", answers: ["Power-Ups", "Keys", "Boosters", "Coins"], correct: 1 },
+{ question: "Which popular game allows players to design and manage their own theme park?", answers: ["Zoo Tycoon", "RollerCoaster Tycoon", "SimCity", "Planet Coaster"], correct: 1 },
+{ question: "Which of these games is set in a post-apocalyptic world where players must scavenge and survive?", answers: ["Fallout 4", "Skyrim", "Final Fantasy XIII", "The Elder Scrolls Online"], correct: 0 },
+{ question: "In the game 'Minecraft,' what do you need to craft a bed?", answers: ["Wood, stone, and wool", "Wood, wool, and string", "Wood, wool, and iron", "Wood, wool, and sticks"], correct: 3 },
 // Hard Questions (15)
-{ question: "What is the name of the monster hunter organization in 'Monster Hunter: World'?", "answers": ["The Hunters", "The League", "The Guild", "The Order"], "correct": 2 },
-{ question: "Which game features an open world where you can interact with over 200 unique characters, many of them having different abilities?", "answers": ["Dragon Age: Inquisition", "Genshin Impact", "Zelda: Breath of the Wild", "Final Fantasy XV"], "correct": 1 },
-{ question: "In 'The Elder Scrolls V: Skyrim,' what is the name of the dragonborn's primary shout?", "answers": ["Fus Ro Dah", "Dragon Rage", "Whirlwind Sprint", "Unrelenting Force"], "correct": 0 },
-{ question: "In 'Dark Souls,' what is the name of the first boss?", "answers": ["The Asylum Demon", "The Nameless King", "Nito", "Ornstein and Smough"], "correct": 0 },
-{ question: "What is the name of the series of supernatural creatures in 'Bloodborne'?", "answers": ["The Great Watchers", "The Great Ones", "The Old Ones", "The Eldritch"], "correct": 1 },
-{ question: "What is the name of the artificial intelligence antagonist in 'Halo'?", "answers": ["Cortana", "Mother Brain", "Shodan", "GLaDOS"], "correct": 0 },
-{ question: "In 'Final Fantasy VII,' what is the name of the main villain?", "answers": ["Cloud", "Barrett", "Vincent", "Sephiroth"], "correct": 3 },
-{ question: "Which game features a space-faring character known as Samus Aran?", "answers": ["Star Fox", "No Man's Sky", "Metroid", "Halo"], "correct": 2 },
-{ question: "Which game is set in the dystopian world of Rapture?", "answers": ["System Shock", "Fallout 3", "Bioshock", "Dishonored"], "correct": 2 },
-{ question: "What is the main protagonist's name in the 'Assassin's Creed' series?", "answers": ["Desmond Miles", "Ezio Auditore", "Altaïr Ibn-La'Ahad", "Connor Kenway"], "correct": 2 },
-{ question: "In 'Final Fantasy XV,' who is the prince?", "answers": ["Cloud Strife", "Noctis Lucis Caelum", "Zidane Tribal", "Balthier"], "correct": 1 },
-{ question: "What is the name of the main villain in 'The Legend of Zelda: Ocarina of Time'?", "answers": ["Majora", "Ganon", "Dark Link", "Vati"], "correct": 1 },
-{ question: "Which game was released by Nintendo as a successor to the Wii?", "answers": ["Switch", "NES", "GameCube", "Wii U"], "correct": 0 },
-{ question: "Which RPG features characters named Cloud, Tifa, and Aerith?", "answers": ["Dragon Quest", "Chrono Trigger", "Final Fantasy VII", "The Elder Scrolls"], "correct": 2 },
-{ question: "Which game popularized the battle royale genre?", "answers": ["Fortnite", "PUBG", "Apex Legends", "H1Z1"], "correct": 1 },
+{ question: "What is the name of the monster hunter organization in 'Monster Hunter: World'?", answers: ["The Hunters", "The League", "The Guild", "The Order"], correct: 2 },
+{ question: "Which game features an open world where you can interact with over 200 unique characters, many of them having different abilities?", answers: ["Dragon Age: Inquisition", "Genshin Impact", "Zelda: Breath of the Wild", "Final Fantasy XV"], correct: 1 },
+{ question: "In 'The Elder Scrolls V: Skyrim,' what is the name of the dragonborn's primary shout?", answers: ["Fus Ro Dah", "Dragon Rage", "Whirlwind Sprint", "Unrelenting Force"], correct: 0 },
+{ question: "In 'Dark Souls,' what is the name of the first boss?", answers: ["The Asylum Demon", "The Nameless King", "Nito", "Ornstein and Smough"], correct: 0 },
+{ question: "What is the name of the series of supernatural creatures in 'Bloodborne'?", answers: ["The Great Watchers", "The Great Ones", "The Old Ones", "The Eldritch"], correct: 1 },
+{ question: "What is the name of the artificial intelligence antagonist in 'Halo'?", answers: ["Cortana", "Mother Brain", "Shodan", "GLaDOS"], correct: 0 },
+{ question: "In 'Final Fantasy VII,' what is the name of the main villain?", answers: ["Cloud", "Barrett", "Vincent", "Sephiroth"], correct: 3 },
+{ question: "Which game features a space-faring character known as Samus Aran?", answers: ["Star Fox", "No Man's Sky", "Metroid", "Halo"], correct: 2 },
+{ question: "Which game is set in the dystopian world of Rapture?", answers: ["System Shock", "Fallout 3", "Bioshock", "Dishonored"], correct: 2 },
+{ question: "What is the main protagonist's name in the 'Assassin's Creed' series?", answers: ["Desmond Miles", "Ezio Auditore", "Altaïr Ibn-La'Ahad", "Connor Kenway"], correct: 2 },
+{ question: "In 'Final Fantasy XV,' who is the prince?", answers: ["Cloud Strife", "Noctis Lucis Caelum", "Zidane Tribal", "Balthier"], correct: 1 },
+{ question: "What is the name of the main villain in 'The Legend of Zelda: Ocarina of Time'?", answers: ["Majora", "Ganon", "Dark Link", "Vati"], correct: 1 },
+{ question: "Which game was released by Nintendo as a successor to the Wii?", answers: ["Switch", "NES", "GameCube", "Wii U"], correct: 0 },
+{ question: "Which RPG features characters named Cloud, Tifa, and Aerith?", answers: ["Dragon Quest", "Chrono Trigger", "Final Fantasy VII", "The Elder Scrolls"], correct: 2 },
+{ question: "Which game popularized the battle royale genre?", answers: ["Fortnite", "PUBG", "Apex Legends", "H1Z1"], correct: 1 },
 
 ],
 survival: [
@@ -2087,766 +2234,401 @@ foodsAndBeverages: [
 
      
 
+// ...existing code...
 let currentCategory = "";
 let currentQuestionIndex = 0;
 let score = 0;
 let timerInterval;
 let timeLeft = 260;
+let extraTimePurchased = false;
 
-function startQuiz() {
-    document.getElementById("splash").style.display = "none";
-    document.getElementById("categories").style.display = "flex";
-}
-document.addEventListener("DOMContentLoaded", () => {
-    let streaks = parseInt(localStorage.getItem("streaks")) || 0;
-    let sparksbux = parseInt(localStorage.getItem("sparksbux")) || 0;
-    let lastPlayed = localStorage.getItem("lastPlayed");
-    let today = new Date().toDateString();
-    let extraTimePurchased = false;
-    let highScores = JSON.parse(localStorage.getItem("highScores")) || {};
+const db = firebase.firestore();
+let currentUser = null;
 
-    console.log("Initial streaks:", streaks);
-    console.log("Initial sparksbux:", sparksbux);
-    console.log("Last played:", lastPlayed);
-    console.log("Today:", today);
-
-    const streakDisplay = document.querySelectorAll("#streak-count");
-    const sparksbuxDisplay = document.querySelectorAll("#sparksbux-count");
-    const notification = document.getElementById("quiz-notification");
-    const skipQuestionButton = document.getElementById("skip-question-button");
-
-    if (!streakDisplay.length || !sparksbuxDisplay.length || !notification || !skipQuestionButton) {
-        console.error("One or more elements not found in the DOM.");
-        return;
-    }
-
-    function updateStreak() {
-    const today = new Date().toDateString(); // Get today's date as a string
-    const lastPlayed = localStorage.getItem("lastPlayed"); // Get the last played date from localStorage
-
-    if (lastPlayed === today) {
-        // If the user has already played today, do nothing
-        console.log("Streak already updated for today.");
-        return;
-    }
-
-    if (lastPlayed) {
-        const lastPlayedDate = new Date(lastPlayed);
-        const currentDate = new Date(today);
-
-        // Calculate the difference in days
-        const daysDifference = Math.floor((currentDate - lastPlayedDate) / (1000 * 60 * 60 * 24));
-
-        if (daysDifference === 1) {
-            // Increment streak if the user played yesterday
-            streaks++;
-        } else {
-            // Reset streak if more than 1 day has passed
-            streaks = 1;
-        }
-    } else {
-        // If no last played date exists, start a new streak
-        streaks = 1;
-    }
-
-    // Save the updated streak and today's date in localStorage
-    localStorage.setItem("streaks", streaks);
-    localStorage.setItem("lastPlayed", today);
-
-    // Update the streak display
-    streakDisplay.forEach(display => display.innerText = streaks);
-    console.log("Updated streak:", streaks);
-}
-
-    function calculateSparksbux(score) {
-        if (score >= 50) return 1000;
-        if (score >= 40) return 400;
-        if (score >= 30) return 300;
-        if (score >= 20) return 200;
-        if (score >= 10) return 100;
-        return 50;
-    }
-
-    function awardSparksbux(score) {
-        let earned = calculateSparksbux(score);
-        sparksbux += earned;
-        localStorage.setItem("sparksbux", sparksbux);
-        sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
-        showNotification(`🎉 You earned ${earned} Sparksbux!`);
-        console.log("Awarded Sparksbux:", earned);
-        console.log("Total Sparksbux:", sparksbux);
-    }
-
-    let notificationQueue = [];
-    let isNotificationVisible = false;
-    
-    function showNotification(message) {
-        notificationQueue.push(message);
-        if (!isNotificationVisible) {
-            displayNextNotification();
-        }
-    }
-    
-    function displayNextNotification() {
-        if (notificationQueue.length === 0) {
-            isNotificationVisible = false;
-            return;
-        }
-    
-        isNotificationVisible = true;
-        const notification = document.getElementById("quiz-notification");
-        const message = notificationQueue.shift();
-    
-        notification.innerText = message;
-        notification.style.opacity = "1";
-        notification.style.transform = "scale(1.1)";
-    
-        setTimeout(() => {
-            notification.style.opacity = "0";
-            notification.style.transform = "scale(1)";
-            setTimeout(displayNextNotification, 500);
-        }, 3000);
-    }
-
-    function purchaseItem(item, cost) {
-      if (sparksbux >= cost) {
-          sparksbux -= cost;
-          localStorage.setItem("sparksbux", sparksbux);
-          sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
-          showNotification(`🎉 You successfully purchased ${item}!`);
-  
-          switch (item) {
-              case 'extraTime':
-                  extraTimePurchased = true;
-                  showNotification("⏳ Extra Time added for your next quiz!");
-                  break;
-  
-              case 'multiplier':
-                  activateMultiplier();
-                  showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
-                  break;
-  
-              case 'answers':
-                  addCorrectAnswers(25);
-                  showNotification("📚 25 Correct Answers added to your account!");
-                  break;
-  
-              
-  
-              case 'streakSaver':
-                  activateStreakSaver();
-                  showNotification("🔥 Streak Saver activated for 48 hours!");
-                  break;
-  
-              default:
-                  showNotification("❓ Unknown item purchased.");
-          }
-      } else {
-          showNotification("❌ Insufficient Sparksbux!");
-      }
-  }
-
-
-// Multiplier Functionality
-
-const MULTIPLIER_KEY = 'sparksbuxMultiplierActive';
-const EXPIRY_KEY = 'sparksbuxMultiplierExpiry';
-const MULTIPLIER_DURATION = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
-
-let multiplierActive = false;
-let streakSaverActive = false;
-let multiplierExpiration = null;
-let streakSaverExpiration = null;
-
-
-function loadMultiplierState() {
-    const storedActive = localStorage.getItem(MULTIPLIER_KEY);
-    const storedExpiry = localStorage.getItem(EXPIRY_KEY);
-
-    if (storedActive === 'true' && storedExpiry) {
-        const expiryTime = parseInt(storedExpiry, 10);
-        if (new Date().getTime() < expiryTime) {
-            multiplierActive = true;
-            multiplierExpiry = expiryTime;
-            startExpiryTimer(expiryTime);
-            showNotification("⚡ Sparksbux Multiplier is active!");
-            return;
-        }
-    }
-    // If not active or expired, ensure local storage is clean
-    localStorage.removeItem(MULTIPLIER_KEY);
-    localStorage.removeItem(EXPIRY_KEY);
-    multiplierActive = false;
-    multiplierExpiry = null;
-}
-
-function saveMultiplierState() {
-    if (multiplierActive && multiplierExpiry) {
-        localStorage.setItem(MULTIPLIER_KEY, 'true');
-        localStorage.setItem(EXPIRY_KEY, String(multiplierExpiry)); // Explicit string conversion
-    } else {
-        localStorage.removeItem(MULTIPLIER_KEY);
-        localStorage.removeItem(EXPIRY_KEY);
-    }
-}
-
-function clearMultiplierState() {
-    localStorage.removeItem(MULTIPLIER_KEY);
-    localStorage.removeItem(EXPIRY_KEY);
-    multiplierActive = false;
-    multiplierExpiry = null;
-    if (multiplierTimeout) {
-        clearTimeout(multiplierTimeout);
-        multiplierTimeout = null;
-    }
-}
-
-function startExpiryTimer(expiryTime) {
-    const remainingTime = expiryTime - new Date().getTime();
-    if (remainingTime > 0) {
-        multiplierTimeout = setTimeout(() => {
-            clearMultiplierState();
-            showNotification("⚡ Sparksbux Multiplier expired!");
-        }, remainingTime);
-    } else {
-        clearMultiplierState(); // Expired already, clean up
-    }
-}
-
-function activateMultiplier() {
-    if (multiplierActive) {
-        showNotification("⚡ Sparksbux Multiplier is already active!");
-        return;
-    }
-
-    multiplierActive = true;
-    multiplierExpiry = new Date().getTime() + MULTIPLIER_DURATION;
-    saveMultiplierState();
-    startExpiryTimer(multiplierExpiry);
-    showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
-}
-
-function calculateSparksbux(score) {
-    let baseSparksbux = score >= 50 ? 1000 : score >= 40 ? 400 : score >= 30 ? 300 : score >= 20 ? 200 : score >= 10 ? 100 : 50;
-    return multiplierActive ? baseSparksbux * 2 : baseSparksbux; // Double Sparksbux if multiplier is active
-}
-
-// Initialize the multiplier state when the page loads
-loadMultiplierState();
-
-// Example of how you might trigger the activation (e.g., button click)
-// document.getElementById('activateButton').addEventListener('click', activateMultiplier);
-
-// Placeholder for showNotification function (you'll need to define this)
+// --- Notification System ---
+let notificationQueue = [];
+let isNotificationVisible = false;
 function showNotification(message) {
-    const notification = document.getElementById("quiz-notification");
-    if (!notification) {
-        console.error("Notification element not found in the DOM.");
-        return;
-    }
-
-    // Set the message and make the notification visible
-    notification.innerText = message;
-    notification.style.opacity = "1";
-    notification.style.transform = "scale(1.1)";
-
-    // Hide the notification after 3 seconds
-    setTimeout(() => {
-        notification.style.opacity = "0";
-        notification.style.transform = "scale(1)";
-    }, 3000);
+  notificationQueue.push(message);
+  if (!isNotificationVisible) displayNextNotification();
 }
-    
-
-const PURCHASED_ANSWERS_KEY = 'correctAnswersPurchased';
-const REMAINING_ROUNDS_KEY = 'remainingRounds';
-const ANSWERS_PER_PURCHASE = 20; // Number of correct answers purchased at once
-const ROUNDS_TO_USE = 5; // Number of rounds the purchased answers are valid
-
-let correctAnswersPurchased = parseInt(localStorage.getItem(PURCHASED_ANSWERS_KEY)) || 0;
-let remainingRounds = parseInt(localStorage.getItem(REMAINING_ROUNDS_KEY)) || 0;
-let glowActive = false; // Track the glow state
-
-function loadAnswerState() {
-    const storedAnswers = localStorage.getItem(PURCHASED_ANSWERS_KEY);
-    const storedRounds = localStorage.getItem(REMAINING_ROUNDS_KEY);
-
-    correctAnswersPurchased = storedAnswers ? parseInt(storedAnswers, 10) : 0;
-    remainingRounds = storedRounds ? parseInt(storedRounds, 10) : 0;
-
-    if (remainingRounds > 0 && correctAnswersPurchased > 0) {
-        //  No notification here,  checkAnswer will handle it
-    } else {
-        //reset state
-        correctAnswersPurchased = 0;
-        remainingRounds = 0;
-        localStorage.removeItem(PURCHASED_ANSWERS_KEY);
-        localStorage.removeItem(REMAINING_ROUNDS_KEY);
-    }
-}
-
-function saveAnswerState() {
-    localStorage.setItem(PURCHASED_ANSWERS_KEY, correctAnswersPurchased.toString());
-    localStorage.setItem(REMAINING_ROUNDS_KEY, remainingRounds.toString());
-}
-
-function clearAnswerState() {
-    localStorage.removeItem(PURCHASED_ANSWERS_KEY);
-    localStorage.removeItem(REMAINING_ROUNDS_KEY);
-    correctAnswersPurchased = 0;
-    remainingRounds = 0;
-    removeGlowEffect(); // Also remove glow when state is cleared
-}
-
-// Function to add purchased correct answers
-function addCorrectAnswers() {
-    if (remainingRounds > 0) {
-        showNotification(`📚 You already have ${correctAnswersPurchased} correct answers for ${remainingRounds}  rounds.`);
-        return; // prevent buying again.
-    }
-    correctAnswersPurchased += ANSWERS_PER_PURCHASE;
-    remainingRounds = ROUNDS_TO_USE;
-    saveAnswerState();
-    showNotification(`📚 You have purchased 20 correct answers for the next 5 rounds!`);
-    applyGlowEffect(); // Apply glow when purchased
-}
-
-// Function to check the answer
-function checkAnswer(index) {
-    const questionData = questions[currentCategory][currentQuestionIndex];
-
-    if (correctAnswersPurchased > 0 && remainingRounds > 0) {
-        // Automatically mark the answer as correct if purchased answers are available
-        correctAnswersPurchased--;
-        saveAnswerState(); // Save immediately after decrementing
-        showNotification(`📚 Used a purchased correct answer! Remaining: ${correctAnswersPurchased} answers, Rounds: ${remainingRounds}`);
-        score++;
-    } else if (index === questionData.correct) {
-        // Normal correct answer
-        score++;
-    } else {
-        // Incorrect answer
-        showNotification("❌ Incorrect answer!");
-    }
-
-    if (correctAnswersPurchased <= 0 && remainingRounds > 0) { //check if answers are finished.
-        clearAnswerState();
-        showNotification("📚 Your purchased correct answers have run out!");
-    }
-    nextQuestion(); //call nextQuestion
-}
-
-// Function to decrement rounds.  Call this at the beginning of each new round.
-function startNewRound() {
-    if (remainingRounds > 0) {
-        remainingRounds--;
-        if (remainingRounds === 0 && correctAnswersPurchased > 0) {
-            clearAnswerState(); //clears all.
-            showNotification("📚 Your purchased correct answers have expired!");
-        } else if (remainingRounds === 0 && correctAnswersPurchased <= 0)
-        {
-            clearAnswerState();
-            showNotification("📚 Your purchased correct answers have run out!");
-        }
-        saveAnswerState(); //save the round.
-    }
-}
-
-// Initialize on page load
-loadAnswerState();
-
-// --- Visual Glow Effect (Optional) ---
-function applyGlowEffect() {
-    if (!glowActive) {
-        document.body.classList.add("correct-boost"); // Add the CSS class
-        glowActive = true;
-    }
-}
-
-function removeGlowEffect() {
-    if (glowActive) {
-        document.body.classList.remove("correct-boost"); // Remove the CSS class
-        glowActive = false;
-    }
-}
-
-// You would also need to define the CSS class somewhere, like in a <style> tag:
-
-
-// Streak Saver Functionality
-// Function to activate the StreakSaver
-function activateStreakSaver() {
-    if (streakSaverActive) {
-        showNotification("🔥 Streak Saver is already active!");
-        return;
-    }
-
-    streakSaverActive = true;
-    streakSaverExpiration = new Date(Date.now() + 48 * 60 * 60 * 1000); // 48 hours from now
-    localStorage.setItem("streakSaverExpiration", streakSaverExpiration.toISOString());
-    showNotification("🔥 Streak Saver activated for 48 hours!");
-
-    // Automatically deactivate after 48 hours
-    setTimeout(() => {
-        deactivateStreakSaver();
-    }, 48 * 60 * 60 * 1000);
-}
-
-// Function to deactivate the StreakSaver
-function deactivateStreakSaver() {
-    streakSaverActive = false;
-    streakSaverExpiration = null;
-    localStorage.removeItem("streakSaverExpiration");
-    showNotification("🔥 Streak Saver expired!");
-}
-    // Function to update streaks with StreakSaver logic
-function updateStreak() {
-    const today = new Date().toDateString();
-    const lastPlayed = localStorage.getItem("lastPlayed");
-
-    if (lastPlayed === today) return;
-
-    if (lastPlayed) {
-        const lastPlayedDate = new Date(lastPlayed);
-        const currentDate = new Date(today);
-        const daysDifference = Math.floor((currentDate - lastPlayedDate) / (1000 * 60 * 60 * 24));
-
-        if (daysDifference === 1 || (daysDifference > 1 && streakSaverActive)) {
-            streaks++;
-        } else {
-            streaks = 1;
-        }
-    } else {
-        streaks = 1;
-    }
-
-    localStorage.setItem("streaks", streaks);
-    localStorage.setItem("lastPlayed", today);
-    streakDisplay.forEach(display => display.innerText = streaks);
-}
-
-// Function to check and restore active states on page load
-function restoreActiveStates() {
-    const savedMultiplierExpiration = localStorage.getItem("multiplierExpiration");
-    const savedStreakSaverExpiration = localStorage.getItem("streakSaverExpiration");
-
-    if (savedMultiplierExpiration) {
-        const expirationDate = new Date(savedMultiplierExpiration);
-        if (expirationDate > new Date()) {
-            multiplierActive = true;
-            multiplierExpiration = expirationDate;
-
-            // Set timeout to deactivate when it expires
-            setTimeout(() => {
-                deactivateMultiplier();
-            }, expirationDate - Date.now());
-        } else {
-            deactivateMultiplier();
-        }
-    }
-    if (savedStreakSaverExpiration) {
-        const expirationDate = new Date(savedStreakSaverExpiration);
-        if (expirationDate > new Date()) {
-            streakSaverActive = true;
-            streakSaverExpiration = expirationDate;
-
-            // Set timeout to deactivate when it expires
-            setTimeout(() => {
-                deactivateStreakSaver();
-            }, expirationDate - Date.now());
-        } else {
-            deactivateStreakSaver();
-        }
-    }
-}
-
-// Call restoreActiveStates on page load
-document.addEventListener("DOMContentLoaded", () => {
-    restoreActiveStates();
-});
-
-  function updateStreak() {
-    const today = new Date().toDateString();
-    const lastPlayed = localStorage.getItem("lastPlayed");
-
-    if (lastPlayed === today) return;
-
-    if (lastPlayed) {
-        const lastPlayedDate = new Date(lastPlayed);
-        const currentDate = new Date(today);
-        const daysDifference = Math.floor((currentDate - lastPlayedDate) / (1000 * 60 * 60 * 24));
-
-        if (daysDifference === 1 || (daysDifference > 1 && streakSaverActive)) {
-            streaks++;
-        } else {
-            streaks = 1;
-        }
-    } else {
-        streaks = 1;
-    }
-
-    localStorage.setItem("streaks", streaks);
-    localStorage.setItem("lastPlayed", today);
-    streakDisplay.forEach(display => display.innerText = streaks);
-}
-
-    function skipQuestion() {
-        const cost = 80;
-        if (sparksbux >= cost) {
-            sparksbux -= cost;
-            localStorage.setItem("sparksbux", sparksbux);
-            sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
-            showNotification("⏭️ Question skipped!");
-            nextQuestion();
-        } else {
-            showNotification("❌ Insufficient Sparksbux!");
-        }
-    }
-
-    function nextQuestion() {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions[currentCategory].length) {
-            showQuestion();
-        } else {
-            endQuiz();
-        }
-    }
-
-    function updateHighScores(category, score) {
-        if (!highScores[category] || score > highScores[category]) {
-            highScores[category] = score;
-            localStorage.setItem("highScores", JSON.stringify(highScores));
-            showNotification("🎉 Congratulations! You beat your high score!");
-        }
-    }
-
-    function displayHighScores() {
-    const highScoresSection = document.getElementById("high-scores-section");
-    highScoresSection.innerHTML = `
-        <h1>🏆 High Scores 🏆</h1>
-        <p style="font-style: italic; color: #ccc;">High Scores will be displayed once accomplished.</p>
-    `;
-
-    for (const category in highScores) {
-        highScoresSection.innerHTML += `
-            <div style="
-                background: linear-gradient(135deg, #1a1a2e, #16213e);
-                padding: 20px;
-                border-radius: 15px;
-                margin: 15px 0;
-                text-align: center;
-                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
-                transition: transform 0.3s ease-in-out, box-shadow 0.3s;
-            ">
-                <h2 style="
-                    font-size: 24px;
-                    font-weight: bold;
-                    color: #ffd700;
-                    text-transform: uppercase;
-                    margin-bottom: 10px;
-                    text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
-                ">
-                    ${category}
-                </h2>
-                <p style="
-                    font-size: 20px;
-                    color: #ffffff;
-                    font-weight: bold;
-                    margin: 0;
-                ">
-                    High Score: ${highScores[category]}
-                </p>
-            </div>
-        `;
-    }
-}
-
-
-
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function(event) {
-        event.preventDefault();
-        const sectionId = this.dataset.section;
-
-        if (sectionId === "high-scores") {
-            displayHighScores();
-            showSection(sectionId);
-
-        // Update active link styling
-        document.querySelectorAll('.nav-link').forEach(otherLink => {
-            otherLink.classList.remove('active');
-        });
-        this.classList.add('active');
-}});
-});
-
-
-
-    // Initial UI Update
-    streakDisplay.forEach(display => display.innerText = streaks);
-    sparksbuxDisplay.forEach(display => display.innerText = sparksbux);
-    displayHighScores();
-    console.log("Initial UI update complete");
-
-    function showSection(sectionId) {
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            section.classList.remove('active');
-            section.style.display = 'none';
-        });
-
-        const activeSection = document.getElementById(sectionId);
-        activeSection.style.display = 'block';
-        setTimeout(() => {
-            activeSection.classList.add('active');
-        }, 10);
-    }
-
-    showSection('home'); // Show home section by default
-
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const sectionId = this.dataset.section;
-            showSection(sectionId);
-
-            // Remove active class from all links.
-            navLinks.forEach(otherLink => {
-                otherLink.classList.remove('active');
-            });
-            // Add active class to current link.
-            this.classList.add('active');
-        });
-    });
-
-    window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('navbar');
-        if (window.scrollY > 50) {
-            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
-        } else {
-            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
-        }
-    });
-
-    // Security: Disable right-click and certain keys
-    document.addEventListener("contextmenu", (e) => e.preventDefault());
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "F12" || (e.ctrlKey && ["U", "I", "J", "C", "S"].includes(e.key.toUpperCase()))) {
-            e.preventDefault();
-        }
-    });
-
-    // Detect Developer Tools (Prevents cheating)
-    (function detectDevTools() {
-        const element = new Image();
-        element.__defineGetter__('id', function () {
-            alert("Developer Tools Detected! Please close it.");
-            window.location.reload();
-        });
-        console.log("%c", element);
-    })();
-    
-  function setSecureItem(key, value) {
-    const encryptedValue = btoa(value); // Base64 encode
-    localStorage.setItem(key, encryptedValue);
-}
-
-function getSecureItem(key) {
-    const encryptedValue = localStorage.getItem(key);
-    return encryptedValue ? atob(encryptedValue) : null; // Base64 decode
-}
-document.addEventListener("contextmenu", (e) => e.preventDefault());
-document.addEventListener("keydown", (e) => {
-    if (e.key === "F12" || (e.ctrlKey && ["U", "I", "J", "C", "S"].includes(e.key.toUpperCase())) || e.key === "PrintScreen") {
-        e.preventDefault();
-    }
-});
-function encryptData(data) {
-  return btoa(unescape(encodeURIComponent(data))); // Base64 encode
-}
-
-function decryptData(data) {
-  return decodeURIComponent(escape(atob(data))); // Base64 decode
-}
-
-// Usage
-localStorage.setItem("encryptedSparksbux", encryptData(sparksbux));
-const decryptedSparksbux = decryptData(localStorage.getItem("encryptedSparksbux"));
-
-
-
-
-
-    // Fisher-Yates Shuffle Algorithm
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-        }
-    }
-
-    // Load quiz with shuffled questions
-    function loadQuiz(category) {
-      currentCategory = category;
-      currentQuestionIndex = 0;
-      score = 0;
-      document.getElementById("categories").style.display = "none";
-      document.getElementById("quiz").style.display = "flex";
-      document.getElementById("quiz-category").innerText = category.toUpperCase();
-      timeLeft = extraTimePurchased ? 300 : 260;
-      extraTimePurchased = false; // Reset extra time purchase after use
-      startTimer();
-  
-      // Shuffle questions before displaying
-      shuffleArray(questions[category]);
-      showQuestion();
+function displayNextNotification() {
+  if (notificationQueue.length === 0) {
+    isNotificationVisible = false;
+    return;
   }
-
-    function showQuestion() {
-        const questionData = questions[currentCategory][currentQuestionIndex];
-        const container = document.getElementById("question-container");
-        container.innerHTML = `<h3>${questionData.question}</h3>`;
-        questionData.answers.forEach((answer, index) => {
-            container.innerHTML += `<button onclick="checkAnswer(${index})">${answer}</button>`;
-        });
-    }
-
-    function goBack() {
-        clearInterval(timerInterval);
-        document.getElementById("timer").innerText = "Time Left: 260s";
-        document.getElementById('quiz').style.display = 'none';
-        document.getElementById('categories').style.display = 'flex';
-        // Reset values
-        currentQuestionIndex = 0;
-        score = 0;
-        timeLeft = 260;
-    }
-
-    function checkAnswer(index) {
-        const questionData = questions[currentCategory][currentQuestionIndex];
-        if (index === questionData.correct) score++;
-        nextQuestion();
-    }
-
-    function startTimer() {
-      const timerElement = document.getElementById("timer");
-      clearInterval(timerInterval); // Clear any existing timer
-  
-  
-      // Start the timer
-      timerInterval = setInterval(() => {
-        if (timeLeft > 0) {
-            timeLeft--;
-            timerElement.innerText = `Time Left: ${timeLeft}s`;
-        } else {
-            clearInterval(timerInterval);
-            timerInterval = null; // Mark the timer as stopped
-            endQuiz();
-        }
-    }, 1000);
+  isNotificationVisible = true;
+  const notification = document.getElementById("quiz-notification");
+  notification.innerText = notificationQueue.shift();
+  notification.style.opacity = "1";
+  notification.style.transform = "scale(1.1)";
+  setTimeout(() => {
+    notification.style.opacity = "0";
+    notification.style.transform = "scale(1)";
+    setTimeout(displayNextNotification, 500);
+  }, 3000);
 }
 
+// --- Account Management ---
+function showAccountNotification(msg, color = "#ffd700") {
+  const notif = document.getElementById("account-notification");
+  notif.innerText = msg;
+  notif.style.color = color;
+  notif.style.opacity = "1";
+  setTimeout(() => { notif.style.opacity = "0"; }, 3000);
+}
+function isValidUsername(username) {
+  return /^[a-zA-Z0-9_.-]{3,20}$/.test(username);
+}
+function isValidPassword(password) {
+  return password.length >= 4;
+}
+async function signUp() {
+  const username = document.getElementById("signUp-username").value.trim();
+  const password = document.getElementById("signUp-password").value;
+  const password2 = document.getElementById("signUp-password2").value;
+  if (!isValidUsername(username)) {
+    showAccountNotification("Username must be 3-20 chars: letters, numbers, _, ., -", "orange");
+    return;
+  }
+  if (!isValidPassword(password)) {
+    showAccountNotification("Password must be at least 4 characters.", "orange");
+    return;
+  }
+  if (password !== password2) {
+    showAccountNotification("Passwords do not match.", "red");
+    return;
+  }
+  const userDoc = await db.collection("users").doc(username).get();
+  if (userDoc.exists) {
+    showAccountNotification("Username already exists. Choose another.", "red");
+    return;
+  }
+  await db.collection("users").doc(username).set({
+    username,
+    password: btoa(password),
+    sparksbux: 0,
+    streak: 0,
+    lastPlayed: "",
+    highScores: {},
+    multiplierActive: false,
+    multiplierExpiry: null,
+    correctAnswersPurchased: 0,
+    remainingRounds: 0,
+    streakSaverActive: false,
+    streakSaverExpiry: null
+  });
+  currentUser = { username, sparksbux: 0, streak: 0, lastPlayed: "", highScores: {}, multiplierActive: false, multiplierExpiry: null, correctAnswersPurchased: 0, remainingRounds: 0, streakSaverActive: false, streakSaverExpiry: null };
+  showAccountNotification("Account created! Logging you in...", "limegreen");
+  setTimeout(() => {
+    showSplashAfterLogin();
+    updateAccountUsername && updateAccountUsername();
+    loadUserStats();
+  }, 1000);
+}
+async function logIn() {
+  const username = document.getElementById("login-username").value.trim();
+  const password = document.getElementById("login-password").value;
+  if (!isValidUsername(username)) {
+    showAccountNotification("Invalid username format.", "orange");
+    return;
+  }
+  if (!isValidPassword(password)) {
+    showAccountNotification("Password must be at least 4 characters.", "orange");
+    return;
+  }
+  const userDoc = await db.collection("users").doc(username).get();
+  if (!userDoc.exists) {
+    showAccountNotification("Username does not exist.", "red");
+    return;
+  }
+  const userData = userDoc.data();
+  if (userData.password !== btoa(password)) {
+    showAccountNotification("Incorrect password.", "red");
+    return;
+  }
+  currentUser = {
+    username,
+    sparksbux: userData.sparksbux || 0,
+    streak: userData.streak || 0,
+    lastPlayed: userData.lastPlayed || "",
+    highScores: userData.highScores || {},
+    multiplierActive: userData.multiplierActive || false,
+    multiplierExpiry: userData.multiplierExpiry || null,
+    correctAnswersPurchased: userData.correctAnswersPurchased || 0,
+    remainingRounds: userData.remainingRounds || 0,
+    streakSaverActive: userData.streakSaverActive || false,
+    streakSaverExpiry: userData.streakSaverExpiry || null
+  };
+  showAccountNotification("Welcome, " + currentUser.username + "!", "limegreen");
+  setTimeout(() => {
+    showSplashAfterLogin();
+    updateAccountUsername && updateAccountUsername();
+    loadUserStats();
+  }, 1000);
+}
+
+// --- Firestore User Stats ---
+async function loadUserStats() {
+  if (!currentUser) return;
+  const userDoc = await db.collection("users").doc(currentUser.username).get();
+  if (userDoc.exists) {
+    const data = userDoc.data();
+    currentUser.sparksbux = data.sparksbux || 0;
+    currentUser.streak = data.streak || 0;
+    currentUser.lastPlayed = data.lastPlayed || "";
+    currentUser.highScores = data.highScores || {};
+    currentUser.multiplierActive = data.multiplierActive || false;
+    currentUser.multiplierExpiry = data.multiplierExpiry || null;
+    currentUser.correctAnswersPurchased = data.correctAnswersPurchased || 0;
+    currentUser.remainingRounds = data.remainingRounds || 0;
+    currentUser.streakSaverActive = data.streakSaverActive || false;
+    currentUser.streakSaverExpiry = data.streakSaverExpiry || null;
+    updateStatsUI();
+  }
+}
+async function saveUserStats() {
+  if (!currentUser) return;
+  await db.collection("users").doc(currentUser.username).update({
+    sparksbux: currentUser.sparksbux,
+    streak: currentUser.streak,
+    lastPlayed: currentUser.lastPlayed,
+    highScores: currentUser.highScores,
+    multiplierActive: currentUser.multiplierActive,
+    multiplierExpiry: currentUser.multiplierExpiry,
+    correctAnswersPurchased: currentUser.correctAnswersPurchased,
+    remainingRounds: currentUser.remainingRounds,
+    streakSaverActive: currentUser.streakSaverActive,
+    streakSaverExpiry: currentUser.streakSaverExpiry
+  });
+}
+function updateStatsUI() {
+  document.querySelectorAll("#sparksbux-count").forEach(el => el.innerText = currentUser.sparksbux);
+  document.querySelectorAll("#streak-count").forEach(el => el.innerText = currentUser.streak);
+}
+
+// --- Streaks ---
+async function updateStreak() {
+  const today = new Date().toDateString();
+  if (currentUser.lastPlayed === today) return;
+  if (currentUser.lastPlayed) {
+    const lastPlayedDate = new Date(currentUser.lastPlayed);
+    const currentDate = new Date(today);
+    const daysDifference = Math.floor((currentDate - lastPlayedDate) / (1000 * 60 * 60 * 24));
+    if (daysDifference === 1 || (daysDifference > 1 && isStreakSaverActive())) {
+      currentUser.streak += 1;
+    } else {
+      currentUser.streak = 1;
+    }
+  } else {
+    currentUser.streak = 1;
+  }
+  currentUser.lastPlayed = today;
+  await saveUserStats();
+  updateStatsUI();
+}
+
+// --- Sparksbux ---
+function calculateSparksbux(score) {
+  let base = score >= 50 ? 1000 : score >= 40 ? 400 : score >= 30 ? 300 : score >= 20 ? 200 : score >= 10 ? 100 : 50;
+  return isMultiplierActive() ? base * 2 : base;
+}
+async function awardSparksbux(score) {
+  let earned = calculateSparksbux(score);
+  currentUser.sparksbux += earned;
+  await saveUserStats();
+  updateStatsUI();
+  showNotification(`🎉 You earned ${earned} Sparksbux!`);
+}
+
+// --- High Scores ---
+async function updateHighScores(category, score) {
+  if (!currentUser.highScores[category] || score > currentUser.highScores[category]) {
+    currentUser.highScores[category] = score;
+    await saveUserStats();
+    showNotification("🎉 Congratulations! You beat your high score!");
+  }
+}
+function displayHighScores() {
+  const highScoresSection = document.getElementById("high-scores-section");
+  highScoresSection.innerHTML = `<h1>🏆 High Scores 🏆</h1>
+    <p style="font-style: italic; color: #ccc;">High Scores will be displayed once accomplished.</p>`;
+  for (const category in currentUser.highScores) {
+    highScoresSection.innerHTML += `
+      <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 20px; border-radius: 15px; margin: 15px 0; text-align: center; box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); transition: transform 0.3s ease-in-out, box-shadow 0.3s;">
+        <h2 style="font-size: 24px; font-weight: bold; color: #ffd700; text-transform: uppercase; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);">${category}</h2>
+        <p style="font-size: 20px; color: #ffffff; font-weight: bold; margin: 0;">High Score: ${currentUser.highScores[category]}</p>
+      </div>`;
+  }
+}
+
+// --- Multiplier ---
+function isMultiplierActive() {
+  return currentUser.multiplierActive && currentUser.multiplierExpiry && Date.now() < currentUser.multiplierExpiry;
+}
+async function activateMultiplier() {
+  if (isMultiplierActive()) {
+    showNotification("⚡ Sparksbux Multiplier is already active!");
+    return;
+  }
+  currentUser.multiplierActive = true;
+  currentUser.multiplierExpiry = Date.now() + 48 * 60 * 60 * 1000;
+  await saveUserStats();
+  showNotification("⚡ Sparksbux Multiplier activated for 48 hours!");
+  setTimeout(async () => {
+    currentUser.multiplierActive = false;
+    currentUser.multiplierExpiry = null;
+    await saveUserStats();
+    showNotification("⚡ Sparksbux Multiplier expired!");
+  }, 48 * 60 * 60 * 1000);
+}
+
+// --- Purchased Correct Answers ---
+async function addCorrectAnswers(amount = 20, rounds = 5) {
+  if (currentUser.remainingRounds > 0) {
+    showNotification(`📚 You already have ${currentUser.correctAnswersPurchased} correct answers for ${currentUser.remainingRounds} rounds.`);
+    return;
+  }
+  currentUser.correctAnswersPurchased = amount;
+  currentUser.remainingRounds = rounds;
+  await saveUserStats();
+  showNotification(`📚 You have purchased ${amount} correct answers for the next ${rounds} rounds!`);
+}
+async function useCorrectAnswer() {
+  if (currentUser.correctAnswersPurchased > 0 && currentUser.remainingRounds > 0) {
+    currentUser.correctAnswersPurchased--;
+    await saveUserStats();
+    showNotification(`📚 Used a purchased correct answer! Remaining: ${currentUser.correctAnswersPurchased} answers, Rounds: ${currentUser.remainingRounds}`);
+    return true;
+  }
+  return false;
+}
+async function startNewRound() {
+  if (currentUser.remainingRounds > 0) {
+    currentUser.remainingRounds--;
+    if (currentUser.remainingRounds === 0) {
+      currentUser.correctAnswersPurchased = 0;
+      showNotification("📚 Your purchased correct answers have expired!");
+    }
+    await saveUserStats();
+  }
+}
+
+// --- Streak Saver ---
+function isStreakSaverActive() {
+  return currentUser.streakSaverActive && currentUser.streakSaverExpiry && Date.now() < currentUser.streakSaverExpiry;
+}
+async function activateStreakSaver() {
+  if (isStreakSaverActive()) {
+    showNotification("🔥 Streak Saver is already active!");
+    return;
+  }
+  currentUser.streakSaverActive = true;
+  currentUser.streakSaverExpiry = Date.now() + 48 * 60 * 60 * 1000;
+  await saveUserStats();
+  showNotification("🔥 Streak Saver activated for 48 hours!");
+  setTimeout(async () => {
+    currentUser.streakSaverActive = false;
+    currentUser.streakSaverExpiry = null;
+    await saveUserStats();
+    showNotification("🔥 Streak Saver expired!");
+  }, 48 * 60 * 60 * 1000);
+}
+
+// --- Shop ---
+async function purchaseItem(item, cost) {
+  if (currentUser.sparksbux >= cost) {
+    currentUser.sparksbux -= cost;
+    await saveUserStats();
+    updateStatsUI();
+    showNotification(`🎉 You successfully purchased ${item}!`);
+    switch (item) {
+      case 'extraTime':
+        extraTimePurchased = true;
+        showNotification("⏳ Extra Time added for your next quiz!");
+        break;
+      case 'multiplier':
+        await activateMultiplier();
+        break;
+      case 'answers':
+        await addCorrectAnswers(25, 5);
+        break;
+      case 'streakSaver':
+        await activateStreakSaver();
+        break;
+      default:
+        showNotification("❓ Unknown item purchased.");
+    }
+  } else {
+    showNotification("❌ Insufficient Sparksbux!");
+  }
+}
+
+// --- Quiz Logic ---
+function startQuiz() {
+  document.getElementById("splash").style.display = "none";
+  document.getElementById("categories").style.display = "flex";
+}
+window.startQuiz = startQuiz;
+
+function loadQuiz(category) {
+  currentCategory = category;
+  currentQuestionIndex = 0;
+  score = 0;
+  document.getElementById("categories").style.display = "none";
+  document.getElementById("quiz").style.display = "flex";
+  document.getElementById("quiz-category").innerText = category.toUpperCase();
+  timeLeft = extraTimePurchased ? 300 : 260;
+  extraTimePurchased = false;
+  startTimer();
+  shuffleArray(questions[category]);
+  showQuestion();
+}
+function showQuestion() {
+  const questionData = questions[currentCategory][currentQuestionIndex];
+  const container = document.getElementById("question-container");
+  container.innerHTML = `<h3>${questionData.question}</h3>`;
+  questionData.answers.forEach((answer, index) => {
+    container.innerHTML += `<button onclick="checkAnswer(${index})">${answer}</button>`;
+  });
+}
+function checkAnswer(index) {
+  const questionData = questions[currentCategory][currentQuestionIndex];
+  useCorrectAnswer().then(used => {
+    if (used) {
+      score++;
+      nextQuestion();
+    } else if (index === questionData.correct) {
+      score++;
+      nextQuestion();
+    } else {
+      showNotification("❌ Incorrect answer!");
+      nextQuestion();
+    }
+  });
+}
+function nextQuestion() {
+  currentQuestionIndex++;
+  if (currentQuestionIndex < questions[currentCategory].length) {
+    showQuestion();
+  } else {
+    endQuiz();
+  }
+}
+function startTimer() {
+  const timerElement = document.getElementById("timer");
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--;
+      timerElement.innerText = `Time Left: ${timeLeft}s`;
+    } else {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      endQuiz();
+    }
+  }, 1000);
+}
 function endQuiz() {
   clearInterval(timerInterval);
   document.getElementById("quiz").style.display = "none";
@@ -2854,93 +2636,193 @@ function endQuiz() {
   document.getElementById("score").innerText = `Your Score: ${score}`;
   const percentage = (score / questions[currentCategory].length) * 100;
   document.getElementById("rank").innerText = getRank(percentage);
-
-  // Award Sparksbux for the quiz
   awardSparksbux(score);
-
-  // Update streaks and high scores
   updateStreak();
   updateHighScores(currentCategory, score);
-
-  // Reset flags
- 
+  extraTimePurchased = false;
+}
+function getRank(percentage) {
+  if (percentage === 100) {
+    return "Legendary IQ Award! You’ve shattered expectations and reached the pinnacle of brilliance! No one thought it was possible, but you’ve proven everyone wrong. You are truly a genius! 🎊";
+  } else if (percentage >= 90) {
+    return "Excellent work! You're nearly there, just one step away from a Legendary IQ Award. Keep pushing your limits; you're unstoppable!";
+  } else if (percentage >= 75) {
+    return "Fantastic effort! You're closing in on greatness. Keep honing your skills, and soon enough, you'll be at the top!";
+  } else if (percentage >= 50) {
+    return "Good job! You're definitely on the right path. A little more practice, and you'll be reaching new heights. Keep at it, the journey has just begun!";
+  } else if (percentage >= 25) {
+    return "You're making progress, but there's still a way to go. Stay motivated, practice more, and watch your IQ skyrocket!";
+  } else if (percentage >= 1) {
+    return "I know it was quite a tough journey. But stay motivated. There is still room for improvement.";
+  } else {
+    return "Oops! Don’t worry, it’s not the end. Every setback is a setup for a greater comeback. Try again with confidence—success is just a few steps away!";
+  }
+}
+function restartQuiz() {
+  document.getElementById("results").style.display = "none";
+  document.getElementById("categories").style.display = "flex";
   extraTimePurchased = false;
 }
 
-    function getRank(percentage) {
-        if (percentage === 100) {
-            return "Legendary IQ Award! You’ve shattered expectations and reached the pinnacle of brilliance! No one thought it was possible, but you’ve proven everyone wrong. You are truly a genius! 🎊";
-        } else if (percentage >= 90) {
-            return "Excellent work! You're nearly there, just one step away from a Legendary IQ Award. Keep pushing your limits; you're unstoppable!";
-        } else if (percentage >= 75) {
-            return "Fantastic effort! You're closing in on greatness. Keep honing your skills, and soon enough, you'll be at the top!";
-        } else if (percentage >= 50) {
-            return "Good job! You're definitely on the right path. A little more practice, and you'll be reaching new heights. Keep at it, the journey has just begun!";
-        } else if (percentage >= 25) {
-            return "You're making progress, but there's still a way to go. Stay motivated, practice more, and watch your IQ skyrocket!";
-        } else if (percentage >= 1) {
-            return "I know it was quite a tough journey. But stay motivated. There is still room for improvement.";
-        } else {
-            return "Oops! Don’t worry, it’s not the end. Every setback is a setup for a greater comeback. Try again with confidence—success is just a few steps away!";
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const music = document.getElementById("bg-music");
-  
-      // Optional volume setting (0.0 - 1.0)
-      music.volume = 0.5;
-  
-      // Try to autoplay
-      music.play().catch(() => {
-          // If blocked, play on first user interaction
-          document.addEventListener("click", () => {
-              music.play();
-          }, { once: true });
-      });
-  });
-  
-
-  function restartQuiz() {
-    document.getElementById("results").style.display = "none";
-    document.getElementById("categories").style.display = "flex";
-
-    // Reset flags
-   
-    extraTimePurchased = false;
+// --- Utility ---
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
 
-    // Reset streak at midnight if the user doesn't play
-    function resetStreakAtMidnight() {
-        const now = new Date();
-        const millisTillMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0) - now;
-        setTimeout(() => {
-            if (localStorage.getItem("lastPlayed") !== new Date().toDateString()) {
-                streaks = 0;
-                localStorage.setItem("streaks", streaks);
-                streakDisplay.forEach(display => display.innerText = streaks);
-                console.log("Streak reset at midnight");
-            }
-            resetStreakAtMidnight(); // Schedule the next reset
-        }, millisTillMidnight);
+// --- Navigation ---
+function showSection(sectionId) {
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => {
+    section.classList.remove('active');
+    section.style.display = 'none';
+  });
+  const activeSection = document.getElementById(sectionId);
+  activeSection.style.display = 'block';
+  setTimeout(() => {
+    activeSection.classList.add('active');
+  }, 10);
+}
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function(event) {
+    event.preventDefault();
+    const sectionId = this.dataset.section;
+    if (sectionId === "high-scores") {
+      displayHighScores();
     }
-    document.addEventListener("DOMContentLoaded", () => {
-    resetStreakAtMidnight();
+    showSection(sectionId);
+    document.querySelectorAll('.nav-link').forEach(otherLink => {
+      otherLink.classList.remove('active');
+    });
+    this.classList.add('active');
+  });
 });
-document.addEventListener("DOMContentLoaded", () => {
-    streaks = parseInt(localStorage.getItem("streaks")) || 0; // Load streaks or default to 0
-    streakDisplay.forEach(display => display.innerText = streaks); // Update the streak display
-});
-    resetStreakAtMidnight(); // Initialize the first reset
+showSection('home');
 
-    // Expose functions to global scope for button onclick handlers
-    window.loadQuiz = loadQuiz;
-    window.checkAnswer = checkAnswer;
-    window.goBack = goBack;
-    window.restartQuiz = restartQuiz;
-    window.purchaseItem = purchaseItem;
-    window.skipQuestion = skipQuestion;
+// --- Expose functions for HTML ---
+window.signUp = signUp;
+window.logIn = logIn;
+window.loadQuiz = loadQuiz;
+window.checkAnswer = checkAnswer;
+window.goBack = function() {
+  clearInterval(timerInterval);
+  document.getElementById("timer").innerText = "Time Left: 260s";
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('categories').style.display = 'flex';
+  currentQuestionIndex = 0;
+  score = 0;
+  timeLeft = 260;
+};
+window.restartQuiz = restartQuiz;
+window.purchaseItem = purchaseItem;
+window.skipQuestion = async function() {
+  const cost = 80;
+  if (currentUser.sparksbux >= cost) {
+    currentUser.sparksbux -= cost;
+    await saveUserStats();
+    updateStatsUI();
+    showNotification("⏭️ Question skipped!");
+    nextQuestion();
+  } else {
+    showNotification("❌ Insufficient Sparksbux!");
+  }
+};
+
+// --- Password Show/Hide ---
+function togglePassword(id1, id2, checkboxId) {
+  const show = document.getElementById(checkboxId).checked;
+  document.getElementById(id1).type = show ? "text" : "password";
+  if (id2 && document.getElementById(id2)) document.getElementById(id2).type = show ? "text" : "password";
+}
+window.togglePassword = togglePassword;
+
+function showLogin() {
+  document.getElementById("signUp-section").style.display = "none";
+  document.getElementById("login-section").style.display = "block";
+}
+function showSignUp() {
+  document.getElementById("login-section").style.display = "none";
+  document.getElementById("signUp-section").style.display = "block";
+}
+window.showLogin = showLogin;
+window.showSignUp = showSignUp;
+
+// --- Splash Logic ---
+function showSplashAfterLogin() {
+  document.getElementById("account-overlay").style.display = "none";
+  document.getElementById("splash").style.display = "flex";
+  // Show the Get Started button after a short delay (simulate loading)
+  setTimeout(() => {
+    document.getElementById("get-started-btn").style.display = "inline-block";
+    // Animate loading bar and percent
+    let percent = 0;
+    const bar = document.getElementById("splash-loading-bar");
+    const percentText = document.getElementById("splash-loading-percent");
+    bar.style.width = "0";
+    percentText.innerText = "0%";
+    let interval = setInterval(() => {
+      percent += 2;
+      if (percent > 100) percent = 100;
+      bar.style.width = percent + "%";
+      percentText.innerText = percent + "%";
+      if (percent >= 100) clearInterval(interval);
+    }, 20);
+  }, 500);
+}
+window.showSplashAfterLogin = showSplashAfterLogin;
+
+
+// --- Security (optional) ---
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+document.addEventListener("keydown", (e) => {
+  if (e.key === "F12" || (e.ctrlKey && ["U", "I", "J", "C", "S"].includes(e.key.toUpperCase())) || e.key === "PrintScreen") {
+    e.preventDefault();
+  }
 });
+(function detectDevTools() {
+  const element = new Image();
+  element.__defineGetter__('id', function () {
+    alert("Developer Tools Detected! Please close it.");
+    window.location.reload();
+  });
+  console.log("%c", element);
+})();
+// ...existing code...
+window.signUp = signUp;
+window.logIn = logIn;
+window.loadQuiz = loadQuiz;
+window.checkAnswer = checkAnswer;
+window.goBack = function() {
+  clearInterval(timerInterval);
+  document.getElementById("timer").innerText = "Time Left: 260s";
+  document.getElementById('quiz').style.display = 'none';
+  document.getElementById('categories').style.display = 'flex';
+  currentQuestionIndex = 0;
+  score = 0;
+  timeLeft = 260;
+};
+window.restartQuiz = restartQuiz;
+window.purchaseItem = purchaseItem;
+window.skipQuestion = async function() {
+  const cost = 80;
+  if (currentUser.sparksbux >= cost) {
+    currentUser.sparksbux -= cost;
+    await saveUserStats();
+    updateStatsUI();
+    showNotification("⏭️ Question skipped!");
+    nextQuestion();
+  } else {
+    showNotification("❌ Insufficient Sparksbux!");
+  }
+};
+window.togglePassword = togglePassword;
+window.showSplashAfterLogin = showSplashAfterLogin;
+window.updateAccountUsername = updateAccountUsername;
+window.showLogin = showLogin;
+window.showSignUp = showSignUp;
+window.startQuiz = startQuiz;
 </script>
 
 </body>
