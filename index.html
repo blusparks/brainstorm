@@ -24,12 +24,12 @@
     
       @keyframes gradientAnimation {
         0% { background: linear-gradient(to bottom right, #160039, #021348); }
-        25% { background: linear-gradient(to bottom right, #3b3c36, #00173a); }
-        50% { background: linear-gradient(to bottom right, #242124, #003366); }
+
+        50% { background: linear-gradient(to bottom right, #242124, #000966); }
         60% { background: linear-gradient(to bottom right, #24044b, #0e1768); }
         70% { background: linear-gradient(to bottom right, #01134a, #0c0039); }
         80% { background: linear-gradient(to bottom right, #032b04, #130F40); }
-        90% { background: linear-gradient(to bottom right, #2C3E50, #000000); }
+
         100% { background: linear-gradient(to bottom right, #00173a, #300066); }
       }
       
@@ -741,20 +741,36 @@
           box-shadow: 0px 6px 20px rgba(255, 204, 0, 0.8);
       }
       
-      #quiz-notification {
-          position: fixed;
-          bottom: 530px;
-          right: 450px;
-          background-color: #333;
-          color: #fff;
-          padding: 18px;
-          border-radius: 20px;
-          opacity: 0;
-          transition: opacity 0.5s;
-          font-size: 20px;
-          
-      }
-      
+     #quiz-notification, .notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    left: 30px;
+    max-width: 90vw;
+    width: auto;
+    z-index: 9999;
+    background-color: #222;
+    color: #ffd700;
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.4);
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.3s;
+    pointer-events: none;
+}
+   @media (max-width: 600px) {
+    #quiz-notification, .notification {
+        left: 5vw;
+        right: 5vw;
+        bottom: 10px;
+        font-size: 1rem;
+        padding: 10px 8px;
+        border-radius: 12px;
+        max-width: 90vw;
+    }
+}   
       #buy-answer-button.success {
           background-color: #28a745; /* Green */
       }
@@ -772,11 +788,11 @@
   <div id="pre-splash" class="pre-splash">
       <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Brainstorm Logo">
       
-      <h1>Powered By Sparks</h1>
+      <h1>By Sparks</h1>
   </div>
   <!-- Splash Screen -->
   <div id="splash" class="splash-screen">
-      <div class="main-title">Welcome to Brainstorm</div>
+      <div class="main-title">Sparks Entertainment presents..</div>
       <img src="https://img.freepik.com/premium-vector/black-white-logo-that-says-brain-storm-it_882132-11.jpg" alt="Trivia Game Icon">
       <div class="sub-title">The <strong style="color:green;">HARDERST QUIZ GAME ON THE INTERNET</strong> Test your knowledge across various topics and claim your IQ ranking! Wish You the best of LUCK!!😂😈</div>
       <button onclick="startQuiz()">Get Started</button>
@@ -833,26 +849,27 @@
     </section>
     
 
-      <section id="news" class="section">
-          <h1>🚀 Latest News & Updates 📰</h1>
-          <p>Welcome to our Updates and News Hub! Stay informed with the latest posts, features, and improvements. Be sure to check in from time to time! 🔥</p>
-          <p>We bring fresh updates **every year** to make your experience even better! 🌟</p>
-
-          <div class="news-content">
-              <p>📅 **Next Update Release:** <strong>5th January 2026</strong> ⏳</p>
-              <h2>**New Feature Alert!**</h2>
-              <p> We're introducing **polls** to let YOU decide exciting aspects of the game! 🗳️🔥</p>
-
-              <h2>🔹 What You’ll Be Voting For:</h2>
-              <ul>
-                  
-                  <li>🕹️ **New Game Categories** – Help us pick fresh and exciting categories to be added next!</li>
-                  <li>Any other thing you might feel is needed.</li>
-              </ul>
-<p> In the <b>Future </b>we hope to even introduce <strong>Accounts</strong> and <strong>Leaderboards</strong> so that you may get your scores saved across different search engines.<br>We also hope to have purchase plans to purchase our Sparksbux and Streaks.</p>
-              <p>🔥 **Polls are organized by** <strong>Sparks </strong> – Stay tuned and make your voice count! Your choices shape the future of Sparks! 🚀</p>
-          </div>
-      </section>
+    <!-- Only one News section, placed in the correct order -->
+<section id="news" class="section">
+  <h1>📰 Latest News & Updates 📰</h1>
+  <p>Stay tuned for the latest updates, features, and improvements in Brainstorm! 🚀</p>
+  <!-- News Flash -->
+  <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 14px; box-shadow: 0 0 18px rgba(0,255,255,0.2); padding: 22px; margin-bottom: 24px;">
+    <h2 style="color:#ffd700; font-size:2rem; margin-bottom:10px;">🧠 BRAINSTORM NEWSFLASH ⚡</h2>
+    <p style="font-size:1.1rem; color:#fff;">
+      <strong>Brainstorm Updates 2026 are underway...</strong><br><br>
+      The gears are turning, the sparks are flying — and what’s coming might just unlock a whole new level of epic.<br>
+      But here’s the thing... greatness isn’t guaranteed — it’s earned.<br><br>
+      🧩 Will you rise through the ranks... or get lost in the static?<br>
+      🌪️ Will the new challenges shake you... or shape you?<br>
+      ✨ These updates won’t just test your brain — they’ll reveal your potential.<br><br>
+      So sharpen your skills, fuel your focus, and stay in the zone.<br>
+      Because the ones who stay ready... might just become legendary.<br><br>
+      <strong>#Brainstorm2026 – A new spark is coming. Will it light your fire? 🔥</strong><br><br>
+      <span style="color:#ff8080;">Note: The updates might not be as epic as expected for everyone, but rest assured — there will always be better improvements and new features to enjoy!</span>
+    </p>
+  </div>
+</section>
 
       <section id="about" class="section">
         <h1>🚀 Welcome to Brainstorm! ⚡</h1>
@@ -900,14 +917,14 @@
   <h3>Spend your Sparksbux wisely!</h3>
   <div class="shop-items">
       <div class="shop-item">
-          <img src="assets/extra-time.png" alt="Extra Time">
+          
           <h2>⏳ Extra Time</h2>
           <p>Adds +40 seconds to your timer, giving you more room to breathe and think. Perfect for those brain-busting questions!</p>
           <h2 class="price">400 Sparksbux</h2>
           <button onclick="purchaseItem('extraTime', 400)">Buy</button>
       </div>
       <div class="shop-item">
-        <img src="assets/multiplier.png" alt="Sparksbux Multiplier">
+      
         <h2>⚡ Sparksbux Multiplier</h2>
         <p>Doubles the Sparksbux you earn during this quiz. Get paid twice as much for your brilliance!</p>
         <h2 class="price">3000 Sparksbux</h2>
@@ -916,7 +933,7 @@
         <button onclick="purchaseItem('multiplier', 3000)">Buy</button>
     </div>
     <div class="shop-item">
-      <img src="assets/answers.png" alt="Buy 25 Answers">
+      
       <h2>📚 Buy 25 Correct Answers</h2>
       <p>Instantly marks 25 questions as correct. Whether you're stuck or just stacking points, this is a serious power move.</p>
       <h2 class="price">5000 Sparksbux</h2>
@@ -927,7 +944,7 @@
   </div>
  
   <div class="shop-item">
-      <img src="assets/streak-saver.png" alt="Streak Saver">
+    
       <h2>🔥 Streak Saver</h2>
       <p>Automatically saves your streaks from vanishing if you miss a day.</p>
       <h2 class="price">3500 Sparksbux</h2>
@@ -975,7 +992,7 @@
       <button onclick="restartQuiz()">Restart</button>
   </div>
 
-  <audio id="bg-music" src="assets/audio/brainstorm-theme.mp3" autoplay loop></audio>
+ 
 </body>
     <script>
 
