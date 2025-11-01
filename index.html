@@ -2844,21 +2844,30 @@ function shuffleAll(questions) {
     
 
     // Load quiz with shuffled questions
-    function loadQuiz(category) {
-      currentCategory = category;
-      currentQuestionIndex = 0;
-      score = 0;
-      document.getElementById("categories").style.display = "none";
-      document.getElementById("quiz").style.display = "flex";
-      document.getElementById("quiz-category").innerText = category.toUpperCase();
-      timeLeft = extraTimePurchased ? 300 : 260;
-      extraTimePurchased = false; // Reset extra time purchase after use
-      startTimer();
-  
-      // Shuffle questions before displaying
-      shuffleArray(questions[category]);
-      showQuestion();
-  }
+function loadQuiz(category) {
+    currentCategory = category;
+    currentQuestionIndex = 0;
+    score = 0;
+    document.getElementById("categories").style.display = "none";
+    document.getElementById("quiz").style.display = "flex";
+    document.getElementById("quiz-category").innerText = category.toUpperCase();
+    timeLeft = extraTimePurchased ? 300 : 260;
+    extraTimePurchased = false; // Reset extra time purchase after use
+    startTimer();
+
+    // ✅ Shuffle questions before displaying
+    shuffleArray(questions[category]);
+
+    // ✅ Also shuffle the answers inside each question
+    questions[category].forEach(q => {
+        if (q.answers && Array.isArray(q.answers)) {
+            shuffleArray(q.answers);
+        }
+    });
+
+    showQuestion();
+}
+
 
     function showQuestion() {
         const questionData = questions[currentCategory][currentQuestionIndex];
@@ -3002,6 +3011,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
