@@ -2810,6 +2810,51 @@ const decryptedSparksbux = decryptData(localStorage.getItem("encryptedSparksbux"
         }
     }
 
+
+
+// === 🔀 Brainstorm X Smart Answer Shuffler ===
+// Automatically randomizes multiple-choice answer order for each question set before the quiz starts.
+
+(function() {
+  // Fisher–Yates shuffle algorithm
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  // Prepare and shuffle all questions in advance
+  if (typeof questions !== "undefined" && Array.isArray(questions)) {
+    questions.forEach(q => {
+      if (q.options && q.answer) {
+        // Combine option text with whether it's correct
+        const pairs = q.options.map(opt => ({
+          text: opt,
+          correct: opt === q.answer
+        }));
+
+        // Shuffle the option order
+        const shuffled = shuffleArray(pairs);
+
+        // Reassign shuffled texts back to question
+        q.options = shuffled.map(p => p.text);
+        q.answer = shuffled.find(p => p.correct).text;
+      }
+    });
+
+    console.log("✅ Brainstorm X: All question choices have been randomized.");
+  } else {
+    console.warn("⚠️ Brainstorm X: No questions array found for shuffling.");
+  }
+})();
+
+
+
+
+    
+
     // Load quiz with shuffled questions
     function loadQuiz(category) {
       currentCategory = category;
@@ -2969,6 +3014,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
