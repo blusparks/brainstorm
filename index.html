@@ -2802,53 +2802,41 @@ const decryptedSparksbux = decryptData(localStorage.getItem("encryptedSparksbux"
 
 
 
-    // Fisher-Yates Shuffle Algorithm
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-        }
+// === ⚡ Brainstorm X Dual Shuffle System === //
+// This version randomizes both the question order AND each question's answer options.
+function shuffleAll(questions) {
+    // Step 1: Shuffle the question order
+    for (let i = questions.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [questions[i], questions[j]] = [questions[j], questions[i]];
     }
 
-
-
-// === 🔀 Brainstorm X Smart Answer Shuffler ===
-// Automatically randomizes multiple-choice answer order for each question set before the quiz starts.
-
-(function() {
-  // Fisher–Yates shuffle algorithm
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  // Prepare and shuffle all questions in advance
-  if (typeof questions !== "undefined" && Array.isArray(questions)) {
+    // Step 2: Shuffle each question's options while keeping track of the correct one
     questions.forEach(q => {
-      if (q.options && q.answer) {
-        // Combine option text with whether it's correct
-        const pairs = q.options.map(opt => ({
-          text: opt,
-          correct: opt === q.answer
-        }));
+        if (q.options && q.answer) {
+            const optionsWithFlag = q.options.map(opt => ({
+                text: opt,
+                correct: opt === q.answer
+            }));
 
-        // Shuffle the option order
-        const shuffled = shuffleArray(pairs);
+            // Shuffle the options
+            for (let i = optionsWithFlag.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [optionsWithFlag[i], optionsWithFlag[j]] = [optionsWithFlag[j], optionsWithFlag[i]];
+            }
 
-        // Reassign shuffled texts back to question
-        q.options = shuffled.map(p => p.text);
-        q.answer = shuffled.find(p => p.correct).text;
-      }
+            // Update the question with shuffled options
+            q.options = optionsWithFlag.map(o => o.text);
+            q.answer = optionsWithFlag.find(o => o.correct).text;
+        }
     });
 
-    console.log("✅ Brainstorm X: All question choices have been randomized.");
-  } else {
-    console.warn("⚠️ Brainstorm X: No questions array found for shuffling.");
-  }
-})();
+    console.log("✅ Brainstorm X: Questions and answers shuffled successfully!");
+}
+
+
+
+
 
 
 
@@ -3014,6 +3002,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
