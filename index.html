@@ -2802,72 +2802,30 @@ const decryptedSparksbux = decryptData(localStorage.getItem("encryptedSparksbux"
 
 
 
-// === ⚡ Brainstorm X Dual Shuffle System === //
-// This version randomizes both the question order AND each question's answer options.
-function shuffleAll(questions) {
-    // Step 1: Shuffle the question order
-    for (let i = questions.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [questions[i], questions[j]] = [questions[j], questions[i]];
+    // Fisher-Yates Shuffle Algorithm
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+        }
     }
 
-    // Step 2: Shuffle each question's options while keeping track of the correct one
-    questions.forEach(q => {
-        if (q.options && q.answer) {
-            const optionsWithFlag = q.options.map(opt => ({
-                text: opt,
-                correct: opt === q.answer
-            }));
-
-            // Shuffle the options
-            for (let i = optionsWithFlag.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [optionsWithFlag[i], optionsWithFlag[j]] = [optionsWithFlag[j], optionsWithFlag[i]];
-            }
-
-            // Update the question with shuffled options
-            q.options = optionsWithFlag.map(o => o.text);
-            q.answer = optionsWithFlag.find(o => o.correct).text;
-        }
-    });
-
-    console.log("✅ Brainstorm X: Questions and answers shuffled successfully!");
-}
-
-
-
-
-
-
-
-
-    
-
     // Load quiz with shuffled questions
-function loadQuiz(category) {
-    currentCategory = category;
-    currentQuestionIndex = 0;
-    score = 0;
-    document.getElementById("categories").style.display = "none";
-    document.getElementById("quiz").style.display = "flex";
-    document.getElementById("quiz-category").innerText = category.toUpperCase();
-    timeLeft = extraTimePurchased ? 300 : 260;
-    extraTimePurchased = false; // Reset extra time purchase after use
-    startTimer();
-
-    // ✅ Shuffle questions before displaying
-    shuffleArray(questions[category]);
-
-    // ✅ Also shuffle the answers inside each question
-    questions[category].forEach(q => {
-        if (q.answers && Array.isArray(q.answers)) {
-            shuffleArray(q.answers);
-        }
-    });
-
-    showQuestion();
-}
-
+    function loadQuiz(category) {
+      currentCategory = category;
+      currentQuestionIndex = 0;
+      score = 0;
+      document.getElementById("categories").style.display = "none";
+      document.getElementById("quiz").style.display = "flex";
+      document.getElementById("quiz-category").innerText = category.toUpperCase();
+      timeLeft = extraTimePurchased ? 300 : 260;
+      extraTimePurchased = false; // Reset extra time purchase after use
+      startTimer();
+  
+      // Shuffle questions before displaying
+      shuffleArray(questions[category]);
+      showQuestion();
+  }
 
     function showQuestion() {
         const questionData = questions[currentCategory][currentQuestionIndex];
@@ -3011,7 +2969,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
-
 
 
 
