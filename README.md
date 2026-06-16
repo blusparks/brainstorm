@@ -42,5 +42,9 @@ BRAINSTORM
   BY SPARKS NETWORK
 
 
-                                                                             Mr Sparks (Declan Mshindi)
-                                                                             CEO/OWNER/FOUNDER - Sparks Network
+Mr Sparks ( Declan Mshindi )
+CEO/OWNER/FOUNDER  - Sparks Network                    
+
+
+                                                                             
+                                              
